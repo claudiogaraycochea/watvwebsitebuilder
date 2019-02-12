@@ -4,8 +4,9 @@ import './Main.css';
 import Header from '../header/Header';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Welcome from '../welcome/Welcome';
+import Login from '../login/Login';
 import WebsiteList from '../websiteList/WebsiteList.js';
+
 class Main extends Component {
   render() {
     return (
@@ -14,7 +15,7 @@ class Main extends Component {
         <div className="content">
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" component={Welcome} />
+                    <Route exact path="/" component={Login} />
                     <Route path="/:websiteLinkname" component={WebsiteList} />  
                 </Switch>
             </BrowserRouter>
