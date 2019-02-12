@@ -8,8 +8,7 @@ class WebsiteList extends Component {
       <div className="primary-style">
         <div className="container padding-20 center">
           <div className="welcome-wrapper">
-            <img src={logo} className="logo" alt="" />
-            <div className="slogan">Internet and Television Together</div>
+            <div className="slogan">Ups!</div>
           </div>
         </div>
         <Footer className="footer"/>    
