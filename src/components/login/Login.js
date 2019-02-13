@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Login.css';
 import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from '../../constants';
 
 class Welcome extends Component {
   constructor(props) {
@@ -13,7 +15,15 @@ class Welcome extends Component {
   }
   
   login= () => {
-    this.props.history.push("/WebsiteList");
+    const paramsData = 'user_email=claudio@sharesmarttv.com&user_password=321456';
+    axios.post(`${API_URL}lu`, paramsData )
+      .then(response => {
+        sessionStorage.setItem('userId',response.data.user_id);
+        sessionStorage.setItem('userFirstname',response.data.user_firstname);
+        sessionStorage.setItem('userToken',response.data.user_token);
+        this.props.history.push("/websiteList");
+      })
+      .catch(error => {});
   }
 
   render() {

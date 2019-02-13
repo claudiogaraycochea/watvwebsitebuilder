@@ -6,6 +6,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Login from '../login/Login';
 import WebsiteList from '../websiteList/WebsiteList.js';
+import WebsiteEdit from '../websiteEdit/WebsiteEdit.js';
+import WebsiteRun from '../pro/WebsiteRun.js';
 
 class Main extends Component {
   render() {
@@ -16,7 +18,9 @@ class Main extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Login} />
-                    <Route path="/:websiteLinkname" component={WebsiteList} />  
+                    <Route path="/websitelist" component={WebsiteList} />
+                    <Route path="/websiteEdit/:websiteId" component={WebsiteEdit} />
+                    <Route path="/pro/:websiteId" component={WebsiteRun} />
                 </Switch>
             </BrowserRouter>
         </div>
