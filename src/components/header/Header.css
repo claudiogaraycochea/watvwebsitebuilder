@@ -22,6 +22,10 @@
     flex: 1 1 auto;
 }
 
+.menu {
+    display: flex;
+}
+
 .icon-menu {
     display: flex;
     height: 20px;
