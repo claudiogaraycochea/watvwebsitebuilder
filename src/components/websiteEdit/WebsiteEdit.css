@@ -1,0 +1,34 @@
+.editor-wrapper {
+    border: 1px solid yellow;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.module-list {
+    border: 1px solid red;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-box {
+    border: 1px solid blue;
+    flex: 1 1 auto;
+}
+
+.module-wrapper {
+    border: 1px solid violet;
+    flex: 1 1 auto;
+}
+
+.drag-wrapper {
+    border: 1px solid orange;
+    flex: 1 1 auto;
+}
+
+.properties-wrapper {
+    border: 1px solid bisque;
+    flex: 1 1 auto;
+}
+

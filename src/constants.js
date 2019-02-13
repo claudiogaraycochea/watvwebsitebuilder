@@ -1,0 +1,1 @@
+export const API_URL = "https://modules.weband.tv/api/v1/";
