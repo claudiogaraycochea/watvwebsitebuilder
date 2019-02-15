@@ -127,8 +127,8 @@ class WebsiteEdit extends Component {
     let newWebsiteDraggable = [];
     let data = [];
     let movePosition = false;
-    let nextPosition = 0;
-
+    let nextPosition = -1;
+    let maxRow = this.state.websiteDraggableConfig.maxRow;
     for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
      
       if(i===row){
@@ -150,7 +150,7 @@ class WebsiteEdit extends Component {
 
       if(movePosition===true){
         console.log('movePosition', movePosition);
-        if(nextPosition===0){
+        if(nextPosition===-1){
           nextPosition = i;
         }
       }
@@ -165,7 +165,7 @@ class WebsiteEdit extends Component {
       console.log('mover todo el array desde ', nextPosition);
       for (let i = nextPosition; i < this.state.websiteDraggableConfig.maxRow; i++) {
         if(websiteDraggable[i]!==undefined) {
-          if((i+1)<this.state.websiteDraggableConfig.maxRow){
+          
             data = {
               modulePosition: (i+1),
               moduleKey:  websiteDraggable[i].moduleKey,
@@ -174,13 +174,18 @@ class WebsiteEdit extends Component {
             }
             newWebsiteDraggable[(i+1)]=data;
             console.log('mover uno mas abajo',websiteDraggable[i]);
-          }
+            if((i+1)===this.state.websiteDraggableConfig.maxRow){
+              maxRow = this.state.websiteDraggableConfig.maxRow+1;
+            }
         }
       }
     }
     console.log('newWebsiteDraggable: ',newWebsiteDraggable);
     this.setState({
       websiteDraggable: newWebsiteDraggable,
+      websiteDraggableConfig: {
+        maxRow,
+      }
     });
 
   }
@@ -269,6 +274,7 @@ class WebsiteEdit extends Component {
           <div className="editor-wrapper">
             <div className="module-wrapper">
               <div className="modules-list">
+                Modules
                 {
                   this.state.modulesList.map((item,i) => 
                     <div className="module-box" key={i}
