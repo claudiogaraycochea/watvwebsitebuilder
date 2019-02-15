@@ -13,11 +13,11 @@ class WebsiteEdit extends Component {
       websiteList: [],
       websiteId: '',
       websiteData: {},
-      websiteTemplate: [
-        {
-          modulePosition: 0,
+      websiteDraggable: [
+      /*  {
           moduleKey: 'module_link',
           moduleTitle: 'Simple Link',
+          modulePosition: 0,
           moduleSrc: {
             title: 'Visit us',
             description: 'List of channels',
@@ -25,13 +25,57 @@ class WebsiteEdit extends Component {
           }
         },
         {
+          moduleKey: 'module_link',
+          moduleTitle: 'Simple Link',
           modulePosition: 1,
-          moduleKey: 'module_social',
+          moduleSrc: {
+            title: 'Visit us',
+            description: 'List of channels',
+            link: 'http://booking.com',
+          }
+        }*/
+      ],
+      websiteDraggableConfig: {
+        maxRow: 5,
+      },
+      modulesList: [
+        {
+          moduleKey: 'module_link',
+          moduleTitle: 'Simple Link',
+          modulePosition: null,
+          moduleSrc: {
+            title: 'Visit us',
+            description: 'List of channels',
+            link: 'http://booking.com',
+          }
+        },
+        {
+          moduleKey: 'module_social_network',
           moduleTitle: 'Social Network',
+          modulePosition: null,
           moduleSrc: {
             title: 'Follow us',
             link_facebook: '',
             link_twitter: '',
+          }
+        },
+        {
+          moduleKey: 'module_facebook_send_message',
+          moduleTitle: 'Facebook Send Message',
+          modulePosition: null,
+          moduleSrc: {
+            title: 'Send Message',
+            link_facebook: '',
+            text: '#includeyourhashtag ',
+          }
+        },
+        {
+          moduleKey: 'module_realtime_reactions',
+          moduleTitle: 'Realtime Reactions',
+          modulePosition: null,
+          moduleSrc: {
+            title: 'Realtime Reactions',
+            reactions: 'happy, sad, like, love',
           }
         },
       ]
@@ -57,8 +101,160 @@ class WebsiteEdit extends Component {
       .catch(error => {});
   }
 
+	/* When start to Drag set a Block name as ID */
+	onDragStart = (ev, blockId) => {
+    ev.dataTransfer.setData("blockId", blockId);
+    console.log('onDragStart - Element selected',blockId);
+	}
+
+	onDragOver = (ev) => {
+    ev.preventDefault();
+    console.log('onDragOver');
+  }
+
+  getSelectedModulesList(blockId){
+    let itemSelected = {};
+    this.state.modulesList.forEach((item,key) => {
+			if (item.moduleKey === blockId) {
+				itemSelected = item;
+			}
+    });
+    return itemSelected;
+  }
+  
+  insertItemSelectedToWebsiteDraggable(itemSelected, row){
+    let websiteDraggable = { ...this.state.websiteDraggable };
+    let newWebsiteDraggable = [];
+    let data = [];
+    let movePosition = false;
+    let nextPosition = 0;
+
+    for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
+     
+      if(i===row){
+
+        if(websiteDraggable[i]!==undefined){
+          console.log('tiene contenido');
+          movePosition = true;
+        }
+        
+        data = {
+          modulePosition: row,
+          moduleKey: itemSelected.moduleKey,
+          moduleTitle: itemSelected.moduleTitle,
+          moduleSrc: itemSelected.moduleSrc
+        }
+        newWebsiteDraggable[i]=data;
+
+      }
+
+      if(movePosition===true){
+        console.log('movePosition', movePosition);
+        if(nextPosition===0){
+          nextPosition = i;
+        }
+      }
+      else {
+        if(websiteDraggable[i]!==undefined) {
+          newWebsiteDraggable[i] = websiteDraggable[i];
+        }
+      }
+    };
+
+    if(movePosition===true) {
+      console.log('mover todo el array desde ', nextPosition);
+      for (let i = nextPosition; i < this.state.websiteDraggableConfig.maxRow; i++) {
+        if(websiteDraggable[i]!==undefined) {
+          if((i+1)<this.state.websiteDraggableConfig.maxRow){
+            data = {
+              modulePosition: (i+1),
+              moduleKey:  websiteDraggable[i].moduleKey,
+              moduleTitle: websiteDraggable[i].moduleTitle,
+              moduleSrc: websiteDraggable[i].moduleSrc
+            }
+            newWebsiteDraggable[(i+1)]=data;
+            console.log('mover uno mas abajo',websiteDraggable[i]);
+          }
+        }
+      }
+    }
+    console.log('newWebsiteDraggable: ',newWebsiteDraggable);
+    this.setState({
+      websiteDraggable: newWebsiteDraggable,
+    });
+
+  }
+
+  insertModuleToWebsiteDraggable(blockId,row){
+    //console.log('insertModuleToWebsiteDraggable: blockId:',blockId,' row:',row);
+    let itemSelected = this.getSelectedModulesList(blockId);
+    this.insertItemSelectedToWebsiteDraggable(itemSelected, row);
+  }
+
+  changePositionWebsiteDraggable(blockId,row){
+    //console.log('changePositionWebsiteDraggable: blockId:',blockId,' row:',row);
+  }
+
+	/* When is Drop insert the Block */
+	onDrop = (ev, row) => {
+		let blockId = ev.dataTransfer.getData("blockId");
+    //this.insertBlockToWorkflow(blockId,row,col);
+    
+    if(blockId.indexOf("module_")===0) {
+      this.insertModuleToWebsiteDraggable(blockId,row);
+    }
+    else {
+      this.changePositionWebsiteDraggable(blockId,row);
+    }
+	}
+
+	createTable = () => {
+		return(
+			<table>
+				<tbody>
+					{this.createContentTable()}
+				</tbody>
+			</table>
+		)
+  }
+  
+  getItemFromWebsiteDraggable(rowPosition) {
+    let moduleItem = {};
+		this.state.websiteDraggable.forEach((item,key) => {
+			if (item.modulePosition === rowPosition) {
+				moduleItem = item;
+			}
+		});
+		return moduleItem;
+  }
+
+  createWebsiteDraggable = () => {
+    let websiteDraggableList = [];
+    for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
+      let moduleItem = this.getItemFromWebsiteDraggable(i);
+      websiteDraggableList.push(
+        <div 
+          className="module-box"
+          key={i}
+          onDragOver={(e)=>this.onDragOver(e)}
+          onDrop={(e)=>{this.onDrop(e, i)}}
+          onDragStart = {(e) => this.onDragStart(e, i)}
+          draggable
+          >
+          {i} {moduleItem.moduleKey}
+        </div>)
+    }
+		return(
+			<div>
+        websiteDraggable
+				{websiteDraggableList}
+			</div>
+		)
+	}
+
   render() {
-    console.log('>>>>>>this.state: ',this.state);
+    //console.log('>>>******************>>>this.state: ',this.state);
+    //console.log('dragable https://github.com/claudiogaraycochea/draganddrop/blob/master/components/workflowTemplateEditor/WorkflowTemplateEditor.js');
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -70,12 +266,15 @@ class WebsiteEdit extends Component {
               <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">View</Link> 
             </div>
           </div>
-          <div class="editor-wrapper">
+          <div className="editor-wrapper">
             <div className="module-wrapper">
               <div className="modules-list">
                 {
-                  this.state.websiteTemplate.map((item,i) => 
-                    <div className="module-box" key={i}>
+                  this.state.modulesList.map((item,i) => 
+                    <div className="module-box" key={i}
+                      onDragStart = {(e) => this.onDragStart(e, item.moduleKey)}
+									    draggable
+                    >
                       {/*item.moduleKey*/} 
                       {item.moduleTitle}
                     </div>  
@@ -84,7 +283,7 @@ class WebsiteEdit extends Component {
               </div>             
             </div>
             <div className="drag-wrapper">
-              Drag
+                {this.createWebsiteDraggable()}
             </div>
             <div className="properties-wrapper">
               Properties
