@@ -1,35 +1,18 @@
 .editor-wrapper {
-    border: 1px solid yellow;
     width: 100%;
+    height: 70vh;
     display: flex;
     flex-direction: row;
 }
 
 .module-list {
-    border: 1px solid red;
-    width: 200px;
     display: flex;
     flex-direction: column;
 }
 
 .module-box {
-    border: 1px solid blue;
+    border: 1px dashed rgba(244, 244, 244, 0.25);
     flex: 1 1 auto;
+    width: 100%;
     padding: 20px;
 }
-
-.module-wrapper {
-    border: 1px solid violet;
-    flex: 1 1 auto;
-}
-
-.drag-wrapper {
-    border: 1px solid orange;
-    flex: 1 1 auto;
-}
-
-.properties-wrapper {
-    border: 1px solid bisque;
-    flex: 1 1 auto;
-}
-

@@ -19,7 +19,7 @@ class WebsiteEdit extends Component {
       websiteData: {},
       websiteDraggable: [
       /*  {
-          moduleKey: 'module_link',
+          moduleKey: 'ModuleLink',
           moduleTitle: 'Simple Link',
           modulePosition: 0,
           moduleSrc: {
@@ -29,18 +29,18 @@ class WebsiteEdit extends Component {
           }
         },
         {
-          moduleKey: 'module_link',
-          moduleTitle: 'Simple Link',
-          modulePosition: 1,
+          moduleKey: 'ModuleFacebookSendMessage',
+          moduleTitle: 'Facebook Send Message',
+          modulePosition: null,
           moduleSrc: {
-            title: 'Visit us',
-            description: 'List of channels',
-            link: 'http://booking.com',
+            title: 'Send Message',
+            link_facebook: '',
+            text: '#includeyourhashtag ',
           }
         }*/
       ],
       websiteDraggableConfig: {
-        maxRow: 5,
+        maxRow: 1,
       },
       modulesList: [
         {
@@ -184,6 +184,9 @@ class WebsiteEdit extends Component {
         }
       }
     }
+    
+    maxRow = this.state.websiteDraggableConfig.maxRow+1;
+    
     console.log('newWebsiteDraggable: ',newWebsiteDraggable);
     this.setState({
       websiteDraggable: newWebsiteDraggable,
@@ -237,6 +240,19 @@ class WebsiteEdit extends Component {
 		return moduleItem;
   }
 
+  getModuleComponent(moduleKey) {
+    switch(moduleKey) {
+      case 'ModuleLink':
+        return <ModuleLink />
+      case 'ModuleSocialNetwork':
+        return <ModuleSocialNetwork />
+      case 'ModuleFacebookSendMessage':
+        return <ModuleFacebookSendMessage />
+      default:
+        return null;
+    }
+  }
+
   createWebsiteDraggable = () => {
     let websiteDraggableList = [];
     for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
@@ -251,9 +267,7 @@ class WebsiteEdit extends Component {
           draggable
           >
           {i} {moduleItem.moduleKey}
-          {('ModuleLink' === moduleItem.moduleKey) ? <ModuleLink /> : null }
-          {('ModuleSocialNetwork' === moduleItem.moduleKey) ? <ModuleSocialNetwork /> : null }
-          {('ModuleFacebookSendMessage' === moduleItem.moduleKey) ? <ModuleFacebookSendMessage /> : null }
+          {this.getModuleComponent(moduleItem.moduleKey)}
         </div>)
     }
 		return(
@@ -277,33 +291,52 @@ class WebsiteEdit extends Component {
               <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">View</Link> 
             </div>
           </div>
-          <div className="editor-wrapper">
-            <div className="module-wrapper">
-              <div className="modules-list">
-                {
-                  this.state.modulesList.map((item,i) => 
-                    <div className="module-box" key={i}
-                      onDragStart = {(e) => this.onDragStart(e, item.moduleKey)}
-									    draggable
-                    >
-                      {/*item.moduleKey*/} 
-                      {item.moduleTitle}
-                      {('ModuleLink' === item.moduleKey) ? <ModuleLink /> : null }
-                      {('ModuleSocialNetwork' === item.moduleKey) ? <ModuleSocialNetwork /> : null }
-                      {('ModuleFacebookSendMessage' === item.moduleKey) ? <ModuleFacebookSendMessage /> : null }
-                    </div>  
-                  )
-                }
-              </div>             
-            </div>
-            <div className="drag-wrapper">
-                {this.createWebsiteDraggable()}
-            </div>
-            <div className="properties-wrapper">
-              Properties
+          <div className="container-content">
+            <div className="editor-wrapper">
+              <div className="col-4">
+                <div className="box-wrapper">
+                  <div className="box-header">Modules</div>
+                  <div className="box-container">
+                    <div className="modules-list">
+                      {
+                        this.state.modulesList.map((moduleItem,i) => 
+                          <div className="module-box" key={i}
+                            onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
+                            draggable
+                          >
+                            {moduleItem.moduleTitle}
+                            {this.getModuleComponent(moduleItem.moduleKey)}
+                          </div>  
+                        )
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="box-wrapper">
+                  <div className="box-header">Editor <div onDragOver={(e)=>this.onDragOver(e)} draggable>Delete</div></div>
+                  <div className="box-container">
+                    {this.createWebsiteDraggable()}
+                  </div>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="box-wrapper">
+                  <div className="box-header">Properties</div>
+                  <div className="box-container">
+                  </div>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="box-wrapper">
+                  <div className="box-header">Publish</div>
+                  <div className="box-container">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
         <Footer className="footer"/>    
       </div>
