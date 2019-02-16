@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 
+import ModuleLink from '../modules/moduleLink/ModuleLink';
+import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
+
 class WebsiteEdit extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +43,7 @@ class WebsiteEdit extends Component {
       },
       modulesList: [
         {
-          moduleKey: 'module_link',
+          moduleKey: 'ModuleLink',
           moduleTitle: 'Simple Link',
           modulePosition: null,
           moduleSrc: {
@@ -50,7 +53,7 @@ class WebsiteEdit extends Component {
           }
         },
         {
-          moduleKey: 'module_social_network',
+          moduleKey: 'ModuleSocialNetwork',
           moduleTitle: 'Social Network',
           modulePosition: null,
           moduleSrc: {
@@ -60,7 +63,7 @@ class WebsiteEdit extends Component {
           }
         },
         {
-          moduleKey: 'module_facebook_send_message',
+          moduleKey: 'ModuleFacebookSendMessage',
           moduleTitle: 'Facebook Send Message',
           modulePosition: null,
           moduleSrc: {
@@ -70,7 +73,7 @@ class WebsiteEdit extends Component {
           }
         },
         {
-          moduleKey: 'module_realtime_reactions',
+          moduleKey: 'ModuleRealtimeReactions',
           moduleTitle: 'Realtime Reactions',
           modulePosition: null,
           moduleSrc: {
@@ -205,7 +208,7 @@ class WebsiteEdit extends Component {
 		let blockId = ev.dataTransfer.getData("blockId");
     //this.insertBlockToWorkflow(blockId,row,col);
     
-    if(blockId.indexOf("module_")===0) {
+    if(blockId.indexOf("Module")===0) {
       this.insertModuleToWebsiteDraggable(blockId,row);
     }
     else {
@@ -247,11 +250,14 @@ class WebsiteEdit extends Component {
           draggable
           >
           {i} {moduleItem.moduleKey}
+          {('ModuleLink' === moduleItem.moduleKey) ? <ModuleLink /> : null }
+          {('ModuleSocialNetwork' === moduleItem.moduleKey) ? <ModuleSocialNetwork /> : null }
         </div>)
     }
 		return(
 			<div>
         websiteDraggable
+        <ModuleLink />
 				{websiteDraggableList}
 			</div>
 		)
@@ -283,6 +289,8 @@ class WebsiteEdit extends Component {
                     >
                       {/*item.moduleKey*/} 
                       {item.moduleTitle}
+                      {('ModuleLink' === item.moduleKey) ? <ModuleLink /> : null }
+                      {('ModuleSocialNetwork' === item.moduleKey) ? <ModuleSocialNetwork /> : null }
                     </div>  
                   )
                 }
