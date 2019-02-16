@@ -27,7 +27,6 @@ a {
 }
 
 .inp {
-  border: 1px solid red;
   padding: 10px 20px;
   font-size: 14px;
   border-radius: 5px;
@@ -61,7 +60,7 @@ a.btn {
   color: #ffffff;
 }
 
-.box-wrapper {
+.center-wrapper {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -88,6 +87,10 @@ h1, h2, h3, h4 {
   margin-bottom: 20px;
 }
 
+.container-content {
+  /*margin-bottom: 60px;*/
+}
+
 .table-list {
   /*border: 1px solid #ffffff;*/
   width: 100%;
@@ -108,22 +111,68 @@ h1, h2, h3, h4 {
   border-right: 0px solid;
 }
 
-.width-1 {
-  width: 10%;
+[class^="col-"],
+[class*=" col-"] {
+  flex: 1 1 auto;
+  margin-right: 10px;
 }
 
-.width-2 {
+[class^="col-"]:last-child,
+[class*=" col-"]:last-child {
+  flex: 1 1 auto;
+  margin-right: 0;
+}
+
+.col-1 {
+  width: 100%;
+}
+
+.col-2 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 33.33%;
+}
+
+.col-4 {
+  width: 25%;
+}
+
+.col-5 {
   width: 20%;
 }
 
-.width-3 {
-  width: 30%;
+.col-6 {
+  width: 16.66%;
 }
 
-.width-4 {
-  width: 40%;
+.col-7 {
+  width: 14.28%;
 }
 
-.width-5 {
-  width: 50%;
+.col-8 {
+  width: 12.5%;
+}
+
+.box-wrapper {
+  border: 1px solid rgba(244, 244, 244, 0.25);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.box-header {
+  min-height: 60px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(244, 244, 244, 0.25);
+}
+
+.box-container {
+  overflow: auto;
+  flex: 1 1 auto;
 }

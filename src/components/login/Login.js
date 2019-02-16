@@ -30,7 +30,7 @@ class Welcome extends Component {
     return (
       <div className="primary-style">
         <div className="container padding-20 center">
-          <div className="box-wrapper">
+          <div className="center-wrapper">
             <div className="row">
               <h2>Login</h2>
             </div>

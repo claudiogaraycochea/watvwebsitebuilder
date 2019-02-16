@@ -9,7 +9,7 @@ class ModuleFacebookSendMessage extends Component {
           Send Message:
         </div>
         <div>
-          <textarea value="#myhashtag"></textarea>
+          <textarea readOnly value="#myhashtag"></textarea>
         </div>
         <div>
           <a href="https://nba.com" className="btn">Send</a>
