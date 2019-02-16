@@ -41,6 +41,7 @@ class WebsiteEdit extends Component {
       ],
       websiteDraggableConfig: {
         maxRow: 1,
+        itemSelected: null,
       },
       modulesList: [
         {
@@ -84,6 +85,7 @@ class WebsiteEdit extends Component {
         },
       ]
     };
+    this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
     //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
   }
 
@@ -114,6 +116,17 @@ class WebsiteEdit extends Component {
 	onDragOver = (ev) => {
     ev.preventDefault();
     console.log('onDragOver');
+  }
+
+  handleOnClickProperties(e, row){
+    
+    console.log('click on properties ', row);
+    this.setState({
+      websiteDraggableConfig: {
+        maxRow: this.state.websiteDraggableConfig.maxRow,
+        itemSelected: row
+      }
+    });
   }
 
   getSelectedModulesList(blockId){
@@ -237,14 +250,16 @@ class WebsiteEdit extends Component {
 		return moduleItem;
   }
 
-  getModuleComponent(moduleKey) {
+  getModuleComponent(moduleItem, properties) {
+    const moduleKey = moduleItem.moduleKey;
+    const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
       case 'ModuleLink':
-        return <ModuleLink />
+        return <ModuleLink moduleSrc={moduleSrc} properties={properties} />
       case 'ModuleSocialNetwork':
-        return <ModuleSocialNetwork />
+        return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
       case 'ModuleFacebookSendMessage':
-        return <ModuleFacebookSendMessage />
+        return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
       default:
         return null;
     }
@@ -262,8 +277,9 @@ class WebsiteEdit extends Component {
           onDrop={(e)=>{this.onDrop(e, i)}}
           onDragStart = {(e) => this.onDragStart(e, i)}
           draggable
+          onClick={(e) => this.handleOnClickProperties(e,i)}
           >
-          {(!moduleItem.moduleKey) ? <div className="message">Drag and drop the modules here</div> : this.getModuleComponent(moduleItem.moduleKey) }
+          {(!moduleItem.moduleKey) ? <div className="message">Drag and drop the modules here</div> : this.getModuleComponent(moduleItem, false) }
         </div>)
     }
 		return(
@@ -273,8 +289,19 @@ class WebsiteEdit extends Component {
 		)
 	}
 
+  showProperties() {
+    const itemSelected = this.state.websiteDraggableConfig.itemSelected;
+    console.log('itemSelected: ',itemSelected);
+    if(itemSelected>-1) {
+      const moduleItem = this.getItemFromWebsiteDraggable(itemSelected);
+      console.log('_____________________________ PROPERTIES:',moduleItem.moduleSrc);
+      
+      return (this.getModuleComponent(moduleItem, true));
+    }
+  }
+
   render() {
-    //console.log('>>>******************>>>this.state: ',this.state);
+    console.log('>>>******************>>>this.state: ',this.state);
     //console.log('dragable https://github.com/claudiogaraycochea/draganddrop/blob/master/components/workflowTemplateEditor/WorkflowTemplateEditor.js');
     return (
       <div className="tertiary-style">
@@ -301,7 +328,7 @@ class WebsiteEdit extends Component {
                             draggable
                           >
                             {moduleItem.moduleTitle}
-                            {this.getModuleComponent(moduleItem.moduleKey)}
+                            {this.getModuleComponent(moduleItem, false)}
                           </div>  
                         )
                       }
@@ -311,7 +338,7 @@ class WebsiteEdit extends Component {
               </div>
               <div className="col-4">
                 <div className="box-wrapper">
-                  <div className="box-header">Editor <div onDragOver={(e)=>this.onDragOver(e)} draggable>Delete</div></div>
+                  <div className="box-header">Editor</div>
                   <div className="box-container">
                     {this.createWebsiteDraggable()}
                   </div>
@@ -321,6 +348,7 @@ class WebsiteEdit extends Component {
                 <div className="box-wrapper">
                   <div className="box-header">Properties</div>
                   <div className="box-container">
+                    {this.showProperties()}
                   </div>
                 </div>
               </div>
