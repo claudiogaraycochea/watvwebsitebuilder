@@ -138,7 +138,6 @@ class WebsiteEdit extends Component {
       if(i===row){
 
         if(websiteDraggable[i]!==undefined){
-          console.log('tiene contenido');
           movePosition = true;
         }
         
@@ -153,7 +152,6 @@ class WebsiteEdit extends Component {
       }
 
       if(movePosition===true){
-        console.log('movePosition', movePosition);
         if(nextPosition===-1){
           nextPosition = i;
         }
@@ -177,7 +175,6 @@ class WebsiteEdit extends Component {
               moduleSrc: websiteDraggable[i].moduleSrc
             }
             newWebsiteDraggable[(i+1)]=data;
-            console.log('mover uno mas abajo',websiteDraggable[i]);
             if((i+1)===this.state.websiteDraggableConfig.maxRow){
               maxRow = this.state.websiteDraggableConfig.maxRow+1;
             }
@@ -266,8 +263,7 @@ class WebsiteEdit extends Component {
           onDragStart = {(e) => this.onDragStart(e, i)}
           draggable
           >
-          {i} {moduleItem.moduleKey}
-          {this.getModuleComponent(moduleItem.moduleKey)}
+          {(!moduleItem.moduleKey) ? <div className="message">Drag and drop the modules here</div> : this.getModuleComponent(moduleItem.moduleKey) }
         </div>)
     }
 		return(

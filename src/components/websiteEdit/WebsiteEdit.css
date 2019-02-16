@@ -16,3 +16,7 @@
     width: 100%;
     padding: 20px;
 }
+
+.module-box .message {
+    color: #70709e;
+}
