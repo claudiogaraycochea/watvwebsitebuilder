@@ -6,7 +6,7 @@ class ModuleLink extends Component {
     return (
       <div>
         Haz click en el siguiente enlace
-        <a href="https://nba.com">Send</a>
+        <a href="https://nba.com" className="btn" >Send</a>
       </div>
     );
   }

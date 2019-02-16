@@ -48,6 +48,7 @@ a {
 
 a.btn {
   margin-right: 5px;
+  display: inline-block;
 }
 
 .btn-primary {
