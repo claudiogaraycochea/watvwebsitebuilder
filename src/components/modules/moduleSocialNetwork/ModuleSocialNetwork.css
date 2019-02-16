@@ -1,0 +1,11 @@
+.module-link {
+    padding: 0 10px;
+    background: #343448;
+    color: #ffffff;
+    font-size: 11px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
