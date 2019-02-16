@@ -6,8 +6,8 @@ class ModuleSocialNetwork extends Component {
     return (
       <div>
         Follow US
-        <a href="https://nba.com">Facebook</a>
-        <a href="https://nba.com">Twitter</a>
+        <a href="https://nba.com" className="btn" >Facebook</a>
+        <a href="https://nba.com" className="btn" >Twitter</a>
       </div>
     );
   }

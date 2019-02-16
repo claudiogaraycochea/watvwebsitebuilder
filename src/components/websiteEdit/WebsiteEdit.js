@@ -7,6 +7,7 @@ import { API_URL } from '../../constants';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
+import ModuleFacebookSendMessage from '../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage';
 
 class WebsiteEdit extends Component {
   constructor(props) {
@@ -252,12 +253,11 @@ class WebsiteEdit extends Component {
           {i} {moduleItem.moduleKey}
           {('ModuleLink' === moduleItem.moduleKey) ? <ModuleLink /> : null }
           {('ModuleSocialNetwork' === moduleItem.moduleKey) ? <ModuleSocialNetwork /> : null }
+          {('ModuleFacebookSendMessage' === moduleItem.moduleKey) ? <ModuleFacebookSendMessage /> : null }
         </div>)
     }
 		return(
 			<div>
-        websiteDraggable
-        <ModuleLink />
 				{websiteDraggableList}
 			</div>
 		)
@@ -280,7 +280,6 @@ class WebsiteEdit extends Component {
           <div className="editor-wrapper">
             <div className="module-wrapper">
               <div className="modules-list">
-                Modules
                 {
                   this.state.modulesList.map((item,i) => 
                     <div className="module-box" key={i}
@@ -291,6 +290,7 @@ class WebsiteEdit extends Component {
                       {item.moduleTitle}
                       {('ModuleLink' === item.moduleKey) ? <ModuleLink /> : null }
                       {('ModuleSocialNetwork' === item.moduleKey) ? <ModuleSocialNetwork /> : null }
+                      {('ModuleFacebookSendMessage' === item.moduleKey) ? <ModuleFacebookSendMessage /> : null }
                     </div>  
                   )
                 }
