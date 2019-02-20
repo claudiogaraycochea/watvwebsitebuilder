@@ -8,6 +8,7 @@ import { API_URL } from '../../constants';
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
 import ModuleFacebookSendMessage from '../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage';
+import ModuleTitleDescription from '../modules/moduleTitleDescription/ModuleTitleDescription';
 
 class WebsiteEdit extends Component {
   constructor(props) {
@@ -43,6 +44,22 @@ class WebsiteEdit extends Component {
         itemSelected: null,
       },
       modulesList: [
+        {
+          moduleKey: 'ModuleTitleDescription',
+          moduleTitle: 'Title & Description',
+          moduleSrc: {
+            title: 'Title',
+            description: 'Description',
+          }
+        },
+        {
+          moduleKey: 'ModuleImage',
+          moduleTitle: 'Image',
+          moduleSrc: {
+            title: 'Realtime Reactions',
+            size: 'small, medium, big',
+          }
+        },
         {
           moduleKey: 'ModuleLink',
           moduleTitle: 'Simple Link',
@@ -243,12 +260,10 @@ class WebsiteEdit extends Component {
     const moduleKey = moduleItem.moduleKey;
     const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
-      case 'ModuleLink':
-        return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleSocialNetwork':
-        return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
-      case 'ModuleFacebookSendMessage':
-        return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
+      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
+      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
       default:
         return null;
     }
@@ -294,7 +309,7 @@ class WebsiteEdit extends Component {
   }
 
   setModuleProperties(moduleSrc){
-    let newWebsiteDraggable = this.state.websiteDraggable;
+    let newWebsiteDraggable = JSON.parse(JSON.stringify(this.state.websiteDraggable));
     let itemSelected = this.state.websiteDraggableConfig.itemSelected;
     newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
     this.setState({
