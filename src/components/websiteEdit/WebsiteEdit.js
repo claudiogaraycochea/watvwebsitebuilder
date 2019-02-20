@@ -40,24 +40,21 @@ class WebsiteEdit extends Component {
         }*/
       ],
       websiteDraggableConfig: {
-        maxRow: 1,
         itemSelected: null,
       },
       modulesList: [
         {
           moduleKey: 'ModuleLink',
           moduleTitle: 'Simple Link',
-          modulePosition: null,
           moduleSrc: {
-            title: 'Visit us',
-            description: 'List of channels',
-            link: 'http://booking.com',
+            title:'Testing',
+            buttonLink: 'http://jjjjj.com',
+            buttonTitle: ''
           }
         },
         {
           moduleKey: 'ModuleSocialNetwork',
           moduleTitle: 'Social Network',
-          modulePosition: null,
           moduleSrc: {
             title: 'Follow us',
             link_facebook: '',
@@ -67,7 +64,6 @@ class WebsiteEdit extends Component {
         {
           moduleKey: 'ModuleFacebookSendMessage',
           moduleTitle: 'Facebook Send Message',
-          modulePosition: null,
           moduleSrc: {
             title: 'Send Message',
             link_facebook: '',
@@ -77,15 +73,38 @@ class WebsiteEdit extends Component {
         {
           moduleKey: 'ModuleRealtimeReactions',
           moduleTitle: 'Realtime Reactions',
-          modulePosition: null,
           moduleSrc: {
             title: 'Realtime Reactions',
             reactions: 'happy, sad, like, love',
           }
         },
+      ],
+      modalVisibility: false,
+      websiteTemplates: [
+        {
+          title: 'MyTemplate 1',
+          templateSrc: {
+            backgroundImage: '',
+            backgroundColor: 'red',
+            fontSize: '20px',
+            fontFamily: ''
+          },
+        },
+        {
+          title: 'MyTemplate 2',
+          templateSrc: {
+            backgroundImage: '',
+            backgroundColor: 'blue',
+            fontSize: '18px',
+            fontFamily: ''
+          },
+        }
       ]
     };
     this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
+    this.handleCloseProperties = this.handleCloseProperties.bind(this);
+    this.setModuleProperties = this.setModuleProperties.bind(this);
+    this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
     //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
   }
 
@@ -119,17 +138,34 @@ class WebsiteEdit extends Component {
   }
 
   handleOnClickProperties(e, row){
-    
-    console.log('click on properties ', row);
+    let modalVisibility = false;
+    if(row>-1) {
+      modalVisibility = true;
+    }
     this.setState({
+      modalVisibility,
       websiteDraggableConfig: {
-        maxRow: this.state.websiteDraggableConfig.maxRow,
         itemSelected: row
       }
     });
   }
 
-  getSelectedModulesList(blockId){
+  handleOnClickRemove(e, row){
+    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
+    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    newWebsiteDraggable.splice(row, 1);
+
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    });
+  }
+
+  handleCloseProperties(){
+    this.setState({modalVisibility: false});
+  }
+
+  /* */
+  getItemSelectedModulesList(blockId){
     let itemSelected = {};
     this.state.modulesList.forEach((item,key) => {
 			if (item.moduleKey === blockId) {
@@ -140,88 +176,51 @@ class WebsiteEdit extends Component {
   }
   
   insertItemSelectedToWebsiteDraggable(itemSelected, row){
-    let websiteDraggable = { ...this.state.websiteDraggable };
-    let newWebsiteDraggable = [];
-    let data = [];
-    let movePosition = false;
-    let nextPosition = -1;
-    let maxRow = this.state.websiteDraggableConfig.maxRow;
-    for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
-     
-      if(i===row){
+    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
+    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    newWebsiteDraggable.splice(row,0, itemSelected);
 
-        if(websiteDraggable[i]!==undefined){
-          movePosition = true;
-        }
-        
-        data = {
-          modulePosition: row,
-          moduleKey: itemSelected.moduleKey,
-          moduleTitle: itemSelected.moduleTitle,
-          moduleSrc: itemSelected.moduleSrc
-        }
-        newWebsiteDraggable[i]=data;
-
-      }
-
-      if(movePosition===true){
-        if(nextPosition===-1){
-          nextPosition = i;
-        }
-      }
-      else {
-        if(websiteDraggable[i]!==undefined) {
-          newWebsiteDraggable[i] = websiteDraggable[i];
-        }
-      }
-    };
-
-    if(movePosition===true) {
-      console.log('mover todo el array desde ', nextPosition);
-      for (let i = nextPosition; i < this.state.websiteDraggableConfig.maxRow; i++) {
-        if(websiteDraggable[i]!==undefined) {
-          
-            data = {
-              modulePosition: (i+1),
-              moduleKey:  websiteDraggable[i].moduleKey,
-              moduleTitle: websiteDraggable[i].moduleTitle,
-              moduleSrc: websiteDraggable[i].moduleSrc
-            }
-            newWebsiteDraggable[(i+1)]=data;
-            if((i+1)===this.state.websiteDraggableConfig.maxRow){
-              maxRow = this.state.websiteDraggableConfig.maxRow+1;
-            }
-        }
-      }
-    }
-    
-    maxRow = this.state.websiteDraggableConfig.maxRow+1;
-    
-    console.log('newWebsiteDraggable: ',newWebsiteDraggable);
     this.setState({
-      websiteDraggable: newWebsiteDraggable,
-      websiteDraggableConfig: {
-        maxRow,
-      }
+      websiteDraggable: newWebsiteDraggable
     });
-
   }
 
   insertModuleToWebsiteDraggable(blockId,row){
     //console.log('insertModuleToWebsiteDraggable: blockId:',blockId,' row:',row);
-    let itemSelected = this.getSelectedModulesList(blockId);
+    let itemSelected = this.getItemSelectedModulesList(blockId);
     this.insertItemSelectedToWebsiteDraggable(itemSelected, row);
   }
 
   changePositionWebsiteDraggable(blockId,row){
     //console.log('changePositionWebsiteDraggable: blockId:',blockId,' row:',row);
+    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
+    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let itemSelected = newWebsiteDraggable[blockId];
+    newWebsiteDraggable.splice(blockId, 1);
+    newWebsiteDraggable.splice(row,0, itemSelected);
+
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    });
+  }
+
+  removeItemWebsiteDraggable(blockId,row){
+    //console.log('changePositionWebsiteDraggable: blockId:',blockId,' row:',row);
+    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
+    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let itemSelected = newWebsiteDraggable[blockId];
+    newWebsiteDraggable.splice(blockId, 1);
+    newWebsiteDraggable.splice(row,0, itemSelected);
+
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    });
   }
 
 	/* When is Drop insert the Block */
 	onDrop = (ev, row) => {
 		let blockId = ev.dataTransfer.getData("blockId");
-    //this.insertBlockToWorkflow(blockId,row,col);
-    
+  
     if(blockId.indexOf("Module")===0) {
       this.insertModuleToWebsiteDraggable(blockId,row);
     }
@@ -239,23 +238,13 @@ class WebsiteEdit extends Component {
 			</table>
 		)
   }
-  
-  getItemFromWebsiteDraggable(rowPosition) {
-    let moduleItem = {};
-		this.state.websiteDraggable.forEach((item,key) => {
-			if (item.modulePosition === rowPosition) {
-				moduleItem = item;
-			}
-		});
-		return moduleItem;
-  }
 
   getModuleComponent(moduleItem, properties) {
     const moduleKey = moduleItem.moduleKey;
     const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
       case 'ModuleLink':
-        return <ModuleLink moduleSrc={moduleSrc} properties={properties} />
+        return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
       case 'ModuleSocialNetwork':
         return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
       case 'ModuleFacebookSendMessage':
@@ -266,43 +255,79 @@ class WebsiteEdit extends Component {
   }
 
   createWebsiteDraggable = () => {
-    let websiteDraggableList = [];
-    for (let i = 0; i < this.state.websiteDraggableConfig.maxRow; i++) {
-      let moduleItem = this.getItemFromWebsiteDraggable(i);
-      websiteDraggableList.push(
+    const i=0;
+    return (
+      <div>
+        {this.state.websiteDraggable.map((item,key)=>
+          <div 
+            className="module-box"
+            key={key}
+            onDragOver={(e)=>this.onDragOver(e)}
+            onDrop={(e)=>{this.onDrop(e, key)}}
+            onDragStart = {(e) => this.onDragStart(e, key)}
+            draggable
+            >
+            <button onClick={(e) => this.handleOnClickRemove(e,key)} className="btn-delete">X</button>
+            <div onClick={(e) => this.handleOnClickProperties(e,key)}>
+              {this.getModuleComponent(item, false)}
+            </div>
+          </div>
+        )}
         <div 
           className="module-box"
           key={i}
           onDragOver={(e)=>this.onDragOver(e)}
           onDrop={(e)=>{this.onDrop(e, i)}}
           onDragStart = {(e) => this.onDragStart(e, i)}
-          draggable
-          onClick={(e) => this.handleOnClickProperties(e,i)}
           >
-          {(!moduleItem.moduleKey) ? <div className="message">Drag and drop the modules here</div> : this.getModuleComponent(moduleItem, false) }
-        </div>)
-    }
-		return(
-			<div>
-				{websiteDraggableList}
-			</div>
-		)
-	}
-
-  showProperties() {
+          <div className="message">Drag and drop the modules here</div>
+        </div>
+      </div>
+    )
+  }
+  
+  showModuleProperties(){
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
-    console.log('itemSelected: ',itemSelected);
-    if(itemSelected>-1) {
-      const moduleItem = this.getItemFromWebsiteDraggable(itemSelected);
-      console.log('_____________________________ PROPERTIES:',moduleItem.moduleSrc);
-      
-      return (this.getModuleComponent(moduleItem, true));
-    }
+    const moduleItem = this.state.websiteDraggable[itemSelected];
+    console.log('PROPERTIES:',moduleItem.moduleSrc);
+    return (this.getModuleComponent(moduleItem, true));
+  }
+
+  setModuleProperties(moduleSrc){
+    let newWebsiteDraggable = this.state.websiteDraggable;
+    let itemSelected = this.state.websiteDraggableConfig.itemSelected;
+    newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    })
+  }
+
+  showModal() {
+    const itemSelected = this.state.websiteDraggableConfig.itemSelected;
+    const moduleTitle = this.state.websiteDraggable[itemSelected].moduleTitle;
+    return (  
+      <div className="modal-wrapper">
+        <div className="modal-box">
+          <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseProperties} className="btn small">Close</button></div>  
+          <div className="modal-content">{this.showModuleProperties()}</div>
+          <div className="modal-footer"><button onClick={this.handleCloseProperties} className="btn btn-primary">Ok</button></div>
+        </div>
+      </div>
+    );
+  }
+
+  getTemplates(){
+    return (
+      <div>
+        {this.state.websiteTemplates.map((item,key) => 
+          <div key={key}>{item.title}</div>
+        )}
+      </div>
+    )
   }
 
   render() {
-    console.log('>>>******************>>>this.state: ',this.state);
-    //console.log('dragable https://github.com/claudiogaraycochea/draganddrop/blob/master/components/workflowTemplateEditor/WorkflowTemplateEditor.js');
+    console.log('>>this.state: ',this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -311,7 +336,7 @@ class WebsiteEdit extends Component {
               <h2>Website Editor</h2>
             </div>
             <div className="right">
-              <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">View</Link> 
+              <input type="text" /> <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link> 
             </div>
           </div>
           <div className="container-content">
@@ -322,8 +347,8 @@ class WebsiteEdit extends Component {
                   <div className="box-container">
                     <div className="modules-list">
                       {
-                        this.state.modulesList.map((moduleItem,i) => 
-                          <div className="module-box" key={i}
+                        this.state.modulesList.map((moduleItem,key) => 
+                          <div className="module-box" key={key}
                             onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
                             draggable
                           >
@@ -346,15 +371,15 @@ class WebsiteEdit extends Component {
               </div>
               <div className="col-4">
                 <div className="box-wrapper">
-                  <div className="box-header">Properties</div>
+                  <div className="box-header">Templates</div>
                   <div className="box-container">
-                    {this.showProperties()}
+                    {this.getTemplates()}
                   </div>
                 </div>
               </div>
               <div className="col-4">
                 <div className="box-wrapper">
-                  <div className="box-header">Publish</div>
+                  <div className="box-header">Preview</div>
                   <div className="box-container">
                   </div>
                 </div>
@@ -362,7 +387,8 @@ class WebsiteEdit extends Component {
             </div>
           </div>
         </div>
-        <Footer className="footer"/>    
+        <Footer className="footer"/>
+        {(this.state.modalVisibility===true) ? this.showModal(): null }
       </div>
     );
   }
