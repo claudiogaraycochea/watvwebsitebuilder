@@ -9,6 +9,7 @@ import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
 import ModuleFacebookSendMessage from '../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage';
 
+
 class WebsiteEdit extends Component {
   constructor(props) {
     super(props);
@@ -49,9 +50,9 @@ class WebsiteEdit extends Component {
           moduleTitle: 'Simple Link',
           modulePosition: null,
           moduleSrc: {
-            title: 'Visit us',
-            description: 'List of channels',
-            link: 'http://booking.com',
+            title:'Testing',
+            buttonLink: 'http://jjjjj.com',
+            buttonTitle: ''
           }
         },
         {
@@ -83,9 +84,12 @@ class WebsiteEdit extends Component {
             reactions: 'happy, sad, like, love',
           }
         },
-      ]
+      ],
+      modalVisibility: false,
     };
     this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
+    this.handleCloseProperties = this.handleCloseProperties.bind(this);
+    this.setModuleProperties = this.setModuleProperties.bind(this);
     //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
   }
 
@@ -119,14 +123,21 @@ class WebsiteEdit extends Component {
   }
 
   handleOnClickProperties(e, row){
-    
-    console.log('click on properties ', row);
+    let modalVisibility = false;
+    if(row>-1) {
+      modalVisibility = true;
+    }
     this.setState({
+      modalVisibility,
       websiteDraggableConfig: {
         maxRow: this.state.websiteDraggableConfig.maxRow,
         itemSelected: row
       }
     });
+  }
+
+  handleCloseProperties(){
+    this.setState({modalVisibility: false});
   }
 
   getSelectedModulesList(blockId){
@@ -255,7 +266,7 @@ class WebsiteEdit extends Component {
     const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
       case 'ModuleLink':
-        return <ModuleLink moduleSrc={moduleSrc} properties={properties} />
+        return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
       case 'ModuleSocialNetwork':
         return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
       case 'ModuleFacebookSendMessage':
@@ -287,17 +298,36 @@ class WebsiteEdit extends Component {
 				{websiteDraggableList}
 			</div>
 		)
-	}
-
-  showProperties() {
+  }
+  
+  openModal(){
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
-    console.log('itemSelected: ',itemSelected);
-    if(itemSelected>-1) {
-      const moduleItem = this.getItemFromWebsiteDraggable(itemSelected);
-      console.log('_____________________________ PROPERTIES:',moduleItem.moduleSrc);
-      
-      return (this.getModuleComponent(moduleItem, true));
-    }
+    const moduleItem = this.getItemFromWebsiteDraggable(itemSelected);
+    console.log('_____________________________ PROPERTIES:',moduleItem.moduleSrc);
+    return (this.getModuleComponent(moduleItem, true));
+  }
+
+  setModuleProperties(moduleSrc){
+    let newWebsiteDraggable = this.state.websiteDraggable;
+    let itemSelected = this.state.websiteDraggableConfig.itemSelected;
+    newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    })
+  }
+
+  showModal() {
+    const itemSelected = this.state.websiteDraggableConfig.itemSelected;
+    const moduleTitle = this.state.websiteDraggable[itemSelected].moduleTitle;
+    return (  
+      <div className="modal-wrapper">
+        <div className="modal-box">
+          <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseProperties} className="btn small">Close</button></div>  
+          <div className="modal-content">{this.openModal()}</div>
+          <div className="modal-footer"><button onClick={this.handleCloseProperties} className="btn btn-primary">Ok</button></div>
+      </div>
+      </div>
+    );
   }
 
   render() {
@@ -311,7 +341,7 @@ class WebsiteEdit extends Component {
               <h2>Website Editor</h2>
             </div>
             <div className="right">
-              <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">View</Link> 
+              <input type="text" /> <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link> 
             </div>
           </div>
           <div className="container-content">
@@ -346,15 +376,15 @@ class WebsiteEdit extends Component {
               </div>
               <div className="col-4">
                 <div className="box-wrapper">
-                  <div className="box-header">Properties</div>
+                  <div className="box-header">Templates</div>
                   <div className="box-container">
-                    {this.showProperties()}
+                    
                   </div>
                 </div>
               </div>
               <div className="col-4">
                 <div className="box-wrapper">
-                  <div className="box-header">Publish</div>
+                  <div className="box-header">Preview</div>
                   <div className="box-container">
                   </div>
                 </div>
@@ -362,7 +392,8 @@ class WebsiteEdit extends Component {
             </div>
           </div>
         </div>
-        <Footer className="footer"/>    
+        <Footer className="footer"/>
+        {(this.state.modalVisibility===true) ? this.showModal(): null }
       </div>
     );
   }

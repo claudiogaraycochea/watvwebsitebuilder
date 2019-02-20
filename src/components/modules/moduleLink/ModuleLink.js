@@ -7,7 +7,7 @@ class ModuleLink extends Component {
     this.state = {
       moduleSrc: null,
     };
-    //this.handleMenuBtn = this.handleMenuBtn.bind(this);
+    
   }
   
   componentDidMount() {
@@ -17,16 +17,32 @@ class ModuleLink extends Component {
     })
   }
 
+  createModuleSrc(props, e, moduleSrcInput){
+    // set values;
+    let moduleSrc = {
+      title: props.moduleSrc.title,
+      buttonLink: props.moduleSrc.buttonLink,
+      buttonTitle: props.moduleSrc.buttonTitle
+    };
+
+    if(moduleSrcInput==='title') moduleSrc.title = e.target.value;
+    if(moduleSrcInput==='buttonTitle') moduleSrc.buttonTitle = e.target.value;
+    if(moduleSrcInput==='buttonLink') moduleSrc.buttonLink = e.target.value;
+    props.setModuleProperties(moduleSrc);
+  }
+
   render() {
     if(this.state.properties===true) {
       return (
         <div>
-          <div>Module Link Properties:</div> 
-          <div>
-            <input type="text" onChange={()=>{}} />
+          <div className="row">
+            <input type="text" className="inp" placeholder="Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'title')}} />
           </div>
-          <div>
-            <a href="https://nba.com" className="btn" >Save</a>
+          <div className="row">
+            <input type="text" className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
+          </div>
+          <div className="">
+            <input type="text" className="inp" placeholder="https://example.com" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLink')}} />
           </div>
         </div>
       )
@@ -34,8 +50,12 @@ class ModuleLink extends Component {
     else {
       return (
         <div>
-          Haz click en el siguiente enlace
-          <a href="https://nba.com" className="btn" >Send</a>
+          <div>{(this.props.moduleSrc.title!=='') ? this.props.moduleSrc.title : 'Write a title' }</div>
+          <div>
+            <a href={this.props.moduleSrc.buttonLink} className="btn">
+              {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
+            </a>
+          </div>
         </div>
       );
     }
