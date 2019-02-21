@@ -57,7 +57,7 @@ class WebsiteEdit extends Component {
           moduleTitle: 'Image',
           moduleSrc: {
             imageURL: 'https://www.lavanguardia.com/r/GODO/LV/p5/WebSite/2018/07/20/Recortada/img_ddusster_20180720-165008_imagenes_lv_getty_lalomanu-kaaH-U45974211241JiB-992x558@LaVanguardia-Web.jpg',
-            size: 'small, medium, big',
+            imageSize: 'small',
           }
         },
         {
@@ -116,12 +116,15 @@ class WebsiteEdit extends Component {
             fontFamily: ''
           },
         }
-      ]
+      ],
+      templateSelected: 0,
+      runSrc: {},
     };
     this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
     this.handleCloseProperties = this.handleCloseProperties.bind(this);
     this.setModuleProperties = this.setModuleProperties.bind(this);
     this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
+    this.handleOnClickTemplate = this.handleOnClickTemplate.bind(this);
   }
 
   componentWillMount() {
@@ -142,6 +145,10 @@ class WebsiteEdit extends Component {
       .catch(error => {});
   }
 
+//
+// DRAGG AND DROP
+//
+
 	/* When start to Drag set a Block name as ID */
 	onDragStart = (ev, blockId) => {
     ev.dataTransfer.setData("blockId", blockId);
@@ -150,6 +157,22 @@ class WebsiteEdit extends Component {
 	onDragOver = (ev) => {
     ev.preventDefault();
   }
+
+	/* When is Drop insert the Block */
+	onDrop = (ev, row) => {
+		let blockId = ev.dataTransfer.getData("blockId");
+  
+    if(blockId.indexOf("Module")===0) {
+      this.insertModuleToWebsiteDraggable(blockId,row);
+    }
+    else {
+      this.changePositionWebsiteDraggable(blockId,row);
+    }
+	}
+
+//
+// ON CLICK EVENTS
+//
 
   handleOnClickProperties(e, row){
     let modalVisibility = false;
@@ -177,30 +200,33 @@ class WebsiteEdit extends Component {
     this.setState({modalVisibility: false});
   }
 
-  /* */
-  getItemSelectedModulesList(blockId){
-    let itemSelected = {};
-    this.state.modulesList.forEach((item,key) => {
-			if (item.moduleKey === blockId) {
-				itemSelected = item;
-			}
-    });
-    return itemSelected;
-  }
-  
-  insertItemSelectedToWebsiteDraggable(itemSelected, row){
-    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
-    newWebsiteDraggable.splice(row,0, itemSelected);
-
+  handleOnClickTemplate(e, row){
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      templateSelected: row
     });
   }
 
-  insertModuleToWebsiteDraggable(blockId,row){
-    let itemSelected = this.getItemSelectedModulesList(blockId);
-    this.insertItemSelectedToWebsiteDraggable(itemSelected, row);
+//
+// GET MODULE 
+//
+
+  getModuleComponent(moduleItem, properties) {
+    const moduleKey = moduleItem.moduleKey;
+    const moduleSrc = moduleItem.moduleSrc;
+    switch(moduleKey) {
+      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
+      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
+      default:
+        return null;
+    }
   }
+
+//
+// WEBSITE DRAGGABLE
+//
 
   changePositionWebsiteDraggable(blockId,row){
     let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
@@ -224,43 +250,27 @@ class WebsiteEdit extends Component {
     });
   }
 
-	/* When is Drop insert the Block */
-	onDrop = (ev, row) => {
-		let blockId = ev.dataTransfer.getData("blockId");
-  
-    if(blockId.indexOf("Module")===0) {
-      this.insertModuleToWebsiteDraggable(blockId,row);
-    }
-    else {
-      this.changePositionWebsiteDraggable(blockId,row);
-    }
-	}
-
-	createTable = () => {
-		return(
-			<table>
-				<tbody>
-					{this.createContentTable()}
-				</tbody>
-			</table>
-		)
+  getItemSelectedModulesList(blockId){
+    let itemSelected = {};
+    this.state.modulesList.forEach((item,key) => {
+      if (item.moduleKey === blockId) {
+        itemSelected = item;
+      }
+    });
+    return itemSelected;
   }
 
-  getModuleComponent(moduleItem, properties) {
-    const moduleKey = moduleItem.moduleKey;
-    const moduleSrc = moduleItem.moduleSrc;
-    switch(moduleKey) {
-      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
-      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
-      default:
-        return null;
-    }
+  insertModuleToWebsiteDraggable(blockId,row){
+    let item = this.getItemSelectedModulesList(blockId);
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
+    newWebsiteDraggable.splice(row,0, item);
+
+    this.setState({
+      websiteDraggable: newWebsiteDraggable
+    });
   }
 
-  createWebsiteDraggable = () => {
+  createWebsiteDraggable(){
     const i=0;
     return (
       <div>
@@ -291,7 +301,11 @@ class WebsiteEdit extends Component {
       </div>
     )
   }
-  
+
+//
+// MODULE PROPERTIES
+//
+
   showModuleProperties(){
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
     const moduleItem = this.state.websiteDraggable[itemSelected];
@@ -321,18 +335,62 @@ class WebsiteEdit extends Component {
     );
   }
 
+//
+// TEMPLATES
+//
+
   getTemplates(){
     return (
       <div>
         {this.state.websiteTemplates.map((item,key) => 
-          <div key={key}>{item.title}</div>
+          <div key={key} onClick={(e) => this.handleOnClickTemplate(e,key)}>{item.title}</div>
         )}
       </div>
     )
   }
 
+//
+// PREVIEW
+//
+
+  getPreview(runSrc){
+    const i=0;
+    return (
+      <div className="module-view" 
+        style={runSrc.template.templateSrc}
+      >
+        {runSrc.websiteDraggable.map((item,key)=>
+          <div 
+            className="box"
+            >
+            {this.getModuleComponent(item, false)}
+          </div>
+        )}
+        {runSrc.template.templateSrc.backgroundColor}
+      </div>
+    )
+  }
+
+//
+// RUN SRC
+//
+
+  createRunSrc(){
+    const runSrc = {
+      websiteDraggable: this.state.websiteDraggable,
+      template: this.state.websiteTemplates[this.state.templateSelected],
+    }
+    return runSrc;
+  }
+
+//
+// RENDER
+//
+
   render() {
     console.log('this.state: ',this.state);
+    const runSrc = this.createRunSrc();
+
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -388,6 +446,7 @@ class WebsiteEdit extends Component {
                 <div className="box-wrapper">
                   <div className="box-header">Preview</div>
                   <div className="box-container">
+                    {this.getPreview(runSrc)}
                   </div>
                 </div>
               </div>

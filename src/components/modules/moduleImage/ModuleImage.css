@@ -1,15 +1,21 @@
 .module-image {
-    /*padding: 0 10px;
-    background: #343448;
+    padding: 0 10px;
     color: #ffffff;
     font-size: 11px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 40px;*/
 }
 
 .module-image .large {
     width: 100%;
+}
+
+.module-image .medium {
+    width: 80%;
+}
+
+.module-image .small {
+    width: 50%;
 }
