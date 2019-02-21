@@ -10,6 +10,13 @@
     flex-direction: column;
 }
 
+.modules-list-header {
+    font-size: 11px;
+    background: #444562;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+
 .module-box {
     border: 1px dashed rgba(244, 244, 244, 0.25);
     flex: 1 1 auto;
