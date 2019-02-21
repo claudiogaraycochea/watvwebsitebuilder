@@ -4,6 +4,7 @@ import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
+import * as commons from '../../commons/Commons';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -22,7 +23,6 @@ class WebsiteEdit extends Component {
       /*  {
           moduleKey: 'ModuleLink',
           moduleTitle: 'Simple Link',
-          modulePosition: 0,
           moduleSrc: {
             title: 'Visit us',
             description: 'List of channels',
@@ -32,7 +32,6 @@ class WebsiteEdit extends Component {
         {
           moduleKey: 'ModuleFacebookSendMessage',
           moduleTitle: 'Facebook Send Message',
-          modulePosition: null,
           moduleSrc: {
             title: 'Send Message',
             link_facebook: '',
@@ -122,7 +121,6 @@ class WebsiteEdit extends Component {
     this.handleCloseProperties = this.handleCloseProperties.bind(this);
     this.setModuleProperties = this.setModuleProperties.bind(this);
     this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
-    //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
   }
 
   componentWillMount() {
@@ -146,12 +144,10 @@ class WebsiteEdit extends Component {
 	/* When start to Drag set a Block name as ID */
 	onDragStart = (ev, blockId) => {
     ev.dataTransfer.setData("blockId", blockId);
-    console.log('onDragStart - Element selected',blockId);
 	}
 
 	onDragOver = (ev) => {
     ev.preventDefault();
-    console.log('onDragOver');
   }
 
   handleOnClickProperties(e, row){
@@ -168,8 +164,7 @@ class WebsiteEdit extends Component {
   }
 
   handleOnClickRemove(e, row){
-    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
-    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     newWebsiteDraggable.splice(row, 1);
 
     this.setState({
@@ -193,8 +188,7 @@ class WebsiteEdit extends Component {
   }
   
   insertItemSelectedToWebsiteDraggable(itemSelected, row){
-    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
-    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     newWebsiteDraggable.splice(row,0, itemSelected);
 
     this.setState({
@@ -203,15 +197,12 @@ class WebsiteEdit extends Component {
   }
 
   insertModuleToWebsiteDraggable(blockId,row){
-    //console.log('insertModuleToWebsiteDraggable: blockId:',blockId,' row:',row);
     let itemSelected = this.getItemSelectedModulesList(blockId);
     this.insertItemSelectedToWebsiteDraggable(itemSelected, row);
   }
 
   changePositionWebsiteDraggable(blockId,row){
-    //console.log('changePositionWebsiteDraggable: blockId:',blockId,' row:',row);
-    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
-    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     let itemSelected = newWebsiteDraggable[blockId];
     newWebsiteDraggable.splice(blockId, 1);
     newWebsiteDraggable.splice(row,0, itemSelected);
@@ -222,9 +213,7 @@ class WebsiteEdit extends Component {
   }
 
   removeItemWebsiteDraggable(blockId,row){
-    //console.log('changePositionWebsiteDraggable: blockId:',blockId,' row:',row);
-    let newWebsiteDraggable = JSON.stringify(this.state.websiteDraggable);
-    newWebsiteDraggable = JSON.parse(newWebsiteDraggable);
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     let itemSelected = newWebsiteDraggable[blockId];
     newWebsiteDraggable.splice(blockId, 1);
     newWebsiteDraggable.splice(row,0, itemSelected);
@@ -304,12 +293,11 @@ class WebsiteEdit extends Component {
   showModuleProperties(){
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
     const moduleItem = this.state.websiteDraggable[itemSelected];
-    console.log('PROPERTIES:',moduleItem.moduleSrc);
     return (this.getModuleComponent(moduleItem, true));
   }
 
   setModuleProperties(moduleSrc){
-    let newWebsiteDraggable = JSON.parse(JSON.stringify(this.state.websiteDraggable));
+    let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     let itemSelected = this.state.websiteDraggableConfig.itemSelected;
     newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
     this.setState({
@@ -342,7 +330,7 @@ class WebsiteEdit extends Component {
   }
 
   render() {
-    console.log('>>this.state: ',this.state);
+    console.log('this.state: ',this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -363,13 +351,15 @@ class WebsiteEdit extends Component {
                     <div className="modules-list">
                       {
                         this.state.modulesList.map((moduleItem,key) => 
-                          <div className="module-box" key={key}
-                            onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
-                            draggable
-                          >
-                            {moduleItem.moduleTitle}
-                            {this.getModuleComponent(moduleItem, false)}
-                          </div>  
+                          <div key={key}>
+                            <div className="modules-list-header">{moduleItem.moduleTitle}</div>
+                            <div className="module-box" 
+                              onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
+                              draggable
+                            >
+                              <div>{this.getModuleComponent(moduleItem, false)}</div>
+                            </div>
+                          </div>
                         )
                       }
                     </div>

@@ -11,7 +11,6 @@ class ModuleSocialNetwork extends Component {
   }
 
   componentDidMount() {
-    console.log('**************** componentDidMount: ModuleSocialNetwork:', this.props.properties);
     this.setState({
       properties: this.props.properties
     })
