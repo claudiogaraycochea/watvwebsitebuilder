@@ -10,6 +10,7 @@ import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
 import ModuleFacebookSendMessage from '../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage';
 import ModuleTitleDescription from '../modules/moduleTitleDescription/ModuleTitleDescription';
+import ModuleImage from '../modules/moduleImage/ModuleImage';
 
 class WebsiteEdit extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class WebsiteEdit extends Component {
           moduleKey: 'ModuleImage',
           moduleTitle: 'Image',
           moduleSrc: {
-            title: 'Realtime Reactions',
+            imageURL: 'https://www.lavanguardia.com/r/GODO/LV/p5/WebSite/2018/07/20/Recortada/img_ddusster_20180720-165008_imagenes_lv_getty_lalomanu-kaaH-U45974211241JiB-992x558@LaVanguardia-Web.jpg',
             size: 'small, medium, big',
           }
         },
@@ -251,6 +252,7 @@ class WebsiteEdit extends Component {
     switch(moduleKey) {
       case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
       case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
+      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
       case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
       case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
       default:
