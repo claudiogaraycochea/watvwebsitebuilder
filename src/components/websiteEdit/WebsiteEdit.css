@@ -43,3 +43,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.module-view {
+    border: 1px solid blue;
+    height: 100%;
+}
+
+.module-view .box {
+    border: 0;
+}
