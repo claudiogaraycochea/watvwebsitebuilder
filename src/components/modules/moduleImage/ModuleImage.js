@@ -20,9 +20,12 @@ class ModuleImage extends Component {
     // set values;
     let moduleSrc = {
       imageURL: props.moduleSrc.imageURL,
+      imageSize: props.moduleSrc.imageSize,
     };
 
+    console.log('*******',moduleSrc);
     if(moduleSrcInput==='imageURL') moduleSrc.imageURL = e.target.value;
+    if(moduleSrcInput==='imageSize') moduleSrc.imageSize = e.target.value;
     props.setModuleProperties(moduleSrc);
   }
 
@@ -33,13 +36,21 @@ class ModuleImage extends Component {
           <div className="row">
             <input type="text" className="inp" placeholder="imageURL" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'imageURL')}} />
           </div>
+          <div className="row">
+            <select className="inp" onChange={(e)=>{this.createModuleSrc(this.props,e,'imageSize')}} > 
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+            {/*<input type="text" className="inp" placeholder="imageSize" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'imageSize')}} />*/}
+          </div>
         </div>
       )
     }
     else {
       return (
         <div className="module-image">
-          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className="large" alt=""/> : 'No Image' }
+          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className={this.props.moduleSrc.imageSize} alt=""/> : 'No Image' }
         </div>
       );
     }
