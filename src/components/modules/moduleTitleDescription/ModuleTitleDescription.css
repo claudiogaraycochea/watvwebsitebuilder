@@ -1,11 +1,22 @@
-.module-link {
+.module-title-description {
     padding: 0 10px;
     background: #343448;
     color: #ffffff;
     font-size: 11px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 40px;
+}
+
+.module-title-description .title {
+    font-size: 26px;
+    width: 100%;
+    text-align: center;
+}
+
+.module-title-description .description {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
 }
