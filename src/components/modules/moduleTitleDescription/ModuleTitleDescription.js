@@ -11,7 +11,6 @@ class ModuleTitleDescription extends Component {
   }
   
   componentDidMount() {
-    console.log('**************** componentDidMount: ModuleLink:', this.props.properties);
     this.setState({
       properties: this.props.properties
     })
