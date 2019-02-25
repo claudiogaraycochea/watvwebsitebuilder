@@ -52,3 +52,15 @@
 .module-view .box {
     border: 0;
 }
+
+.template-wrapper {
+    border: 1px solid green;
+    width: 100%;
+    height: 100%;
+}
+
+.template-wrapper .item {
+    border: 1px solid red;
+    width: 100%;
+    padding: 20px;
+}
