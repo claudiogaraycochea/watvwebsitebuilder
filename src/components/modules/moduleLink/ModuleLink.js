@@ -47,6 +47,7 @@ class ModuleLink extends Component {
       )
     }
     else {
+      //console.log('ModuleLink',this.props.moduleSrc);
       return (
         <div>
           <div>{(this.props.moduleSrc.title!=='') ? this.props.moduleSrc.title : 'Write a title' }</div>

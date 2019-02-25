@@ -42,6 +42,7 @@ class WebsiteEdit extends Component {
       ],
       websiteDraggableConfig: {
         itemSelected: null,
+        stateUpdated: false,
       },
       modulesList: [
         {
@@ -100,24 +101,45 @@ class WebsiteEdit extends Component {
       websiteTemplates: [
         {
           title: 'MyTemplate 1',
-          templateSrc: {
-            backgroundImage: '',
-            backgroundColor: 'red',
-            fontSize: '20px',
-            fontFamily: ''
+          styles: {
+            background: {
+              backgroundColor: 'red',
+              fontSize: 20,          
+            },
+            title: {
+              fontSize: 50,
+            },
+            subtitle: {
+              fontSize: 20,
+            },
+            button: {
+              backgroundColor: 'red',
+              fontColor: 'orange',
+            }
           },
         },
         {
           title: 'MyTemplate 2',
-          templateSrc: {
-            backgroundImage: '',
-            backgroundColor: 'blue',
-            fontSize: '18px',
-            fontFamily: ''
+          styles: {
+            background: {
+              backgroundColor: 'blue',
+              fontSize: 30, 
+            },
+            title: {
+              fontSize: 10,
+            },
+            subtitle: {
+              fontSize: 20,
+            },
+            button: {
+              backgroundColor: 'red',
+              fontColor: 'orange',
+            }
           },
-        }
+        },
       ],
       templateSelected: 0,
+      templateChange: false,
       runSrc: {},
     };
     this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
@@ -125,6 +147,7 @@ class WebsiteEdit extends Component {
     this.setModuleProperties = this.setModuleProperties.bind(this);
     this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
     this.handleOnClickTemplate = this.handleOnClickTemplate.bind(this);
+    this.handleBackToTemplate = this.handleBackToTemplate.bind(this);
   }
 
   componentWillMount() {
@@ -192,7 +215,8 @@ class WebsiteEdit extends Component {
     newWebsiteDraggable.splice(row, 1);
 
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      websiteDraggable: newWebsiteDraggable,
+
     });
   }
 
@@ -202,7 +226,19 @@ class WebsiteEdit extends Component {
 
   handleOnClickTemplate(e, row){
     this.setState({
-      templateSelected: row
+      templateSelected: row,
+      templateChange: true,
+      runSrc: {
+        ...this.state.runSrc,
+        template: this.state.websiteTemplates[row],
+      }
+    });
+  }
+
+  handleBackToTemplate(e){
+    console.log('eeeeee');
+    this.setState({
+      templateChange: false,
     });
   }
 
@@ -210,15 +246,15 @@ class WebsiteEdit extends Component {
 // GET MODULE 
 //
 
-  getModuleComponent(moduleItem, properties) {
+  getModuleComponent(moduleItem, properties, showStyle) {
     const moduleKey = moduleItem.moduleKey;
     const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
-      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties}/>
-      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties}/>
-      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties}/>
+      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.state.runSrc} showStyle={showStyle}/>
+      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.runSrc}/>
+      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.runSrc}/>
+      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties} runSrc={this.runSrc}/>
+      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties} runSrc={this.runSrc}/>
       default:
         return null;
     }
@@ -235,7 +271,11 @@ class WebsiteEdit extends Component {
     newWebsiteDraggable.splice(row,0, itemSelected);
 
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      websiteDraggable: newWebsiteDraggable,
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     });
   }
 
@@ -246,7 +286,11 @@ class WebsiteEdit extends Component {
     newWebsiteDraggable.splice(row,0, itemSelected);
 
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      websiteDraggable: newWebsiteDraggable,
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     });
   }
 
@@ -266,12 +310,16 @@ class WebsiteEdit extends Component {
     newWebsiteDraggable.splice(row,0, item);
 
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      websiteDraggable: newWebsiteDraggable,
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     });
   }
 
   createWebsiteDraggable(){
-    const i=0;
+    const i = 0;
     return (
       <div>
         {this.state.websiteDraggable.map((item,key)=>
@@ -285,7 +333,7 @@ class WebsiteEdit extends Component {
             >
             <button onClick={(e) => this.handleOnClickRemove(e,key)} className="btn-delete">X</button>
             <div onClick={(e) => this.handleOnClickProperties(e,key)}>
-              {this.getModuleComponent(item, false)}
+              {this.getModuleComponent(item, false, false)}
             </div>
           </div>
         )}
@@ -309,7 +357,7 @@ class WebsiteEdit extends Component {
   showModuleProperties(){
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
     const moduleItem = this.state.websiteDraggable[itemSelected];
-    return (this.getModuleComponent(moduleItem, true));
+    return (this.getModuleComponent(moduleItem, true, false));
   }
 
   setModuleProperties(moduleSrc){
@@ -317,7 +365,11 @@ class WebsiteEdit extends Component {
     let itemSelected = this.state.websiteDraggableConfig.itemSelected;
     newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
     this.setState({
-      websiteDraggable: newWebsiteDraggable
+      websiteDraggable: newWebsiteDraggable,
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     })
   }
 
@@ -338,12 +390,31 @@ class WebsiteEdit extends Component {
 //
 // TEMPLATES
 //
-
-  getTemplates(){
+  getTemplateProperties(){
+    const templateSrc = commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].templateSrc);
+    console.log('templateProperties: ',templateSrc)
     return (
       <div>
+        Properties
+        <button onClick={(e)=>this.handleBackToTemplate(e)}>Choose template</button>
+        <div>
+          <label>Background</label>
+          <input type="text" /> 
+        </div>
+        <div>
+          <label>Font Family</label>
+          <input type="text" />
+        </div>
+      </div>
+    )
+  }
+
+  getTemplates(){
+    //(this.state.templateChange) ? this.getTemplateProperties() : this.getTemplates() 
+    return (
+      <div className="template-wrapper">
         {this.state.websiteTemplates.map((item,key) => 
-          <div key={key} onClick={(e) => this.handleOnClickTemplate(e,key)}>{item.title}</div>
+          <div className="item" key={key} onClick={(e) => this.handleOnClickTemplate(e,key)}>{item.title}</div>
         )}
       </div>
     )
@@ -353,44 +424,58 @@ class WebsiteEdit extends Component {
 // PREVIEW
 //
 
-  getPreview(runSrc){
-    const i=0;
-    return (
-      <div className="module-view" 
-        style={runSrc.template.templateSrc}
-      >
-        {runSrc.websiteDraggable.map((item,key)=>
-          <div 
-            className="box"
-            >
-            {this.getModuleComponent(item, false)}
-          </div>
-        )}
-        {runSrc.template.templateSrc.backgroundColor}
-      </div>
-    )
+  getPreview(){
+    //console.log('*** Styles :',styles);
+    console.log('this.state.runSrc: ',this.state.runSrc);
+    if(Object.keys(this.state.runSrc).length === 0) 
+      return (<div>Empty</div>)
+    else {
+      const styles = this.state.runSrc.template.styles;
+      const showStyle = true;
+      return (
+        <div 
+          className="module-view" 
+          style={styles.background}
+          >
+          {this.state.runSrc.components.map((item,key)=>
+            <div key={key}
+              className="box"
+              >
+              {this.getModuleComponent(item, false, showStyle)}
+            </div>
+          )}
+        </div>
+      )       
+    }
   }
 
 //
 // RUN SRC
 //
 
-  createRunSrc(){
+  /*runSrcUpdate(){
+    console.log('runSrcUpdate');
     const runSrc = {
-      websiteDraggable: this.state.websiteDraggable,
+      components: this.state.websiteDraggable,
       template: this.state.websiteTemplates[this.state.templateSelected],
     }
-    return runSrc;
-  }
+    this.setState({
+      runSrc,
+      websiteDraggableConfig: {
+        stateUpdated: false,
+      }
+    })
+  }*/
 
 //
 // RENDER
 //
 
   render() {
-    console.log('this.state: ',this.state);
-    const runSrc = this.createRunSrc();
-
+    console.log(this.state);
+    if(this.state.websiteDraggableConfig.stateUpdated===true) {
+      this.runSrcUpdate();
+    }
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -417,7 +502,7 @@ class WebsiteEdit extends Component {
                               onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
                               draggable
                             >
-                              <div>{this.getModuleComponent(moduleItem, false)}</div>
+                              <div>{this.getModuleComponent(moduleItem, false, false)}</div>
                             </div>
                           </div>
                         )
@@ -446,7 +531,7 @@ class WebsiteEdit extends Component {
                 <div className="box-wrapper">
                   <div className="box-header">Preview</div>
                   <div className="box-container">
-                    {this.getPreview(runSrc)}
+                    {this.getPreview()}
                   </div>
                 </div>
               </div>
