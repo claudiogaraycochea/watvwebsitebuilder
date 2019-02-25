@@ -11,6 +11,7 @@ class ModuleTitleDescription extends Component {
   }
   
   componentDidMount() {
+    console.log('**** ModuleTitleDescription: this.props',this.props.runSrc);
     this.setState({
       properties: this.props.properties
     })
@@ -42,13 +43,27 @@ class ModuleTitleDescription extends Component {
       )
     }
     else {
+      let styles = {};
+      if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
+        console.log('ModuleTitleDescription: this.props.runSrc.template',styles);
+        styles = {
+          title: {
+            fontSize: 60,
+            color: '#d04848',
+          }
+        }
+      }
+      else {
+        styles = this.props.runSrc.template.styles;
+      }
       return (
         <div className="module-title-description">
-          {(this.props.moduleSrc.title!=='') ? <div className="title">{this.props.moduleSrc.title}</div> : <div className="title">Write a title</div> }
+          {(this.props.moduleSrc.title!=='') ? <div className="title" style={styles.title}>{this.props.moduleSrc.title}</div> : <div className="title">Write a title</div> }
           {(this.props.moduleSrc.description!=='') ? <div className="description">{this.props.moduleSrc.description}</div> : <div className="description">Write a description</div> }
         </div>
       );
     }
+
   }
 }
 
