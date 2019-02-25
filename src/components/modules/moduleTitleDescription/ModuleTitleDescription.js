@@ -48,8 +48,7 @@ class ModuleTitleDescription extends Component {
         console.log('ModuleTitleDescription: this.props.runSrc.template',styles);
         styles = {
           title: {
-            fontSize: 60,
-            color: '#d04848',
+            fontSize: 30,
           }
         }
       }

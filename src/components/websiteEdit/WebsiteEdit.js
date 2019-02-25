@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
+import '../../commons/Fonts.css';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -104,7 +105,8 @@ class WebsiteEdit extends Component {
           styles: {
             background: {
               backgroundColor: 'red',
-              fontSize: 20,          
+              fontSize: 20,
+              fontFamily: 'Bitter',
             },
             title: {
               fontSize: 50,
@@ -123,10 +125,33 @@ class WebsiteEdit extends Component {
           styles: {
             background: {
               backgroundColor: 'blue',
-              fontSize: 30, 
+              fontSize: 10,
+              fontFamily: 'Ubuntu',
+              color: 'violet',
             },
             title: {
+              fontSize: 50,
+            },
+            subtitle: {
+              fontSize: 20,
+            },
+            button: {
+              backgroundColor: 'red',
+              fontColor: 'orange',
+            }
+          },
+        },
+        {
+          title: 'MyTemplate 3',
+          styles: {
+            background: {
+              backgroundColor: 'yellow',
               fontSize: 10,
+              fontFamily: 'Open Sans',
+              color: 'blue',
+            },
+            title: {
+              fontSize: 50,
             },
             subtitle: {
               fontSize: 20,
@@ -216,7 +241,10 @@ class WebsiteEdit extends Component {
 
     this.setState({
       websiteDraggable: newWebsiteDraggable,
-
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     });
   }
 
