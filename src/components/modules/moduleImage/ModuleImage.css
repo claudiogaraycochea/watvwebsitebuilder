@@ -19,3 +19,7 @@
 .module-image .small {
     width: 50%;
 }
+
+.module-image .ultra-small {
+    width: 30%;
+}
