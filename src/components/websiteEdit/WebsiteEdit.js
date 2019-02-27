@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './WebsiteEdit.css';
 import Footer from '../footer/Footer';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
+import '../../commons/Fonts.css';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -47,9 +48,9 @@ class WebsiteEdit extends Component {
       modulesList: [
         {
           moduleKey: 'ModuleTitleDescription',
-          moduleTitle: 'Title & Description',
+          moduleTitle: 'Title Description',
           moduleSrc: {
-            title: 'Title',
+            title: 'Title11',
             description: 'Description',
           }
         },
@@ -103,8 +104,9 @@ class WebsiteEdit extends Component {
           title: 'MyTemplate 1',
           styles: {
             background: {
-              backgroundColor: 'red',
-              fontSize: 20,          
+              backgroundColor: '#ff0000',
+              fontSize: 20,
+              fontFamily: 'Bitter',
             },
             title: {
               fontSize: 50,
@@ -113,8 +115,8 @@ class WebsiteEdit extends Component {
               fontSize: 20,
             },
             button: {
-              backgroundColor: 'red',
-              fontColor: 'orange',
+              backgroundColor: '#ff0022',
+              fontColor: '#ffffff',
             }
           },
         },
@@ -122,32 +124,58 @@ class WebsiteEdit extends Component {
           title: 'MyTemplate 2',
           styles: {
             background: {
-              backgroundColor: 'blue',
-              fontSize: 30, 
+              backgroundColor: '#3392FF',
+              fontSize: 10,
+              fontFamily: 'Ubuntu',
+              color: 'violet',
             },
             title: {
-              fontSize: 10,
+              fontSize: 50,
             },
             subtitle: {
               fontSize: 20,
             },
             button: {
-              backgroundColor: 'red',
-              fontColor: 'orange',
+              backgroundColor: '#339222',
+              fontColor: '#ffffff',
+            }
+          },
+        },
+        {
+          title: 'MyTemplate 3',
+          styles: {
+            background: {
+              backgroundColor: '#FF9300',
+              fontSize: 10,
+              fontFamily: 'Open Sans',
+              color: 'blue',
+            },
+            title: {
+              fontSize: 50,
+            },
+            subtitle: {
+              fontSize: 20,
+            },
+            button: {
+              backgroundColor: '#FF9300',
+              fontColor: '#fff333',
             }
           },
         },
       ],
       templateSelected: 0,
-      templateChange: false,
+      templateChange: 'template_selector',
       runSrc: {},
     };
-    this.handleOnClickProperties = this.handleOnClickProperties.bind(this);
-    this.handleCloseProperties = this.handleCloseProperties.bind(this);
+
     this.setModuleProperties = this.setModuleProperties.bind(this);
-    this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
-    this.handleOnClickTemplate = this.handleOnClickTemplate.bind(this);
-    this.handleBackToTemplate = this.handleBackToTemplate.bind(this);
+    // Module 
+    this.handleModuleProperties = this.handleModuleProperties.bind(this);
+    this.handleCloseModuleProperties = this.handleCloseModuleProperties.bind(this);
+    this.handleModuleRemove = this.handleModuleRemove.bind(this);
+    this.handleSelectTemplate = this.handleSelectTemplate.bind(this);
+    this.handleSaveChanges = this.handleSaveChanges.bind(this);
+    this.handlePropertiesChange = this.handlePropertiesChange.bind(this);
   }
 
   componentWillMount() {
@@ -161,9 +189,19 @@ class WebsiteEdit extends Component {
     const websiteId = this.state.websiteId;
     axios.get(`${API_URL}getRun/?website_id=${websiteId}`)
       .then(response => {
+        const data = commons.copyObj(response.data);
+        const runSrc = JSON.parse(data.run_src);
+        const components = runSrc.components;
+        const template = runSrc.template;
+    
         this.setState({
-          websiteData: response.data
-        })
+          websiteData: data,
+          websiteDraggable: components,
+          runSrc: {
+            components: components,
+            template: template,
+          }
+        });
       })
       .catch(error => {});
   }
@@ -197,7 +235,7 @@ class WebsiteEdit extends Component {
 // ON CLICK EVENTS
 //
 
-  handleOnClickProperties(e, row){
+  handleModuleProperties(e, row){
     let modalVisibility = false;
     if(row>-1) {
       modalVisibility = true;
@@ -210,24 +248,27 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleOnClickRemove(e, row){
+  handleModuleRemove(e, row){
     let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     newWebsiteDraggable.splice(row, 1);
 
     this.setState({
       websiteDraggable: newWebsiteDraggable,
-
+      runSrc: {
+        components: newWebsiteDraggable,
+        template: this.state.websiteTemplates[this.state.templateSelected],
+      }
     });
   }
 
-  handleCloseProperties(){
+  handleCloseModuleProperties(){
     this.setState({modalVisibility: false});
   }
 
-  handleOnClickTemplate(e, row){
+  handleSelectTemplate(e, row){
     this.setState({
       templateSelected: row,
-      templateChange: true,
+      templateChange: 'template_properties',
       runSrc: {
         ...this.state.runSrc,
         template: this.state.websiteTemplates[row],
@@ -235,11 +276,25 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleBackToTemplate(e){
-    console.log('eeeeee');
-    this.setState({
-      templateChange: false,
-    });
+  handleSaveChanges(e){
+    const userId = sessionStorage.getItem('userId');
+    const userToken = sessionStorage.getItem('userToken');
+    const websiteId = this.state.websiteId;
+    const runSrc = JSON.stringify(this.state.runSrc);
+    let postData='data='+runSrc+'&website_id='+websiteId+'&user_id='+userId+'&user_token='+userToken;
+    console.log('Save changes',postData);
+    axios.post(`${API_URL}setRun/`,postData)
+      .then(response => {
+        this.setState({
+          payload: response.data
+        })
+      })
+      .catch(error => {});
+  }
+
+  handlePropertiesChange(e){
+
+    console.log('****** handleOnClickPropertiesChange',e.target.value);
   }
 
 //
@@ -250,11 +305,38 @@ class WebsiteEdit extends Component {
     const moduleKey = moduleItem.moduleKey;
     const moduleSrc = moduleItem.moduleSrc;
     switch(moduleKey) {
-      case 'ModuleTitleDescription': return <ModuleTitleDescription {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.state.runSrc} showStyle={showStyle}/>
-      case 'ModuleLink': return <ModuleLink {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.runSrc}/>
-      case 'ModuleImage': return <ModuleImage {...this.props} moduleSrc={moduleSrc} properties={properties} setModuleProperties={this.setModuleProperties} runSrc={this.runSrc}/>
-      case 'ModuleSocialNetwork': return <ModuleSocialNetwork moduleSrc={moduleSrc} properties={properties} runSrc={this.runSrc}/>
-      case 'ModuleFacebookSendMessage': return <ModuleFacebookSendMessage moduleSrc={moduleSrc} properties={properties} runSrc={this.runSrc}/>
+      case 'ModuleTitleDescription': 
+        return <ModuleTitleDescription 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
+      case 'ModuleLink': 
+        return <ModuleLink 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleImage': 
+        return <ModuleImage 
+          {...this.props} 
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleSocialNetwork': 
+        return <ModuleSocialNetwork 
+          moduleSrc={moduleSrc} 
+          properties={properties}
+          runSrc={this.runSrc}/>
+      case 'ModuleFacebookSendMessage':
+        return <ModuleFacebookSendMessage 
+          moduleSrc={moduleSrc}
+          properties={properties}
+          runSrc={this.runSrc}/>
       default:
         return null;
     }
@@ -331,8 +413,8 @@ class WebsiteEdit extends Component {
             onDragStart = {(e) => this.onDragStart(e, key)}
             draggable
             >
-            <button onClick={(e) => this.handleOnClickRemove(e,key)} className="btn-delete">X</button>
-            <div onClick={(e) => this.handleOnClickProperties(e,key)}>
+            <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete">X</button>
+            <div onClick={(e) => this.handleModuleProperties(e,key)}>
               {this.getModuleComponent(item, false, false)}
             </div>
           </div>
@@ -379,9 +461,9 @@ class WebsiteEdit extends Component {
     return (  
       <div className="modal-wrapper">
         <div className="modal-box">
-          <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseProperties} className="btn small">Close</button></div>  
+          <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseModuleProperties} className="btn small">Close</button></div>  
           <div className="modal-content">{this.showModuleProperties()}</div>
-          <div className="modal-footer"><button onClick={this.handleCloseProperties} className="btn btn-primary">Ok</button></div>
+          <div className="modal-footer"><button onClick={this.handleCloseModuleProperties} className="btn btn-primary">Ok</button></div>
         </div>
       </div>
     );
@@ -391,15 +473,17 @@ class WebsiteEdit extends Component {
 // TEMPLATES
 //
   getTemplateProperties(){
-    const templateSrc = commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].templateSrc);
-    console.log('templateProperties: ',templateSrc)
+    const styles = this.state.runSrc.template.styles;//commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].styles);
+    console.log('templateProperties: templateSrc.styles: ',styles.background.backgroundColor);
     return (
       <div>
         Properties
-        <button onClick={(e)=>this.handleBackToTemplate(e)}>Choose template</button>
+        <div>
+          <button>Template</button>
+        </div>
         <div>
           <label>Background</label>
-          <input type="text" /> 
+          <input type="color" defaultValue={styles.background.backgroundColor} onClick={(e)=>this.handlePropertiesChange(e)} /> 
         </div>
         <div>
           <label>Font Family</label>
@@ -409,15 +493,23 @@ class WebsiteEdit extends Component {
     )
   }
 
-  getTemplates(){
-    //(this.state.templateChange) ? this.getTemplateProperties() : this.getTemplates() 
+  getTemplateSelector(){
     return (
       <div className="template-wrapper">
         {this.state.websiteTemplates.map((item,key) => 
-          <div className="item" key={key} onClick={(e) => this.handleOnClickTemplate(e,key)}>{item.title}</div>
+          <div className="item" key={key} onClick={(e) => this.handleSelectTemplate(e,key)}>{item.title}</div>
         )}
       </div>
     )
+  }
+
+  getTemplates(){
+    if(this.state.templateChange==='template_properties'){
+      return this.getTemplateProperties();
+    }
+    if(this.state.templateChange==='template_selector') {
+      return this.getTemplateSelector();
+    }
   }
 
 //
@@ -425,8 +517,6 @@ class WebsiteEdit extends Component {
 //
 
   getPreview(){
-    //console.log('*** Styles :',styles);
-    console.log('this.state.runSrc: ',this.state.runSrc);
     if(Object.keys(this.state.runSrc).length === 0) 
       return (<div>Empty</div>)
     else {
@@ -450,32 +540,11 @@ class WebsiteEdit extends Component {
   }
 
 //
-// RUN SRC
-//
-
-  /*runSrcUpdate(){
-    console.log('runSrcUpdate');
-    const runSrc = {
-      components: this.state.websiteDraggable,
-      template: this.state.websiteTemplates[this.state.templateSelected],
-    }
-    this.setState({
-      runSrc,
-      websiteDraggableConfig: {
-        stateUpdated: false,
-      }
-    })
-  }*/
-
-//
 // RENDER
 //
 
   render() {
-    console.log(this.state);
-    if(this.state.websiteDraggableConfig.stateUpdated===true) {
-      this.runSrcUpdate();
-    }
+    //console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
@@ -484,7 +553,9 @@ class WebsiteEdit extends Component {
               <h2>Website Editor</h2>
             </div>
             <div className="right">
-              <input type="text" /> <Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link> 
+              <input type="text" className="website-url" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
+              {/*<Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link>*/}
+              <button onClick={this.handleSaveChanges}>Save Changes</button>
             </div>
           </div>
           <div className="container-content">
