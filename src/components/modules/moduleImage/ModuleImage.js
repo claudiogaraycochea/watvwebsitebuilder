@@ -38,7 +38,8 @@ class ModuleImage extends Component {
           </div>
           <div className="row">
             <select className="inp" onChange={(e)=>{this.createModuleSrc(this.props,e,'imageSize')}} > 
-              <option value="small">Small</option>
+              <option value="ultra-small">Ultra Small</option>
+              <option value="small" selected>Small</option>
               <option value="medium">Medium</option>
               <option value="large">Large</option>
             </select>

@@ -11,7 +11,6 @@ class ModuleTitleDescription extends Component {
   }
   
   componentDidMount() {
-    console.log('**** ModuleTitleDescription: this.props',this.props.runSrc);
     this.setState({
       properties: this.props.properties
     })
@@ -45,7 +44,6 @@ class ModuleTitleDescription extends Component {
     else {
       let styles = {};
       if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
-        console.log('ModuleTitleDescription: this.props.runSrc.template',styles);
         styles = {
           title: {
             fontSize: 30,
