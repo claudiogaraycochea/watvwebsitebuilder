@@ -6,7 +6,6 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
-import _ from "lodash";
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -167,13 +166,6 @@ class WebsiteEdit extends Component {
       templateSelected: 0,
       templateChange: 'template_selector',
       runSrc: {},
-      myObject: {
-        styles: {
-          background: {
-            backgroundColor: '#000000',
-          }
-        },
-      }
     };
   }
 
@@ -467,77 +459,52 @@ class WebsiteEdit extends Component {
 // TEMPLATES
 //
 
+  converterValue = (typeValue, value) =>{
+    if(typeValue==='fontSize')
+      return parseInt(value);
+    return value;
+  }
+
   handleTemplateChange = (e) => {
 
- /*  
-     //const newTemplate = JSON.parse(element);
+    console.log('e.target.value', e.target.value);
+    let toModify = e.target.name.split('.');
+    console.log(toModify.length,' --- ', toModify[0], ' --- ',toModify[1]);
 
-    //const {name, value} = e.target;
- */
- /*let newObject = this.state.myObject.styles.background;
-
-    myObject: {
-      styles: {
-        background: {
-          backgroundColor: '#000000',
-        }
-      },
+    const styles = commons.copyObj(this.state.runSrc.template.styles); 
+    let background = styles.background;
+    if(toModify[0]==='background') {
+      background[toModify[1]] = this.converterValue(toModify[1],e.target.value);
     }
-    newObject[e.target.name] = e.target.value;
-    this.setState({
-      myObject: {
-        styles: {
-          background: newObject 
-        } 
-      }
-    })
-*/
+    let title = styles.title;
+    if(toModify[0]==='title') {
+      title[toModify[1]] = this.converterValue(toModify[1],e.target.value);
+    }
+    let subtitle = styles.subtitle;
+    if(toModify[0]==='subtitle') {
+      subtitle[toModify[1]] = this.converterValue(toModify[1],e.target.value);
+    }
+    let button = styles.button;
 
-    /*let newObject = this.state.myObject.styles.background;
-  
-    newObject[e.target.name] = e.target.value;
-    this.setState({
-      myObject: {
+    const runSrc = {
+      components: this.state.runSrc.components,
+      template : {
+        title: this.state.runSrc.template.title,
         styles: {
-          background: newObject 
-        } 
-      }
-    });*/
-    var questions = [
-      {question: "what is your name"},
-      {question: "How old are you"},
-      {question: "whats is your mothers name"},
-      {question: "where do work/or study"},
-  ];
-  
-  var hasHow = _.filter(questions, function(q){return q.question.match(/how/i)});
-  
-  console.log(hasHow);
-
-    /*{
-      title: 'MyTemplate 3',
-      styles: {
-        background: {
-          backgroundColor: '#FF9300',
-          fontSize: 10,
-          fontFamily: 'Open Sans',
-          color: 'blue',
-        },
-        title: {
-          fontSize: 50,
-        },
-        subtitle: {
-          fontSize: 20,
-        },
-        button: {
-          backgroundColor: '#FF9300',
-          fontColor: '#fff333',
+          background: background,
+          title: title,
+          subtitle: subtitle,
+          button: button,
         }
-      },
-    },*/
-    /*this.setState({
-      ...this.state.runSrc,
-    });*/
+      }
+    };
+
+    console.log('shandleTemplateChange:',runSrc);
+
+    this.setState({
+      ...this.state,
+      runSrc,
+    });
 
   }
 
@@ -552,11 +519,16 @@ class WebsiteEdit extends Component {
         </div>
         <div>
           <label>Background</label>
-          <input type="color" name="backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          <input type="color" name="background.backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          <input type="text" name="background.fontSize" defaultValue={this.state.runSrc.template.styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
         </div>
         <div>
-          <label>Font Family</label>
-          <input type="text" />
+          <label>Title</label>
+          <input type="text" name="title.fontSize" defaultValue={this.state.runSrc.template.styles.title.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+        </div>
+        <div>
+          <label>Subtilte size</label>
+          <input type="text" name="subtitle.fontSize" defaultValue={this.state.runSrc.template.styles.subtitle.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
         </div>
       </div>
     )
