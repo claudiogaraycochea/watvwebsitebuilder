@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
+import _ from "lodash";
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -512,6 +513,7 @@ class WebsiteEdit extends Component {
   var hasHow = _.filter(questions, function(q){return q.question.match(/how/i)});
   
   console.log(hasHow);
+
     /*{
       title: 'MyTemplate 3',
       styles: {
@@ -533,7 +535,6 @@ class WebsiteEdit extends Component {
         }
       },
     },*/
-    console.log(newObject);
     /*this.setState({
       ...this.state.runSrc,
     });*/
