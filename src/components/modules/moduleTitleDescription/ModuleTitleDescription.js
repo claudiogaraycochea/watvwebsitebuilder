@@ -56,7 +56,7 @@ class ModuleTitleDescription extends Component {
       return (
         <div className="module-title-description">
           {(this.props.moduleSrc.title!=='') ? <div className="title" style={styles.title}>{this.props.moduleSrc.title}</div> : <div className="title">Write a title</div> }
-          {(this.props.moduleSrc.description!=='') ? <div className="description">{this.props.moduleSrc.description}</div> : <div className="description">Write a description</div> }
+          {(this.props.moduleSrc.description!=='') ? <div>{this.props.moduleSrc.description}</div> : <div className="description">Write a description</div> }
         </div>
       );
     }
