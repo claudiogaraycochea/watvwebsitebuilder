@@ -166,16 +166,14 @@ class WebsiteEdit extends Component {
       templateSelected: 0,
       templateChange: 'template_selector',
       runSrc: {},
+      myObject: {
+        styles: {
+          background: {
+            backgroundColor: '#000000',
+          }
+        },
+      }
     };
-
-    this.setModuleProperties = this.setModuleProperties.bind(this);
-    // Module 
-    this.handleModuleProperties = this.handleModuleProperties.bind(this);
-    this.handleCloseModuleProperties = this.handleCloseModuleProperties.bind(this);
-    this.handleModuleRemove = this.handleModuleRemove.bind(this);
-    this.handleSelectTemplate = this.handleSelectTemplate.bind(this);
-    this.handleSaveChanges = this.handleSaveChanges.bind(this);
-    this.handlePropertiesChange = this.handlePropertiesChange.bind(this);
   }
 
   componentWillMount() {
@@ -235,7 +233,7 @@ class WebsiteEdit extends Component {
 // ON CLICK EVENTS
 //
 
-  handleModuleProperties(e, row){
+  handleModuleProperties = (e, row) => {
     let modalVisibility = false;
     if(row>-1) {
       modalVisibility = true;
@@ -248,7 +246,7 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleModuleRemove(e, row){
+  handleModuleRemove = (e, row) => {
     let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     newWebsiteDraggable.splice(row, 1);
 
@@ -261,11 +259,11 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleCloseModuleProperties(){
+  handleCloseModuleProperties = () => {
     this.setState({modalVisibility: false});
   }
 
-  handleSelectTemplate(e, row){
+  handleSelectTemplate(e, row) {
     this.setState({
       templateSelected: row,
       templateChange: 'template_properties',
@@ -276,7 +274,7 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleSaveChanges(e){
+  handleSaveChanges = (e) => {
     const userId = sessionStorage.getItem('userId');
     const userToken = sessionStorage.getItem('userToken');
     const websiteId = this.state.websiteId;
@@ -290,11 +288,6 @@ class WebsiteEdit extends Component {
         })
       })
       .catch(error => {});
-  }
-
-  handlePropertiesChange(e){
-
-    console.log('****** handleOnClickPropertiesChange',e.target.value);
   }
 
 //
@@ -442,7 +435,7 @@ class WebsiteEdit extends Component {
     return (this.getModuleComponent(moduleItem, true, false));
   }
 
-  setModuleProperties(moduleSrc){
+  setModuleProperties = (moduleSrc) => {
     let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     let itemSelected = this.state.websiteDraggableConfig.itemSelected;
     newWebsiteDraggable[itemSelected].moduleSrc = moduleSrc;
@@ -472,18 +465,93 @@ class WebsiteEdit extends Component {
 //
 // TEMPLATES
 //
+
+  handleTemplateChange = (e) => {
+
+ /*  
+     //const newTemplate = JSON.parse(element);
+
+    //const {name, value} = e.target;
+ */
+ /*let newObject = this.state.myObject.styles.background;
+
+    myObject: {
+      styles: {
+        background: {
+          backgroundColor: '#000000',
+        }
+      },
+    }
+    newObject[e.target.name] = e.target.value;
+    this.setState({
+      myObject: {
+        styles: {
+          background: newObject 
+        } 
+      }
+    })
+*/
+
+    /*let newObject = this.state.myObject.styles.background;
+  
+    newObject[e.target.name] = e.target.value;
+    this.setState({
+      myObject: {
+        styles: {
+          background: newObject 
+        } 
+      }
+    });*/
+    var questions = [
+      {question: "what is your name"},
+      {question: "How old are you"},
+      {question: "whats is your mothers name"},
+      {question: "where do work/or study"},
+  ];
+  
+  var hasHow = _.filter(questions, function(q){return q.question.match(/how/i)});
+  
+  console.log(hasHow);
+    /*{
+      title: 'MyTemplate 3',
+      styles: {
+        background: {
+          backgroundColor: '#FF9300',
+          fontSize: 10,
+          fontFamily: 'Open Sans',
+          color: 'blue',
+        },
+        title: {
+          fontSize: 50,
+        },
+        subtitle: {
+          fontSize: 20,
+        },
+        button: {
+          backgroundColor: '#FF9300',
+          fontColor: '#fff333',
+        }
+      },
+    },*/
+    console.log(newObject);
+    /*this.setState({
+      ...this.state.runSrc,
+    });*/
+
+  }
+
   getTemplateProperties(){
     const styles = this.state.runSrc.template.styles;//commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].styles);
-    console.log('templateProperties: templateSrc.styles: ',styles.background.backgroundColor);
+    console.log('templateProperties: templateSrc.styles: ', styles.background.backgroundColor);
     return (
       <div>
         Properties
         <div>
-          <button>Template</button>
+          <button >Template</button>
         </div>
         <div>
           <label>Background</label>
-          <input type="color" defaultValue={styles.background.backgroundColor} onClick={(e)=>this.handlePropertiesChange(e)} /> 
+          <input type="color" name="backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
         </div>
         <div>
           <label>Font Family</label>
@@ -544,7 +612,7 @@ class WebsiteEdit extends Component {
 //
 
   render() {
-    //console.log(this.state);
+    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20">
