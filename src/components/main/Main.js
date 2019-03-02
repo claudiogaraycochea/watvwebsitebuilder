@@ -23,7 +23,7 @@ class Main extends Component {
   componentDidMount(){
     console.log('Main user_token: ',sessionStorage.getItem('userToken'));
   }
-
+  
   render() {
     return (
       <div className="main">
