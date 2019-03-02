@@ -166,6 +166,7 @@ class WebsiteEdit extends Component {
       templateSelected: 0,
       templateChange: 'template_selector',
       runSrc: {},
+      fontSizeValue: ['10','15','20','25','30','40'],
     };
   }
 
@@ -485,6 +486,9 @@ class WebsiteEdit extends Component {
       subtitle[toModify[1]] = this.converterValue(toModify[1],e.target.value);
     }
     let button = styles.button;
+    if(toModify[0]==='button') {
+      button[toModify[1]] = this.converterValue(toModify[1],e.target.value);
+    }
 
     const runSrc = {
       components: this.state.runSrc.components,
@@ -512,29 +516,52 @@ class WebsiteEdit extends Component {
     const styles = this.state.runSrc.template.styles;//commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].styles);
     console.log('templateProperties: templateSrc.styles: ', styles.background.backgroundColor);
     return (
-      <div>
-        Properties
-        <div>
-          <button >Template</button>
+      <div className="container-content">
+        <div className="row">
+          <button onClick={() => this.goToTemplates('template_selector')}>Templates</button>
         </div>
-        <div>
-          <label>Background</label>
-          <input type="color" name="background.backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
-          <input type="text" name="background.fontSize" defaultValue={this.state.runSrc.template.styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+        <div className="row">
+          <div className="col-2">Background</div>
+          <div className="col-2">
+            <input type="color" name="background.backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          </div>
         </div>
-        <div>
-          <label>Title</label>
-          <input type="text" name="title.fontSize" defaultValue={this.state.runSrc.template.styles.title.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+        <div className="row">
+          <div className="col-2">Font size global</div>
+          <div className="col-2">
+            <select className="inp" name="background.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+            </select>
+          </div>
         </div>
-        <div>
-          <label>Subtilte size</label>
-          <input type="text" name="subtitle.fontSize" defaultValue={this.state.runSrc.template.styles.subtitle.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+        <div className="row">
+          <div className="col-2">Font size title</div>
+          <div className="col-2">
+            <select className="inp" name="title.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+            </select>
+            {/*<input type="text" name="title.fontSize" defaultValue={this.state.runSrc.template.styles.title.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> */}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-2">Button Color</div>
+          <div className="col-2">
+            <input type="color" name="button.backgroundColor" defaultValue={styles.button.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-2">Font Size Button</div>
+          <div className="col-2">
+            <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+            </select>
+          </div>
         </div>
       </div>
     )
   }
 
-  getTemplateSelector(){
+  getTemplateSelector = () => {
     return (
       <div className="template-wrapper">
         {this.state.websiteTemplates.map((item,key) => 
@@ -551,6 +578,10 @@ class WebsiteEdit extends Component {
     if(this.state.templateChange==='template_selector') {
       return this.getTemplateSelector();
     }
+  }
+
+  goToTemplates = (templateChange) => {
+    this.setState({templateChange});
   }
 
 //
