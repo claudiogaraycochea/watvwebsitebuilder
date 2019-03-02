@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../../assets/logo-watv.svg';
-import iconMenu from '../../assets/icon-menu.svg';
+//import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
+import { withRouter} from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -9,38 +10,46 @@ class Header extends Component {
     this.state = {
       userFirstname: '',
       websiteLinkname: '',
-      searchList: []
+      searchList: [],
+      menuVisible: false,
+      redirect: false,
     };
-    //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
+    
   }
 
-  componentWillMount(props) {
+  componentDidUpdate(props) {
     const userFirstname = sessionStorage.getItem('userFirstname');
+    console.log('Header: componentWillMount', userFirstname);
     if(userFirstname!==null){
       this.setState({
-        userFirstname
+        userFirstname,
+        menuVisible: true,
       })
     }
-    else {
-      
-      console.log('Resetea');
-    }
+  }
+
+  handleCloseSession = () => {
+    console.log('Close session');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userFirstname');
+    sessionStorage.removeItem('userToken');
+    this.props.history.push('/login');
   }
 
   render() {
     return (
       <div className="header">
-        <a href="/"><img src={logo} className="logo" alt="" /></a>
+        <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
         <div className="search">
           Website Builder
         </div>
         <div className="menu">
-          { (this.state.userFirstname!=='') ? <div>Hi {this.state.userFirstname}!</div> : null }
-          <img src={iconMenu} className="icon-menu" alt="Menu" /> 
+          { (this.state.menuVisible!==null) ? <div>Hi {this.state.userFirstname}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null }
+          { /* <img src={iconMenu} className="icon-menu" alt="Menu" /> */}
         </div>
       </div>
     );
   }
 }
 
-export default Header;
+export default withRouter(Header);

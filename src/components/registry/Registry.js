@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Login.css';
+import './Registry.css';
 import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -12,12 +12,13 @@ class Welcome extends Component {
     this.state = {
       email: '',
       password: '',
-      message: {
-        text: '',
-        typeMessage: 'alert',
-      },
+      message: '',
       loading: false,
     };
+  }
+
+  componentWillMount () {
+    //commons.redirectionBySession();
   }
   
   login = () => {
@@ -32,12 +33,7 @@ class Welcome extends Component {
           this.props.history.push("/websiteList");
         }
         else
-          this.setState({
-            message: {
-              text: 'Email or password is incorrect',
-              typeMessage: 'alert',
-            }
-            , loading: false });
+          this.setState({message: 'Email or password is incorrect', loading: false });
       })
       .catch(error => {});
   }
@@ -61,22 +57,22 @@ class Welcome extends Component {
     }
     else {
       this.setState({
-        message: {
-          text: 'Email and password is required',
-          typeMessage: 'alert',
-        }
+        message: 'Email and password is required'
       });
     }
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20 center">
           <div className="center-wrapper">
             <div className="row">
-              <h2>Login</h2>
+              <h2>Registry</h2>
             </div>
+            { commons.LoadingSpinner(this.state.loading) }
+            { commons.Notification(this.state.message, 'alert') }
             <div className="row">
               <input
                 name="email"
@@ -96,15 +92,23 @@ class Welcome extends Component {
                 placeholder='Password'/>
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
+              <input
+                name="password"
+                type="password"
+                className="inp"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                placeholder='Password'/>
+            </div>
+            <div className="row">
+              <button className="btn btn-primary" onClick={this.handleSubmit}>Create</button>
             </div>
             <div className="row">
               <Link to="/WebsiteList">Forgot Password</Link>
             </div>
           </div>
         </div>
-        { commons.LoadingSpinner(this.state.loading) }
-        { commons.Notification(this.state.message.text, this.state.message.typeMessage) }
+        
         <Footer className="footer"/>    
       </div>
     );
