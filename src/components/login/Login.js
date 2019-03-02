@@ -4,29 +4,62 @@ import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
+import * as commons from '../../commons/Commons';
 
 class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
+      message: '',
+      loading: false,
     };
   }
   
-  login= () => {
-    const paramsData = 'user_email=claudio@sharesmarttv.com&user_password=321456';
+  login = () => {
+    const paramsData = `user_email=${this.state.email}&user_password=${this.state.password}`;
     axios.post(`${API_URL}lu`, paramsData )
       .then(response => {
-        sessionStorage.setItem('userId',response.data.user_id);
-        sessionStorage.setItem('userFirstname',response.data.user_firstname);
-        sessionStorage.setItem('userToken',response.data.user_token);
-        this.props.history.push("/websiteList");
+        if(response.data.user_token!==undefined) {
+          sessionStorage.setItem('userId',response.data.user_id);
+          sessionStorage.setItem('userFirstname',response.data.user_firstname);
+          sessionStorage.setItem('userToken',response.data.user_token);
+          
+          this.props.history.push("/websiteList");
+        }
+        else
+          this.setState({message: 'Email or password is incorrect', loading: false });
       })
       .catch(error => {});
   }
 
+  handleInputChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const name = e.target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit = () => {
+    console.log('handleSubmit');
+    if(this.state.email) {
+      this.setState({ loading: true }, () => {
+        console.log('login');
+        this.login();
+      });      
+    }
+    else {
+      this.setState({
+        message: 'Email and password is required'
+      });
+    }
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div className="primary-style">
         <div className="container padding-20 center">
@@ -34,20 +67,36 @@ class Welcome extends Component {
             <div className="row">
               <h2>Login</h2>
             </div>
+            { commons.LoadingSpinner(this.state.loading) }
+            {/* this.state.loading ? <div>Loadingeeeeeeeeee e ee e ee</div> : null*/ }
+            { this.state.message ? <div>{this.state.message}</div> : null }
             <div className="row">
-              <input type="text" className="inp" placeholder="Email"/>
+              <input
+                name="email"
+                type="text"
+                className="inp"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                placeholder='Email'/>
             </div>
             <div className="row">
-              <input type="password" className="inp" placeholder="Password"/>
+              <input
+                name="password"
+                type="text"
+                className="inp"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                placeholder='Password'/>
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.login}>Login</button>
+              <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
             </div>
             <div className="row">
               <Link to="/WebsiteList">Forgot Password</Link>
             </div>
           </div>
         </div>
+        
         <Footer className="footer"/>    
       </div>
     );
