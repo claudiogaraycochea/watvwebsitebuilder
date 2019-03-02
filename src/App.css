@@ -235,3 +235,37 @@ h1, h2, h3, h4 {
 .hidde-element {
   display: none;
 }
+
+.loading-spinner {
+  position: absolute;
+  top: 60px;
+  z-index: 1000;
+  margin: 0 auto;
+  background-image: url('./assets/loading-spinner.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 60px;
+}
+
+.notification {
+  position: absolute;
+  top: 60px;
+  z-index: 1000;
+  margin: 0 auto;
+  width: 80%;
+  height: 60px;
+  min-width: 200px;
+  max-width: 600px;
+  background: #f4f4f4;
+  color: #222222;
+  border-radius: 10px;
+  padding: 20px;
+  height: auto;
+}
+
+.notification.alert {
+  background: #ffd2e5;
+  color: #d4005b;
+}
