@@ -40,7 +40,7 @@ a {
 }
 
 .btn {
-  background: #2a94fa;
+  background: #3e5b77;
   color: #ffffff;
   border: 0;
   padding: 10px 20px;
@@ -239,6 +239,8 @@ h1, h2, h3, h4 {
 .loading-spinner {
   position: absolute;
   top: 60px;
+  left: 0;
+  right: 0;
   z-index: 1000;
   margin: 0 auto;
   background-image: url('./assets/loading-spinner.svg');
@@ -252,6 +254,8 @@ h1, h2, h3, h4 {
 .notification {
   position: absolute;
   top: 60px;
+  left: 0;
+  right: 0;
   z-index: 1000;
   margin: 0 auto;
   width: 80%;

@@ -12,7 +12,7 @@ class WebsiteList extends Component {
       userFirstname: '',
       websiteList: [],
     };
-    //this.handleSearchKeyUp = this.keyUpHandler.bind(this, 'inputSearch');
+    //this.clickHistory = this.clickHistory.bind(this);
   }
 
   componentWillMount() {
@@ -28,6 +28,12 @@ class WebsiteList extends Component {
       .catch(error => {});
   }
   
+  clickHistory = () => {
+    console.log('clickhistory');
+    console.log(this.props);
+    this.props.history.push('/login')
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -38,6 +44,7 @@ class WebsiteList extends Component {
               <h2>My Websites</h2>
             </div>
             <div className="right">
+              <button onClick={()=>this.clickHistory()}>Logout</button>
               <Link to="/websiteList" className="btn btn-primary">Edit</Link>
             </div>
           </div>
