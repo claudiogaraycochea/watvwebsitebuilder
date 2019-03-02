@@ -16,6 +16,10 @@ class Welcome extends Component {
       loading: false,
     };
   }
+
+  componentWillMount () {
+    //commons.redirectionBySession();
+  }
   
   login = () => {
     const paramsData = `user_email=${this.state.email}&user_password=${this.state.password}`;
@@ -46,7 +50,7 @@ class Welcome extends Component {
   handleSubmit = () => {
     console.log('handleSubmit');
     if(this.state.email) {
-      this.setState({ loading: true }, () => {
+      this.setState({ loading: true, message: '' }, () => {
         console.log('login');
         this.login();
       });      
@@ -61,7 +65,7 @@ class Welcome extends Component {
   render() {
     console.log(this.state);
     return (
-      <div className="primary-style">
+      <div className="tertiary-style">
         <div className="container padding-20 center">
           <div className="center-wrapper">
             <div className="row">
@@ -69,7 +73,8 @@ class Welcome extends Component {
             </div>
             { commons.LoadingSpinner(this.state.loading) }
             {/* this.state.loading ? <div>Loadingeeeeeeeeee e ee e ee</div> : null*/ }
-            { this.state.message ? <div>{this.state.message}</div> : null }
+            {/* this.state.message ? <div>{this.state.message}</div> : null */}
+            { commons.Notification(this.state.message, 'alert') }
             <div className="row">
               <input
                 name="email"
@@ -82,7 +87,7 @@ class Welcome extends Component {
             <div className="row">
               <input
                 name="password"
-                type="text"
+                type="password"
                 className="inp"
                 value={this.state.password}
                 onChange={this.handleInputChange}

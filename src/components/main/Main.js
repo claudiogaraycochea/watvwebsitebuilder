@@ -21,6 +21,7 @@ class Main extends Component {
                     <Route path="/websitelist" component={WebsiteList} />
                     <Route path="/websiteEdit/:websiteId" component={WebsiteEdit} />
                     <Route path="/pro/:websiteId" component={WebsiteRun} />
+                    {/*<PrivateRoute path='/websitelist' component={WebsiteList} />*/}
                 </Switch>
             </BrowserRouter>
         </div>

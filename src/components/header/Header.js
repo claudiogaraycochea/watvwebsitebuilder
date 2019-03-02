@@ -22,6 +22,7 @@ class Header extends Component {
       })
     }
     else {
+      
       console.log('Resetea');
     }
   }
