@@ -8,24 +8,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userFirstname: '',
-      websiteLinkname: '',
-      searchList: [],
-      menuVisible: false,
-      redirect: false,
     };
-    
-  }
-
-  componentDidUpdate(props) {
-    const userFirstname = sessionStorage.getItem('userFirstname');
-    console.log('Header: componentWillMount', userFirstname);
-    if(userFirstname!==null){
-      this.setState({
-        userFirstname,
-        menuVisible: true,
-      })
-    }
   }
 
   handleCloseSession = () => {
@@ -36,7 +19,13 @@ class Header extends Component {
     this.props.history.push('/login');
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('Header: getDerivedStateFromProps:');
+    return null;
+  }
+
   render() {
+    const userFirstname = (sessionStorage.getItem('userFirstname')!==null) ? <div>Hi {sessionStorage.getItem('userFirstname')}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
     return (
       <div className="header">
         <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
@@ -44,7 +33,7 @@ class Header extends Component {
           Website Builder
         </div>
         <div className="menu">
-          { (this.state.menuVisible!==null) ? <div>Hi {this.state.userFirstname}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null }
+          { userFirstname }
           { /* <img src={iconMenu} className="icon-menu" alt="Menu" /> */}
         </div>
       </div>
