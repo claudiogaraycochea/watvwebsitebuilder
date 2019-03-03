@@ -3,7 +3,13 @@ import logo from '../../assets/logo-watv.svg';
 //import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
 import { withRouter} from 'react-router-dom';
+/*window.addEventListener('storage', function(e) {  
+  
+  if(e.storageArea===sessionStorage) {
+    console.log('Session storage change');   
+  }
 
+});*/
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +32,7 @@ class Header extends Component {
 
   render() {
     const userFirstname = (sessionStorage.getItem('userFirstname')!==null) ? <div>Hi {sessionStorage.getItem('userFirstname')}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
+    
     return (
       <div className="header">
         <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
