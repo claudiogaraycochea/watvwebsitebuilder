@@ -13,21 +13,27 @@ import Registry from '../registry/Registry';
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     sessionStorage.getItem('userToken') === null
-      ? <Redirect to='/login' />
+      ? <Redirect to='/login'/>
       : <Component {...props} />
   )} />
 )
 
 class Main extends Component {
-
-  componentDidMount(){
-    console.log('Main user_token: ',sessionStorage.getItem('userToken'));
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
   }
-  
+
+  updateHeader = () => {
+    console.log('Main: updateHeader');
+    return 'updateheader true';
+  }
+
   render() {
     return (
       <div className="main">
-        <Header {...this.props}/>
+        <Header {...this.props} updateHeader={()=>this.updateHeader}/>
         <div className="content">
           <BrowserRouter>
             <Switch>
