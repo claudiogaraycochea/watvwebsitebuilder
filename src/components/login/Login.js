@@ -28,7 +28,7 @@ class Welcome extends Component {
           sessionStorage.setItem('userId',response.data.user_id);
           sessionStorage.setItem('userFirstname',response.data.user_firstname);
           sessionStorage.setItem('userToken',response.data.user_token);
-          
+     
           this.props.history.push("/websiteList");
         }
         else
