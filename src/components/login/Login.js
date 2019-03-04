@@ -96,7 +96,7 @@ class Login extends Component {
                 placeholder='Password'/>
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
+              <button className="btn btn-primary" onClick={this.handleSubmit}><i className="icon-key space"/>Login</button>
             </div>
             <div className="row">
               <Link to="/WebsiteList">Forgot Password</Link>

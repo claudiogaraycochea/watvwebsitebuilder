@@ -4,6 +4,7 @@ import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
+import * as commons from '../../commons/Commons';
 
 class WebsiteList extends Component {
   constructor(props) {
@@ -40,11 +41,18 @@ class WebsiteList extends Component {
             </div>
           </div>
           <div className="table-list">
+            <div className="item">
+              <div className="col-6 col">Name</div>
+              <div className="col-3 col">URL</div>
+              <div className="col-6 col">Updated</div>
+              <div className="col-6 col">Options</div>
+            </div>  
             {this.state.websiteList.map((item,i) => 
               <div className="item" key={i}>
-                <div className="col-5 col">{item.website_name}</div>
-                <div className="col-4 col">https://modules.weband.tv/pro/{item.website_id}</div>
-                <div className="col-3 col">
+                <div className="col-6 col">{item.website_name}</div>
+                <div className="col-3 col">https://modules.weband.tv/pro/{item.website_id}</div>
+                <div className="col-6 col">{commons.dateFormat({date: item.website_updated, typeDateFormat: 'en-US'})}</div>
+                <div className="col-6 col">
                   <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary btn-circle"><i className="icon-edit"/></Link> 
                   <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-circle"><i className="icon-trash"/></Link>
                 </div>

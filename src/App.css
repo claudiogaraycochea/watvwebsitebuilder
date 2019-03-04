@@ -36,7 +36,7 @@ a {
   width: 100%;
   max-width: 500px;
   border: 0;
-  height: 32px;
+  height: 40px;
 }
 
 .btn {
@@ -48,6 +48,8 @@ a {
   border-radius: 5px;
   width: fit-content;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 a.btn {
@@ -55,8 +57,13 @@ a.btn {
   display: inline-block;
 }
 
+.center-right {
+  justify-content: flex-end;
+}
+
 .btn.small {
   padding: 5px 10px;
+  font-size: 12px;
 }
 
 .btn-primary {
@@ -288,8 +295,8 @@ h1, h2, h3, h4 {
 }
 
 .notification.alert {
-  background: #ffd2e5;
-  color: #d4005b;
+  background: #ffe8e8;
+  color: #ff5555;
 }
 
 [class^="icon-"],
@@ -302,10 +309,23 @@ h1, h2, h3, h4 {
   height: 14px;
 }
 
+[class^="icon-"].space,
+[class*="icon-"].space {
+  margin-right: 10px;
+}
+
 .icon-edit {
   background-image: url('./assets/icon-edit.svg');
 }
 
 .icon-trash {
   background-image: url('./assets/icon-trash.svg');
+}
+
+.icon-key {
+  background-image: url('./assets/icon-key.svg');
+}
+
+.icon-logout {
+  background-image: url('./assets/icon-logout.svg');
 }
