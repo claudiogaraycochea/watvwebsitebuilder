@@ -55,10 +55,8 @@ class Login extends Component {
   }
 
   handleSubmit = () => {
-    console.log('handleSubmit');
     if(this.state.email) {
       this.setState({ loading: true, message: '' }, () => {
-        console.log('login');
         this.login();
       });      
     }
