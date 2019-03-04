@@ -1,6 +1,6 @@
-const sessionOpen = (userFirstname) => {
+const openSession = (userFirstname) => {
   return {
-    type: 'SESSION_OPEN',
+    type: 'OPEN_SESSION',
     userFirstname
   };
 }
@@ -12,4 +12,4 @@ const test = (userFirstname) => {
   };
 }
 
-export { sessionOpen, test }
+export { openSession, test }

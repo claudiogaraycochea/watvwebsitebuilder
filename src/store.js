@@ -5,7 +5,7 @@ const storeInit = {
 }
 
 const reducer = (state, action) => {
-  if(action.type==='SESSION_OPEN'){
+  if(action.type==='OPEN_SESSION'){
     return {
       ...state,
       userFirstname: action.userFirstname,

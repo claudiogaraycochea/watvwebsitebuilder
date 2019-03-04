@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
-import store from '../../store';
-import { sessionOpen } from '../../actions';
+//import store from '../../store';
+import { openSession } from '../../actions';
+import { connect } from 'react-redux';
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Login extends Component {
           sessionStorage.setItem('userId',response.data.user_id);
           sessionStorage.setItem('userFirstname',response.data.user_firstname);
           sessionStorage.setItem('userToken',response.data.user_token);
-          this.sessionOpen(response.data.user_firstname);
+          this.props.openSession(response.data.user_firstname);
           this.props.history.push("/websiteList");
         }
         else
@@ -112,10 +113,18 @@ class Login extends Component {
     );
   }
 
-  sessionOpen(userFirstname){
-    store.dispatch(sessionOpen(userFirstname));
-  }
-
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {};
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openSession(userFirstname) {
+      dispatch(openSession(userFirstname));
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
