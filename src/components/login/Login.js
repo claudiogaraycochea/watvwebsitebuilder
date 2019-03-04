@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
+import store from '../../store';
+import { sessionOpen } from '../../actions';
 
-class Welcome extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +30,7 @@ class Welcome extends Component {
           sessionStorage.setItem('userId',response.data.user_id);
           sessionStorage.setItem('userFirstname',response.data.user_firstname);
           sessionStorage.setItem('userToken',response.data.user_token);
-     
+          this.sessionOpen(response.data.user_firstname);
           this.props.history.push("/websiteList");
         }
         else
@@ -109,6 +111,11 @@ class Welcome extends Component {
       </div>
     );
   }
+
+  sessionOpen(userFirstname){
+    store.dispatch(sessionOpen(userFirstname));
+  }
+
 }
 
-export default Welcome;
+export default Login;
