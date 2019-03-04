@@ -9,7 +9,6 @@ class WebsiteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userFirstname: '',
       websiteList: [],
     };
     //this.clickHistory = this.clickHistory.bind(this);
@@ -23,15 +22,8 @@ class WebsiteList extends Component {
         this.setState({
           websiteList: response.data
         })
-        //this.props.history.push("/WebsiteList");
       })
       .catch(error => {});
-  }
-  
-  clickHistory = () => {
-    console.log('clickhistory');
-    console.log(this.props);
-    this.props.history.push('/login')
   }
 
   render() {
@@ -44,18 +36,17 @@ class WebsiteList extends Component {
               <h2>My Websites</h2>
             </div>
             <div className="right">
-              <button onClick={()=>this.clickHistory()}>Logout</button>
               <Link to="/websiteList" className="btn btn-primary">Edit</Link>
             </div>
           </div>
           <div className="table-list">
             {this.state.websiteList.map((item,i) => 
               <div className="item" key={i}>
-                <div className="col width-1">{item.website_name}</div>
-                <div className="col width-5">https://modules.weband.tv/pro/{item.website_id}</div>
-                <div className="col">
-                  <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary">Edit</Link> 
-                  <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-secondary">Delete</Link>
+                <div className="col-5 col">{item.website_name}</div>
+                <div className="col-4 col">https://modules.weband.tv/pro/{item.website_id}</div>
+                <div className="col-3 col">
+                  <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary btn-circle"><i className="icon-edit"/></Link> 
+                  <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-circle"><i className="icon-trash"/></Link>
                 </div>
               </div>  
             )}

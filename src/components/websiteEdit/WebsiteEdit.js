@@ -630,7 +630,7 @@ class WebsiteEdit extends Component {
               <button onClick={this.handleSaveChanges}>Save Changes</button>
             </div>
           </div>
-          <div className="container-content">
+          <div>
             <div className="editor-wrapper">
               <div className="col-4">
                 <div className="box-wrapper">

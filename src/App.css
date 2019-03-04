@@ -47,6 +47,7 @@ a {
   font-size: 14px;
   border-radius: 5px;
   width: fit-content;
+  cursor: pointer;
 }
 
 a.btn {
@@ -61,6 +62,21 @@ a.btn {
 .btn-primary {
   background: #1fc588;
   color: #ffffff;
+}
+
+.btn-danger {
+  background: #ff6868;
+  color: #ffffff
+}
+
+.btn-circle {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary {
@@ -114,9 +130,11 @@ h1, h2, h3, h4 {
 }
 
 .table-list .col {
-  border-right: 1px solid #4e4e6f;
   padding: 20px;
   flex: 1 1 auto;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
 }
 
 .table-list .col:last-child {
@@ -272,4 +290,22 @@ h1, h2, h3, h4 {
 .notification.alert {
   background: #ffd2e5;
   color: #d4005b;
+}
+
+[class^="icon-"],
+[class*="icon-"] {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-edit {
+  background-image: url('./assets/icon-edit.svg');
+}
+
+.icon-trash {
+  background-image: url('./assets/icon-trash.svg');
 }

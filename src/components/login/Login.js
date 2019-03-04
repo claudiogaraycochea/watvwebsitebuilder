@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
-//import store from '../../store';
 import { openSession } from '../../actions';
 import { connect } from 'react-redux';
 
