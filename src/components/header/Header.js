@@ -22,17 +22,15 @@ class Header extends Component {
     this.props.history.push('/login');
   }
 
+
   static getDerivedStateFromProps(props, state) {
-    console.log('Header: getDerivedStateFromProps:');
     return {
-      userFirstname: props.userFirstname,
+      userFirstname: sessionStorage.getItem('userFirstname'),
     };
   }
 
   render() {
-    //const userFirstname = (sessionStorage.getItem('userFirstname')!==null) ? <div>Hi {sessionStorage.getItem('userFirstname')}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
-    console.log('Header: render() this.state: ',this.state);
-    const userFirstname = this.state.userFirstname;
+    const buttonSession = (this.state.userFirstname!==null) ? <div>Hi {this.state.userFirstname}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
     return (
       <div className="header">
         <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
@@ -40,7 +38,7 @@ class Header extends Component {
           Website Builder
         </div>
         <div className="menu">
-          { userFirstname }
+          { buttonSession }
           { /* <img src={iconMenu} className="icon-menu" alt="Menu" /> */}
         </div>
       </div>
@@ -49,7 +47,6 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('Header: mapStateToProps:', state);
   return {
     userFirstname: state.userFirstname,
   };
