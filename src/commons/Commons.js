@@ -19,3 +19,10 @@ export const Notification = (value, typeClass) => (
 export const redirectionBySession = () => (
   (sessionStorage.getItem('user_token')==='') ? console.log('No session') : null
 );
+
+export const dateFormat = (data) => {
+  const date = new Date(data.date);
+  const formatter = new Intl.DateTimeFormat("en-US");
+  formatter.format(date);
+  return formatter.format(date);
+}
