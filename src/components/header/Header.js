@@ -3,7 +3,8 @@ import logo from '../../assets/logo-watv.svg';
 //import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
 import { withRouter} from 'react-router-dom';
-import store from '../../store';
+//import store from '../../store';
+import { connect } from 'react-redux';
 
 class Header extends Component {
   constructor(props) {
@@ -11,12 +12,6 @@ class Header extends Component {
     this.state = {
       userFirstname: ''
     };
-
-    store.subscribe(()=>{
-      this.setState({
-        userFirstname: store.getState().userFirstname,
-      });
-    });
   }
 
   handleCloseSession = () => {
@@ -29,7 +24,9 @@ class Header extends Component {
 
   static getDerivedStateFromProps(props, state) {
     console.log('Header: getDerivedStateFromProps:');
-    return null;
+    return {
+      userFirstname: props.userFirstname,
+    };
   }
 
   render() {
@@ -51,4 +48,15 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = state => {
+  console.log('Header: mapStateToProps:', state);
+  return {
+    userFirstname: state.userFirstname,
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
