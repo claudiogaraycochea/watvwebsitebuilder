@@ -3,7 +3,6 @@ import logo from '../../assets/logo-watv.svg';
 //import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
 import { withRouter} from 'react-router-dom';
-//import store from '../../store';
 import { connect } from 'react-redux';
 
 class Header extends Component {
@@ -15,7 +14,6 @@ class Header extends Component {
   }
 
   handleCloseSession = () => {
-    console.log('Close session');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userFirstname');
     sessionStorage.removeItem('userToken');
