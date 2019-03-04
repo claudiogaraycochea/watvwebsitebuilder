@@ -36,7 +36,7 @@ a {
   width: 100%;
   max-width: 500px;
   border: 0;
-  height: 32px;
+  height: 40px;
 }
 
 .btn {
@@ -47,6 +47,9 @@ a {
   font-size: 14px;
   border-radius: 5px;
   width: fit-content;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 a.btn {
@@ -54,13 +57,33 @@ a.btn {
   display: inline-block;
 }
 
+.center-right {
+  justify-content: flex-end;
+}
+
 .btn.small {
   padding: 5px 10px;
+  font-size: 12px;
 }
 
 .btn-primary {
   background: #1fc588;
   color: #ffffff;
+}
+
+.btn-danger {
+  background: #ff6868;
+  color: #ffffff
+}
+
+.btn-circle {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary {
@@ -114,9 +137,11 @@ h1, h2, h3, h4 {
 }
 
 .table-list .col {
-  border-right: 1px solid #4e4e6f;
   padding: 20px;
   flex: 1 1 auto;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
 }
 
 .table-list .col:last-child {
@@ -270,6 +295,37 @@ h1, h2, h3, h4 {
 }
 
 .notification.alert {
-  background: #ffd2e5;
-  color: #d4005b;
+  background: #ffe8e8;
+  color: #ff5555;
+}
+
+[class^="icon-"],
+[class*="icon-"] {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+[class^="icon-"].space,
+[class*="icon-"].space {
+  margin-right: 10px;
+}
+
+.icon-edit {
+  background-image: url('./assets/icon-edit.svg');
+}
+
+.icon-trash {
+  background-image: url('./assets/icon-trash.svg');
+}
+
+.icon-key {
+  background-image: url('./assets/icon-key.svg');
+}
+
+.icon-logout {
+  background-image: url('./assets/icon-logout.svg');
 }

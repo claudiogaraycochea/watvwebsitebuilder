@@ -400,7 +400,7 @@ class WebsiteEdit extends Component {
             onDragStart = {(e) => this.onDragStart(e, key)}
             draggable
             >
-            <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete">X</button>
+            <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete"><i className="icon-trash"></i></button>
             <div onClick={(e) => this.handleModuleProperties(e,key)}>
               {this.getModuleComponent(item, false, false)}
             </div>
@@ -630,7 +630,7 @@ class WebsiteEdit extends Component {
               <button onClick={this.handleSaveChanges}>Save Changes</button>
             </div>
           </div>
-          <div className="container-content">
+          <div>
             <div className="editor-wrapper">
               <div className="col-4">
                 <div className="box-wrapper">

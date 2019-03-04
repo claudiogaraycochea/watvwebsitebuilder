@@ -3,7 +3,6 @@ import logo from '../../assets/logo-watv.svg';
 //import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
 import { withRouter} from 'react-router-dom';
-//import store from '../../store';
 import { connect } from 'react-redux';
 
 class Header extends Component {
@@ -15,7 +14,6 @@ class Header extends Component {
   }
 
   handleCloseSession = () => {
-    console.log('Close session');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userFirstname');
     sessionStorage.removeItem('userToken');
@@ -30,17 +28,17 @@ class Header extends Component {
   }
 
   render() {
-    const buttonSession = (this.state.userFirstname!==null) ? <div>Hi {this.state.userFirstname}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
+    const buttonSession = (this.state.userFirstname!==null) ? <div className="menu-top-wrapper"><div className="item">Hi {this.state.userFirstname}!</div> <button className="btn small" onClick={()=>this.handleCloseSession()}><i className="icon-logout space" />Log Out</button></div> : null;
     return (
       <div className="header">
-        <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
-        <div className="search">
-          Website Builder
+        <div className="logo-wrapper">
+          <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
+          <div className="title">
+            Website Builder
+          </div>
         </div>
-        <div className="menu">
-          { buttonSession }
+        { buttonSession }
           { /* <img src={iconMenu} className="icon-menu" alt="Menu" /> */}
-        </div>
       </div>
     );
   }

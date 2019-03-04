@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
-//import store from '../../store';
 import { openSession } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -97,7 +96,7 @@ class Login extends Component {
                 placeholder='Password'/>
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
+              <button className="btn btn-primary" onClick={this.handleSubmit}><i className="icon-key space"/>Login</button>
             </div>
             <div className="row">
               <Link to="/WebsiteList">Forgot Password</Link>
