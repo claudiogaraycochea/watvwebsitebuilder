@@ -3,18 +3,20 @@ import logo from '../../assets/logo-watv.svg';
 //import iconMenu from '../../assets/icon-menu.svg';
 import './Header.css';
 import { withRouter} from 'react-router-dom';
-/*window.addEventListener('storage', function(e) {  
-  
-  if(e.storageArea===sessionStorage) {
-    console.log('Session storage change');   
-  }
+import store from '../../store';
 
-});*/
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userFirstname: ''
     };
+
+    store.subscribe(()=>{
+      this.setState({
+        userFirstname: store.getState().userFirstname,
+      });
+    });
   }
 
   handleCloseSession = () => {
@@ -31,8 +33,9 @@ class Header extends Component {
   }
 
   render() {
-    const userFirstname = (sessionStorage.getItem('userFirstname')!==null) ? <div>Hi {sessionStorage.getItem('userFirstname')}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
-    
+    //const userFirstname = (sessionStorage.getItem('userFirstname')!==null) ? <div>Hi {sessionStorage.getItem('userFirstname')}! <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
+    console.log('Header: render() this.state: ',this.state);
+    const userFirstname = this.state.userFirstname;
     return (
       <div className="header">
         <a href="/websiteList"><img src={logo} className="logo" alt="" /></a>
