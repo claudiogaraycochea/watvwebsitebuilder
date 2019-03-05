@@ -334,3 +334,17 @@ h1, h2, h3, h4 {
 .icon-save {
   background-image: url('./assets/icon-save.svg');
 }
+
+.no-image {
+  background-image: url('./assets/no-image.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 100px;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+}

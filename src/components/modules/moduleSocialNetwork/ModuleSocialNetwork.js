@@ -32,10 +32,11 @@ class ModuleSocialNetwork extends Component {
     }
     else {
       return (
-        <div>
-          Follow US
-          <a href="https://nba.com" className="btn" >Facebook</a>
-          <a href="https://nba.com" className="btn" >Twitter</a>
+        <div className="social-network-wrapper">
+          <div className="buttons-wrapper">
+            <a href="https://nba.com" className="btn btn-circle" ><i className="icon-facebook"></i></a>
+            <a href="https://nba.com" className="btn btn-circle" ><i className="icon-facebook"></i></a>
+          </div>
         </div>
       );
     }

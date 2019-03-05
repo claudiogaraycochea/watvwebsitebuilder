@@ -45,7 +45,6 @@
 }
 
 .module-view {
-  border: 1px solid blue;
   min-height: 100%;
 }
 
@@ -57,13 +56,11 @@
 }
 
 .template-wrapper {
-  border: 1px solid green;
   width: 100%;
   height: 100%;
 }
 
 .template-wrapper .item {
-  border: 1px solid red;
   width: 100%;
   padding: 20px;
 }
@@ -72,4 +69,19 @@
   margin-right: 20px;
   background: #4b4b67;
   color: #03a9f4;
+}
+
+.saved-successfully {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  font-size: 12px;
+  padding: 0 10px;
+  color: #3dc581;
+}
+
+.website-url-wrapper {
+  position: relative;
+  width: 100%;
+  margin-right: 20px;
 }
