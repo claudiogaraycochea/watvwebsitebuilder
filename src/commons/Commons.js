@@ -20,8 +20,8 @@ export const redirectionBySession = () => (
   (sessionStorage.getItem('user_token')==='') ? console.log('No session') : null
 );
 
-export const dateFormat = (data) => {
-  const date = new Date(data.date);
+export const dateFormat = (value) => {
+  const date = new Date(value);
   const formatter = new Intl.DateTimeFormat("en-US");
   formatter.format(date);
   return formatter.format(date);
