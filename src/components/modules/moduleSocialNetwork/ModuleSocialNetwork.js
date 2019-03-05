@@ -35,7 +35,8 @@ class ModuleSocialNetwork extends Component {
         <div className="social-network-wrapper">
           <div className="buttons-wrapper">
             <a href="https://nba.com" className="btn btn-circle" ><i className="icon-facebook"></i></a>
-            <a href="https://nba.com" className="btn btn-circle" ><i className="icon-facebook"></i></a>
+            <a href="https://nba.com" className="btn btn-circle" ><i className="icon-instagram"></i></a>
+            <a href="https://nba.com" className="btn btn-circle" ><i className="icon-twitter"></i></a>
           </div>
         </div>
       );
