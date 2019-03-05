@@ -43,18 +43,18 @@ a {
   background: #3e5b77;
   color: #ffffff;
   border: 0;
-  padding: 10px 20px;
+  padding: 0 20px;
   font-size: 14px;
   border-radius: 5px;
-  width: fit-content;
   cursor: pointer;
   display: flex;
   align-items: center;
+  height: 40px;
+  white-space: nowrap;
 }
 
 a.btn {
   margin-right: 5px;
-  display: inline-block;
 }
 
 .center-right {
@@ -119,6 +119,7 @@ h1, h2, h3, h4 {
 }
 
 .container-header .right {
+  width: 50%;
   display: flex;
 }
 
@@ -305,8 +306,8 @@ h1, h2, h3, h4 {
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 }
 
 [class^="icon-"].space,
@@ -328,4 +329,8 @@ h1, h2, h3, h4 {
 
 .icon-logout {
   background-image: url('./assets/icon-logout.svg');
+}
+
+.icon-save {
+  background-image: url('./assets/icon-save.svg');
 }

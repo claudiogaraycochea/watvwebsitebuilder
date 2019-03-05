@@ -625,9 +625,9 @@ class WebsiteEdit extends Component {
               <h2>Website Editor</h2>
             </div>
             <div className="right">
-              <input type="text" className="website-url" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
+              <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
               {/*<Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link>*/}
-              <button onClick={this.handleSaveChanges}>Save Changes</button>
+              <button onClick={this.handleSaveChanges} className="btn btn-primary"><i className="icon-save space"/> Save Changes</button>
             </div>
           </div>
           <div>

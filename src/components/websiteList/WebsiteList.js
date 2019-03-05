@@ -36,7 +36,7 @@ class WebsiteList extends Component {
             <div className="left">
               <h2>My Websites</h2>
             </div>
-            <div className="right">
+            <div className="right center-right">
               <Link to="/websiteList" className="btn btn-primary">Edit</Link>
             </div>
           </div>
@@ -51,7 +51,7 @@ class WebsiteList extends Component {
               <div className="item" key={i}>
                 <div className="col-6 col">{item.website_name}</div>
                 <div className="col-3 col">https://modules.weband.tv/pro/{item.website_id}</div>
-                <div className="col-6 col">{commons.dateFormat({date: item.website_updated, typeDateFormat: 'en-US'})}</div>
+                <div className="col-6 col">{commons.dateFormat(item.website_updated)}</div>
                 <div className="col-6 col">
                   <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary btn-circle"><i className="icon-edit"/></Link> 
                   <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-circle"><i className="icon-trash"/></Link>
