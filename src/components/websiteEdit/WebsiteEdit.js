@@ -58,7 +58,7 @@ class WebsiteEdit extends Component {
           moduleKey: 'ModuleImage',
           moduleTitle: 'Image',
           moduleSrc: {
-            imageURL: 'https://www.lavanguardia.com/r/GODO/LV/p5/WebSite/2018/07/20/Recortada/img_ddusster_20180720-165008_imagenes_lv_getty_lalomanu-kaaH-U45974211241JiB-992x558@LaVanguardia-Web.jpg',
+            imageURL: '',
             imageSize: 'small',
           }
         },
@@ -629,7 +629,7 @@ class WebsiteEdit extends Component {
             </div>
             <div className="col-2 inline">
               <div className="website-url-wrapper">
-                { this.state.runSrcSaved ? <div className="saved-successfully">Saved successfully</div> : null }
+                { this.state.runSrcSaved ? <div className="saved-successfully">Successfully saved!</div> : null }
                 <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
               </div>
               <button onClick={this.handleSaveChanges} className="btn btn-primary"><i className="icon-save space"/> Save Changes</button>

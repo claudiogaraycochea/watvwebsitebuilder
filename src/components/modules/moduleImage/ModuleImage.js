@@ -51,7 +51,7 @@ class ModuleImage extends Component {
     else {
       return (
         <div className="module-image">
-          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className={this.props.moduleSrc.imageSize} alt=""/> : 'No Image' }
+          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className={this.props.moduleSrc.imageSize} alt=""/> : <i className="no-image"></i> }
         </div>
       );
     }
