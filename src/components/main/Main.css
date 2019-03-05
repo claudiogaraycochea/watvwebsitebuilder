@@ -54,6 +54,10 @@
 	padding: 20px;
 }
 
+.padding-lr {
+  padding: 0 20px;
+}
+
 .center {
 	align-items: center;
 	justify-content: center;

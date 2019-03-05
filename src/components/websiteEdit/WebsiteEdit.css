@@ -73,3 +73,18 @@
   background: #4b4b67;
   color: #03a9f4;
 }
+
+.saved-successfully {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  font-size: 12px;
+  padding: 0 10px;
+  color: #3dc581;
+}
+
+.website-url-wrapper {
+  position: relative;
+  width: 100%;
+  margin-right: 20px;
+}

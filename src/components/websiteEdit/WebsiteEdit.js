@@ -167,6 +167,7 @@ class WebsiteEdit extends Component {
       templateChange: 'template_selector',
       runSrc: {},
       fontSizeValue: ['10','15','20','25','30','40'],
+      runSrcSaved: false,
     };
   }
 
@@ -277,9 +278,11 @@ class WebsiteEdit extends Component {
     console.log('Save changes',postData);
     axios.post(`${API_URL}setRun/`,postData)
       .then(response => {
-        this.setState({
-          payload: response.data
-        })
+        if(response.data.result==='true') {
+          this.setState({
+            runSrcSaved: true
+          })          
+        }
       })
       .catch(error => {});
   }
@@ -619,14 +622,16 @@ class WebsiteEdit extends Component {
     console.log(this.state);
     return (
       <div className="tertiary-style">
-        <div className="container padding-20">
+        <div className="container padding-lr">
           <div className="container-header">
-            <div className="left">
+            <div className="col-2">
               <h2>Website Editor</h2>
             </div>
-            <div className="right">
-              <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
-              {/*<Link to={`/pro/${this.state.websiteId}`} className="btn btn-secondary">Save</Link>*/}
+            <div className="col-2 inline">
+              <div className="website-url-wrapper">
+                { this.state.runSrcSaved ? <div className="saved-successfully">Saved successfully</div> : null }
+                <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
+              </div>
               <button onClick={this.handleSaveChanges} className="btn btn-primary"><i className="icon-save space"/> Save Changes</button>
             </div>
           </div>

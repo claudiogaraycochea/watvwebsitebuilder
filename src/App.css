@@ -334,3 +334,9 @@ h1, h2, h3, h4 {
 .icon-save {
   background-image: url('./assets/icon-save.svg');
 }
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+}
