@@ -58,11 +58,11 @@ class ModuleSocialNetwork extends Component {
         styles = this.props.runSrc.template.styles;
       }*/
       return (
-        <div className="module-social-network website-row">
-          <div className="buttons-wrapper">
-            {(this.props.moduleSrc.urlFacebook!=='') ? <a href={this.props.moduleSrc.urlFacebook} className="btn btn-circle" ><i className="icon-facebook"></i></a> : null }
-            {(this.props.moduleSrc.urlInstagram!=='') ? <a href={this.props.moduleSrc.urlInstagram} className="btn btn-circle" ><i className="icon-instagram"></i></a> : null }
-            {(this.props.moduleSrc.urlTwitter!=='') ? <a href={this.props.moduleSrc.urlTwitter} className="btn btn-circle" ><i className="icon-twitter"></i></a> : null }
+        <div className="mod-social-network mod-row">
+          <div className="mod-buttons-wrapper">
+            {(this.props.moduleSrc.urlFacebook!=='') ? <a href={this.props.moduleSrc.urlFacebook} className="mod-btn mod-btn-circle" ><i className="mod-icon-facebook"></i></a> : null }
+            {(this.props.moduleSrc.urlInstagram!=='') ? <a href={this.props.moduleSrc.urlInstagram} className="mod-btn mod-btn-circle" ><i className="mod-icon-instagram"></i></a> : null }
+            {(this.props.moduleSrc.urlTwitter!=='') ? <a href={this.props.moduleSrc.urlTwitter} className="mod-btn mod-btn-circle" ><i className="mod-icon-twitter"></i></a> : null }
           </div>
         </div>
       );

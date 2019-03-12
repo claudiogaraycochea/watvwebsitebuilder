@@ -27,7 +27,6 @@
   justify-content: center;
   height: 48px;
   white-space: nowrap;
-  border: 1px solid violet;
 }
 
 a.mod-btn {
@@ -62,6 +61,4 @@ textarea.mod-inp {
   width: 100%;
   height: 100%;
   z-index: 900;
-  border: 2px solid blue;
-  background-color: #008bff7d;
 }
