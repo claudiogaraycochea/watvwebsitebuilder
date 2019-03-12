@@ -405,8 +405,8 @@ class WebsiteEdit extends Component {
             onDragStart = {(e) => this.onDragStart(e, key)}
             draggable>
             <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete"><i className="icon-trash"></i></button>
-            <div className="no-click-event"></div>
-            <div onClick={(e) => this.handleModuleProperties(e,key)}>
+            <div onClick={(e) => this.handleModuleProperties(e,key)} className="no-click-event"></div>
+            <div>
               {this.getModuleComponent(item, false, false)}
             </div>
           </div>
@@ -601,12 +601,12 @@ class WebsiteEdit extends Component {
       const showStyle = true;
       return (
         <div 
-          className="website-view" 
+          className="mod-run" 
           style={styles.background}
           >
           {this.state.runSrc.components.map((item,key)=>
             <div key={key}
-              className="box"
+              className="mod-box"
               >
               {this.getModuleComponent(item, false, showStyle)}
             </div>
