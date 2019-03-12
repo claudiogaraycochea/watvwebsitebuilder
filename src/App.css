@@ -23,9 +23,9 @@ a {
 
 .row {
   width: 100%;
-  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .inp {
@@ -37,6 +37,11 @@ a {
   max-width: 500px;
   border: 0;
   height: 40px;
+}
+
+textarea.inp {
+  padding: 10px;
+  height: 100px;
 }
 
 .btn {

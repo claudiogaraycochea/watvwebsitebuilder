@@ -599,7 +599,7 @@ class WebsiteEdit extends Component {
       const showStyle = true;
       return (
         <div 
-          className="module-view" 
+          className="website-view" 
           style={styles.background}
           >
           {this.state.runSrc.components.map((item,key)=>
