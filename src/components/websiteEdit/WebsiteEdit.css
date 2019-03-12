@@ -21,7 +21,7 @@
   border: 1px dashed rgba(244, 244, 244, 0.25);
   flex: 1 1 auto;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   position: relative;
 }
 
@@ -30,9 +30,9 @@
 }
 
 .module-box .btn-delete {
-  border: 1px solid #636374;
+  border: 0;
   border-radius: 50%;
-  background: transparent;
+  background: #3f5a79;
   position: absolute;
   top: 2px;
   right: 2px;
@@ -44,15 +44,19 @@
   justify-content: center;
 }
 
-.module-view {
+.website-view {
   min-height: 100%;
+  padding: 20px;
 }
 
-.module-view .box {
+.website-view .box {
   flex: 1 1 auto;
   width: 100%;
-  padding: 10px 20px;
   position: relative;
+}
+
+.website-view .website-row {
+  margin-bottom: 20px;
 }
 
 .template-wrapper {

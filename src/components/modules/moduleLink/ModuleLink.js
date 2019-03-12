@@ -49,7 +49,7 @@ class ModuleLink extends Component {
     else {
       //console.log('ModuleLink',this.props.moduleSrc);
       return (
-        <div>
+        <div className="module-link website-row">
           <div>{(this.props.moduleSrc.title!=='') ? this.props.moduleSrc.title : 'Write a title' }</div>
           <div>
             <a href={this.props.moduleSrc.buttonLink} className="btn">
