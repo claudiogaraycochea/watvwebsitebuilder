@@ -1,17 +1,17 @@
-.module-title-description {
+.mod-title-description {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.module-title-description .title {
+.mod-title-description .mod-title {
   font-size: 26px;
   width: 100%;
   text-align: center;
 }
 
-.module-title-description .description {
+.mod-title-description .mod-description {
   font-size: 18px;
   width: 100%;
   text-align: center;

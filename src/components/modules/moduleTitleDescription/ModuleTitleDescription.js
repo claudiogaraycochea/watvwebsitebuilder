@@ -52,9 +52,9 @@ class ModuleTitleDescription extends Component {
         styles = this.props.runSrc.template.styles;
       }
       return (
-        <div className="module-title-description website-row">
-          {(this.props.moduleSrc.title!=='') ? <div className="title" style={styles.title}>{this.props.moduleSrc.title}</div> : <div className="title">Write a title</div> }
-          {(this.props.moduleSrc.description!=='') ? <div>{this.props.moduleSrc.description}</div> : <div className="description">Write a description</div> }
+        <div className="mod-title-description mod-row">
+          {(this.props.moduleSrc.title!=='') ? <div className="mod-title" style={styles.title}>{this.props.moduleSrc.title}</div> : <div className="mod-title">Write a title</div> }
+          {(this.props.moduleSrc.description!=='') ? <div>{this.props.moduleSrc.description}</div> : <div className="mod-description">Write a description</div> }
         </div>
       );
     }

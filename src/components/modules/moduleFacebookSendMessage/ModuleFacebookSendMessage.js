@@ -4,8 +4,8 @@ import './ModuleFacebookSendMessage.css';
 class ModuleFacebookSendMessage extends Component {
   render() {
     return (
-      <div className="module-facebook-send website-row">
-        <textarea className="inp" readOnly value="#myhashtag"/>
+      <div className="mod-facebook-send mod-row">
+        <textarea className="mod-inp" readOnly value="#myhashtag"/>
       </div>
     );
   }
