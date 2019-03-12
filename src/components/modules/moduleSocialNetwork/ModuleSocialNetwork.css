@@ -1,4 +1,4 @@
-.module-social-network {
+.mod-social-network {
   color: #ffffff;
   font-size: 11px;
   display: flex;
@@ -7,8 +7,8 @@
   width: 100%;
 }
 
-[class^="icon-"],
-[class*="icon-"] {
+[class^="mod-icon-"],
+[class*="mod-icon-"] {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -17,24 +17,34 @@
   height: 18px;
 }
 
-.icon-facebook {
+.mod-icon-facebook {
   background-image: url('../../../assets/icon-facebook.svg');
 }
 
-.icon-twitter {
+.mod-icon-twitter {
   background-image: url('../../../assets/icon-twitter.svg');
 }
 
-.icon-instagram {
+.mod-icon-instagram {
   background-image: url('../../../assets/icon-instagram.svg');
 }
 
-.buttons-wrapper {
+.mod-buttons-wrapper {
   display: flex;
   flex-direction: row;
 }
 
-.module-social-network .btn {
+.mod-social-network .mod-btn {
   flex: 1 1 auto;
   margin: 0 10px;
+}
+
+.mod-btn-circle {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
