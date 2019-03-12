@@ -1,12 +1,10 @@
-.social-network-wrapper {
-  padding: 0 10px;
+.module-social-network {
   color: #ffffff;
   font-size: 11px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 40px;
 }
 
 [class^="icon-"],
@@ -36,7 +34,7 @@
   flex-direction: row;
 }
 
-.social-network-wrapper .btn {
+.module-social-network .btn {
   flex: 1 1 auto;
   margin: 0 10px;
 }
