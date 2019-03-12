@@ -7,7 +7,6 @@ class ModuleTitleDescription extends Component {
     this.state = {
       moduleSrc: null,
     };
-    
   }
   
   componentDidMount() {
@@ -22,7 +21,6 @@ class ModuleTitleDescription extends Component {
       title: props.moduleSrc.title,
       description: props.moduleSrc.description,
     };
-
     if(moduleSrcInput==='title') moduleSrc.title = e.target.value;
     if(moduleSrcInput==='description') moduleSrc.description = e.target.value;
     props.setModuleProperties(moduleSrc);

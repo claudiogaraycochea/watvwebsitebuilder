@@ -50,7 +50,7 @@ class WebsiteEdit extends Component {
           moduleKey: 'ModuleTitleDescription',
           moduleTitle: 'Title Description',
           moduleSrc: {
-            title: 'Title11',
+            title: 'Title',
             description: 'Description',
           }
         },
@@ -75,7 +75,7 @@ class WebsiteEdit extends Component {
           moduleKey: 'ModuleSocialNetwork',
           moduleTitle: 'Social Network',
           moduleSrc: {
-            title: 'Follow us',
+            title: 'Follow usyyy',
             link_facebook: '',
             link_twitter: '',
           }
@@ -321,6 +321,7 @@ class WebsiteEdit extends Component {
         return <ModuleSocialNetwork 
           moduleSrc={moduleSrc} 
           properties={properties}
+          setModuleProperties={this.setModuleProperties}
           runSrc={this.runSrc}/>
       case 'ModuleFacebookSendMessage':
         return <ModuleFacebookSendMessage 
@@ -401,8 +402,7 @@ class WebsiteEdit extends Component {
             onDragOver={(e)=>this.onDragOver(e)}
             onDrop={(e)=>{this.onDrop(e, key)}}
             onDragStart = {(e) => this.onDragStart(e, key)}
-            draggable
-            >
+            draggable>
             <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete"><i className="icon-trash"></i></button>
             <div onClick={(e) => this.handleModuleProperties(e,key)}>
               {this.getModuleComponent(item, false, false)}
