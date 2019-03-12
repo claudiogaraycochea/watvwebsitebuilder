@@ -1,4 +1,4 @@
-.module-image {
+.mod-image {
   color: #ffffff;
   font-size: 11px;
   display: flex;
@@ -7,18 +7,18 @@
   width: 100%;
 }
 
-.module-image .large {
+.mod-image .mod-large {
   width: 100%;
 }
 
-.module-image .medium {
+.mod-image .mod-medium {
   width: 80%;
 }
 
-.module-image .small {
+.mod-image .mod-small {
   width: 50%;
 }
 
-.module-image .ultra-small {
+.mod-image .mod-ultra-small {
   width: 30%;
 }

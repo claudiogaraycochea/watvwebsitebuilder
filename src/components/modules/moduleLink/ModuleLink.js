@@ -19,12 +19,9 @@ class ModuleLink extends Component {
   createModuleSrc(props, e, moduleSrcInput){
     // set values;
     let moduleSrc = {
-      title: props.moduleSrc.title,
       buttonLink: props.moduleSrc.buttonLink,
       buttonTitle: props.moduleSrc.buttonTitle
     };
-
-    if(moduleSrcInput==='title') moduleSrc.title = e.target.value;
     if(moduleSrcInput==='buttonTitle') moduleSrc.buttonTitle = e.target.value;
     if(moduleSrcInput==='buttonLink') moduleSrc.buttonLink = e.target.value;
     props.setModuleProperties(moduleSrc);
@@ -34,9 +31,6 @@ class ModuleLink extends Component {
     if(this.state.properties===true) {
       return (
         <div>
-          <div className="row">
-            <input type="text" className="inp" placeholder="Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'title')}} />
-          </div>
           <div className="row">
             <input type="text" className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
           </div>
@@ -49,13 +43,10 @@ class ModuleLink extends Component {
     else {
       //console.log('ModuleLink',this.props.moduleSrc);
       return (
-        <div className="module-link website-row">
-          <div>{(this.props.moduleSrc.title!=='') ? this.props.moduleSrc.title : 'Write a title' }</div>
-          <div>
-            <a href={this.props.moduleSrc.buttonLink} className="btn">
-              {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
-            </a>
-          </div>
+        <div className="mod-link mod-row">
+          <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full">
+            {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
+          </a>
         </div>
       );
     }
