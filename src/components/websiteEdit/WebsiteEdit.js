@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
+import '../../commons/Module.css';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -404,6 +405,7 @@ class WebsiteEdit extends Component {
             onDragStart = {(e) => this.onDragStart(e, key)}
             draggable>
             <button onClick={(e) => this.handleModuleRemove(e,key)} className="btn-delete"><i className="icon-trash"></i></button>
+            <div className="no-click-event"></div>
             <div onClick={(e) => this.handleModuleProperties(e,key)}>
               {this.getModuleComponent(item, false, false)}
             </div>
@@ -650,6 +652,7 @@ class WebsiteEdit extends Component {
                               onDragStart = {(e) => this.onDragStart(e, moduleItem.moduleKey)}
                               draggable
                             >
+                              <div className="no-click-event"></div>
                               <div>{this.getModuleComponent(moduleItem, false, false)}</div>
                             </div>
                           </div>
