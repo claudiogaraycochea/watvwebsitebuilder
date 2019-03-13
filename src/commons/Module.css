@@ -14,8 +14,13 @@
   margin-bottom: 20px;
 }
 
+.mod-row-small {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .mod-btn {
-  background: #3e5b77;
+  background: #ff006b;
   color: #ffffff;
   border: 0;
   padding: 0 20px;
@@ -27,15 +32,22 @@
   justify-content: center;
   height: 48px;
   white-space: nowrap;
-}
-
-a.mod-btn {
   margin-right: 5px;
 }
 
 .mod-btn.mod-small {
   padding: 5px 10px;
   font-size: 12px;
+}
+
+.mod-btn.mod-large-full {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.mod-btn-no-space {
+  margin-right: 0;
 }
 
 .mod-inp {
@@ -61,4 +73,18 @@ textarea.mod-inp {
   width: 100%;
   height: 100%;
   z-index: 900;
+}
+
+[class^="mod-icon-"],
+[class*="mod-icon-"] {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+
+.mod-icon-space {
+  margin-right: 10px;
 }
