@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './ModuleLink.css';
+import './ModuleVote.css';
 
-class ModuleLink extends Component {
+class ModuleVote extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,4 +52,4 @@ class ModuleLink extends Component {
   }
 }
 
-export default ModuleLink;
+export default ModuleVote;
