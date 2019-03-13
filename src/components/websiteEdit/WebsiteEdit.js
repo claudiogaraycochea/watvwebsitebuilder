@@ -7,12 +7,17 @@ import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
 import '../../commons/Module.css';
+import { modulesList } from './ModuleList';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
 import ModuleFacebookSendMessage from '../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage';
 import ModuleTitleDescription from '../modules/moduleTitleDescription/ModuleTitleDescription';
 import ModuleImage from '../modules/moduleImage/ModuleImage';
+import ModuleBuyNow from '../modules/moduleBuyNow/ModuleBuyNow';
+import ModuleDownloadApp from '../modules/moduleDownloadApp/ModuleDownloadApp';
+import ModuleVote from '../modules/moduleVote/ModuleVote';
+import ModuleRealtimeReactions from '../modules/moduleRealtimeReactions/ModuleRealtimeReactions';
 
 class WebsiteEdit extends Component {
   constructor(props) {
@@ -46,59 +51,7 @@ class WebsiteEdit extends Component {
         itemSelected: null,
         stateUpdated: false,
       },
-      modulesList: [
-        {
-          moduleKey: 'ModuleTitleDescription',
-          moduleTitle: 'Title Description',
-          moduleSrc: {
-            title: 'Title',
-            description: 'Description',
-          }
-        },
-        {
-          moduleKey: 'ModuleImage',
-          moduleTitle: 'Image',
-          moduleSrc: {
-            imageURL: '',
-            imageSize: 'small',
-          }
-        },
-        {
-          moduleKey: 'ModuleLink',
-          moduleTitle: 'Simple Link',
-          moduleSrc: {
-            title:'Testing',
-            buttonLink: 'http://jjjjj.com',
-            buttonTitle: ''
-          }
-        },
-        {
-          moduleKey: 'ModuleSocialNetwork',
-          moduleTitle: 'Social Network',
-          moduleSrc: {
-            title: 'Follow usyyy',
-            link_facebook: '',
-            link_twitter: '',
-          }
-        },
-        {
-          moduleKey: 'ModuleFacebookSendMessage',
-          moduleTitle: 'Facebook Send Message',
-          moduleSrc: {
-            title: 'Send Message',
-            link_facebook: '',
-            text: '#includeyourhashtag ',
-          }
-        },
-        {
-          moduleKey: 'ModuleRealtimeReactions',
-          moduleTitle: 'Realtime Reactions',
-          moduleSrc: {
-            title: 'Realtime Reactions',
-            reactions: 'happy, sad, like, love',
-          }
-        },
-      ],
+      modulesList: modulesList,
       modalVisibility: false,
       websiteTemplates: [
         {
@@ -328,6 +281,35 @@ class WebsiteEdit extends Component {
         return <ModuleFacebookSendMessage 
           moduleSrc={moduleSrc}
           properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleBuyNow': 
+        return <ModuleBuyNow 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleDownloadApp': 
+        return <ModuleDownloadApp 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleVote': 
+        return <ModuleVote 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
+          runSrc={this.runSrc}/>
+      case 'ModuleRealtimeReactions': 
+        return <ModuleRealtimeReactions 
+          {...this.props}
+          moduleSrc={moduleSrc}
+          properties={properties}
+          setModuleProperties={this.setModuleProperties}
           runSrc={this.runSrc}/>
       default:
         return null;

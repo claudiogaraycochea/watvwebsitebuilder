@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './ModuleLink.css';
+import './ModuleBuyNow.css';
 
-class ModuleLink extends Component {
+class ModuleBuyNow extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,11 +40,10 @@ class ModuleLink extends Component {
       )
     }
     else {
-      //console.log('ModuleLink',this.props.moduleSrc);
       return (
         <div className="mod-link mod-row">
           <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space">
-            {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
+            <i className="mod-icon-buy-now mod-icon-space" /> {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Buy Now' }
           </a>
         </div>
       );
@@ -52,4 +51,4 @@ class ModuleLink extends Component {
   }
 }
 
-export default ModuleLink;
+export default ModuleBuyNow;

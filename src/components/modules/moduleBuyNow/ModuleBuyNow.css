@@ -1,0 +1,11 @@
+.mod-buy-now {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.mod-icon-buy-now {
+  background-image: url('../../../assets/icon-buy-now.svg');
+}

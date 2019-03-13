@@ -1,4 +1,4 @@
-.mod-social-network {
+.mod-realtime-reactions {
   color: #ffffff;
   font-size: 11px;
   display: flex;
@@ -7,16 +7,16 @@
   width: 100%;
 }
 
-.mod-icon-facebook {
-  background-image: url('../../../assets/icon-facebook.svg');
+.mod-icon-happy {
+  background-image: url('../../../assets/icon-happy.svg');
 }
 
-.mod-icon-twitter {
-  background-image: url('../../../assets/icon-twitter.svg');
+.mod-icon-sad {
+  background-image: url('../../../assets/icon-sad.svg');
 }
 
-.mod-icon-instagram {
-  background-image: url('../../../assets/icon-instagram.svg');
+.mod-icon-heart {
+  background-image: url('../../../assets/icon-heart.svg');
 }
 
 .mod-buttons-wrapper {
@@ -24,7 +24,7 @@
   flex-direction: row;
 }
 
-.mod-social-network .mod-btn {
+.mod-realtime-reactions .mod-btn {
   flex: 1 1 auto;
   margin: 0 10px;
 }
