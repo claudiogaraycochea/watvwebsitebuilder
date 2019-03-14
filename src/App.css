@@ -284,6 +284,10 @@ h1, h2, h3, h4 {
   margin-right: 10px;
 }
 
+.icon-create-website {
+  background-image: url('./assets/icon-create-website.svg');
+}
+
 .icon-edit {
   background-image: url('./assets/icon-edit.svg');
 }

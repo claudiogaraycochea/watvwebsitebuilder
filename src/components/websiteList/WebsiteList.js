@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
+import Modal from '../modal/Modal';
+import CreateWebsite from '../createWebsite/CreateWebsite';
 
 class WebsiteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       websiteList: [],
+      modalVisibility: false,
     };
     //this.clickHistory = this.clickHistory.bind(this);
   }
@@ -27,17 +30,26 @@ class WebsiteList extends Component {
       .catch(error => {});
   }
 
+  closeModal = () => {
+    this.setState({modalVisibility: false});
+  }
+
+  handleClickEdit = () => {
+    console.log('clickEdit')
+    this.setState({modalVisibility: true});
+  }
+
   render() {
     console.log(this.state);
     return (
       <div className="tertiary-style">
-        <div className="container padding-20">
+        <div className="container padding-lr">
           <div className="container-header">
             <div className="left">
               <h2>My Websites</h2>
             </div>
             <div className="right center-right">
-              <Link to="/websiteList" className="btn btn-primary">Edit</Link>
+              <Link to="/websiteList" className="btn btn-primary" onClick={()=>this.handleClickEdit()}><i className="icon-create-website space" /> Website</Link>
             </div>
           </div>
           <div className="table-list">
@@ -60,7 +72,15 @@ class WebsiteList extends Component {
             )}
           </div>
         </div>
-        <Footer className="footer"/>    
+        <Footer className="footer"/>
+        { (this.state.modalVisibility) ? 
+          <Modal 
+            {...this.props}
+            title='Create Website'
+            closeModal={this.closeModal}
+            >
+            <CreateWebsite /> 
+          </Modal> : null }  
       </div>
     );
   }

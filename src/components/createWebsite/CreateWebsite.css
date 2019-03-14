@@ -1,0 +1,17 @@
+.create-website-wrapper {
+  border: 1px solid red;
+}
+
+.create-website-wrapper [class^="image-"],
+.create-website-wrapper [class*="image-"] {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+/*
+.image-buy-now {
+  background-image: url('./assets/icon-create-website.svg');
+}*/
