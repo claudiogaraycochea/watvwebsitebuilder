@@ -19,12 +19,19 @@ class WebsiteList extends Component {
   }
 
   componentWillMount() {
+    this.loadList();
+  }
+
+  loadList = (data) => {
+    const websiteIdCreated = (data!==undefined) ? data.websiteIdCreated : null;
+    console.log('loadList: websiteIdCreated: ',websiteIdCreated);
     const userId = sessionStorage.getItem('userId');
     const userToken = sessionStorage.getItem('userToken');
     axios.get(`${API_URL}gwl/?user_id=${userId}&user_token=${userToken}`)
       .then(response => {
         this.setState({
-          websiteList: response.data
+          websiteList: response.data,
+          websiteIdCreated,
         })
       })
       .catch(error => {});
@@ -59,8 +66,10 @@ class WebsiteList extends Component {
               <div className="col-6 col">Updated</div>
               <div className="col-6 col">Options</div>
             </div>  
-            {this.state.websiteList.map((item,i) => 
-              <div className="item" key={i}>
+            {this.state.websiteList.map((item,i) => {
+              const styleItem = (item.website_id == this.state.websiteIdCreated) ? 'item selected' : 'item';
+              return (<div className={styleItem} key={i}>
+                { (item.website_id == this.state.websiteIdCreated) ? <div className="tooltip-wrapper"><div className="tooltip">Successfully created!</div></div> : null }
                 <div className="col-6 col">{item.website_name}</div>
                 <div className="col-3 col">https://modules.weband.tv/pro/{item.website_id}</div>
                 <div className="col-6 col">{commons.dateFormat(item.website_updated)}</div>
@@ -68,8 +77,8 @@ class WebsiteList extends Component {
                   <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary btn-circle"><i className="icon-edit"/></Link> 
                   <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-circle"><i className="icon-trash"/></Link>
                 </div>
-              </div>  
-            )}
+              </div>)
+            })}
           </div>
         </div>
         <Footer className="footer"/>
@@ -79,7 +88,7 @@ class WebsiteList extends Component {
             title='Create Website'
             closeModal={this.closeModal}
             >
-            <CreateWebsite /> 
+            <CreateWebsite closeModal={this.closeModal} loadList={this.loadList} /> 
           </Modal> : null }  
       </div>
     );
