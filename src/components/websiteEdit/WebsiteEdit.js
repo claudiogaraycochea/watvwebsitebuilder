@@ -593,7 +593,7 @@ class WebsiteEdit extends Component {
             </div>
             <div className="col-2 inline">
               <div className="website-url-wrapper">
-                { this.state.runSrcSaved ? <div className="saved-successfully">Successfully saved!</div> : null }
+                { this.state.runSrcSaved ? <div className="tooltip-wrapper"><div className="tooltip">Successfully saved!</div></div> : null }
                 <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
               </div>
               <button onClick={this.handleSaveChanges} className="btn btn-primary"><i className="icon-save space"/> Save Changes</button>

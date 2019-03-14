@@ -149,6 +149,24 @@ h1, h2, h3, h4 {
   display: flex;
 }
 
+.table-list .item.selected {
+  border-bottom: 1px solid #4e4e6f;
+  background-color: #35404e;
+  display: flex;
+}
+/*
+.table-list .item.selected::before {
+  content: 'Website created successfully!!!';
+  background-color: #3dc581;
+  border-radius: 10px;
+  display: -webkit-flex;
+  padding: 5px 10px;
+  font-size: 10px;
+  display: flex;
+  position: absolute;
+  margin-top: -10px;
+}*/
+
 .table-list .col {
   padding: 20px;
   flex: 1 1 auto;
@@ -343,4 +361,34 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-track {
   border-radius: 10px;  
   background-color: #484863; 
+}
+
+.tooltip-wrapper {
+  position: absolute;
+  margin-top: -20px;
+}
+
+.tooltip {
+  position: relative;
+  background: #3dc581;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.50);
+  z-index: 1000;
+}
+
+.tooltip:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #3dc581;
+	border-width: 10px;
+  margin-left: -10px;
 }
