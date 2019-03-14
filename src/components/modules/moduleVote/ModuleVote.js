@@ -43,9 +43,16 @@ class ModuleVote extends Component {
       //console.log('ModuleLink',this.props.moduleSrc);
       return (
         <div className="mod-link mod-row">
-          <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space">
-            {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
-          </a>
+          <div className="mod-row-small">
+            <a href={this.props.moduleSrc.buttonLink} className="mod-btn">
+              {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Vote' }
+            </a>
+          </div>
+          <div className="mod-row-small">
+            <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space">
+              {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Vote' }
+            </a>
+          </div>
         </div>
       );
     }

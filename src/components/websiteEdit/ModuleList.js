@@ -62,6 +62,7 @@ export const modulesList = [
     moduleKey: 'ModuleVote',
     moduleTitle: 'Vote',
     moduleSrc: {
+      buttonTitle: 'Vote'
     }
   },
   {

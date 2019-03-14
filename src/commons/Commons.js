@@ -26,3 +26,16 @@ export const dateFormat = (value) => {
   formatter.format(date);
   return formatter.format(date);
 }
+
+
+export const showModal = (data, props) => {
+  return (  
+    <div className="modal-wrapper">
+      <div className="modal-box">
+        <div className="modal-header">{data.title} <button onClick={(e) => props.handleCloseModuleProperties()} className="btn small">Close</button></div>  
+        <div className="modal-content">{data.componentChild}</div>
+        <div className="modal-footer"><button onClick={(e) => props.handleCloseModuleProperties()} className="btn btn-primary">Ok</button></div>
+      </div>
+    </div>
+  );
+}
