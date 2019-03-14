@@ -8,6 +8,7 @@ import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
 import '../../commons/Module.css';
 import { modulesList } from './ModuleList';
+import Modal from '../modal/Modal';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
 import ModuleSocialNetwork from '../modules/moduleSocialNetwork/ModuleSocialNetwork';
@@ -123,6 +124,7 @@ class WebsiteEdit extends Component {
       fontSizeValue: ['10','15','20','25','30','40'],
       runSrcSaved: false,
     };
+    //this.handleCloseModuleProperties = this.handleCloseModuleProperties.bind(this);
   }
 
   componentWillMount() {
@@ -208,7 +210,7 @@ class WebsiteEdit extends Component {
     });
   }
 
-  handleCloseModuleProperties = () => {
+  closeModal = () => {
     this.setState({modalVisibility: false});
   }
 
@@ -429,20 +431,6 @@ class WebsiteEdit extends Component {
     })
   }
 
-  showModal(componentChild) {
-    const itemSelected = this.state.websiteDraggableConfig.itemSelected;
-    const moduleTitle = this.state.websiteDraggable[itemSelected].moduleTitle;
-    return (  
-      <div className="modal-wrapper">
-        <div className="modal-box">
-          <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseModuleProperties} className="btn small">Close</button></div>  
-          <div className="modal-content">{componentChild}</div>
-          <div className="modal-footer"><button onClick={this.handleCloseModuleProperties} className="btn btn-primary">Ok</button></div>
-        </div>
-      </div>
-    );
-  }
-
 //
 // TEMPLATES
 //
@@ -454,11 +442,7 @@ class WebsiteEdit extends Component {
   }
 
   handleTemplateChange = (e) => {
-
-    console.log('e.target.value', e.target.value);
     let toModify = e.target.name.split('.');
-    console.log(toModify.length,' --- ', toModify[0], ' --- ',toModify[1]);
-
     const styles = commons.copyObj(this.state.runSrc.template.styles); 
     let background = styles.background;
     if(toModify[0]==='background') {
@@ -489,9 +473,6 @@ class WebsiteEdit extends Component {
         }
       }
     };
-
-    console.log('shandleTemplateChange:',runSrc);
-
     this.setState({
       ...this.state,
       runSrc,
@@ -527,7 +508,6 @@ class WebsiteEdit extends Component {
             <select className="inp" name="title.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
-            {/*<input type="text" name="title.fontSize" defaultValue={this.state.runSrc.template.styles.title.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}} /> */}
           </div>
         </div>
         <div className="row">
@@ -672,7 +652,14 @@ class WebsiteEdit extends Component {
           </div>
         </div>
         <Footer className="footer"/>
-        {(this.state.modalVisibility) ? this.showModal(this.showModuleProperties()): null }
+        { (this.state.modalVisibility) ? 
+          <Modal 
+            {...this.props}
+            title={this.state.websiteDraggable[this.state.websiteDraggableConfig.itemSelected].moduleTitle}
+            closeModal={this.closeModal}
+            >
+            {this.showModuleProperties()}
+          </Modal> : null }
       </div>
     );
   }
