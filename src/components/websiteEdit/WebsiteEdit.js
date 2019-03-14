@@ -429,14 +429,14 @@ class WebsiteEdit extends Component {
     })
   }
 
-  showModal() {
+  showModal(componentChild) {
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
     const moduleTitle = this.state.websiteDraggable[itemSelected].moduleTitle;
     return (  
       <div className="modal-wrapper">
         <div className="modal-box">
           <div className="modal-header">{moduleTitle} <button onClick={this.handleCloseModuleProperties} className="btn small">Close</button></div>  
-          <div className="modal-content">{this.showModuleProperties()}</div>
+          <div className="modal-content">{componentChild}</div>
           <div className="modal-footer"><button onClick={this.handleCloseModuleProperties} className="btn btn-primary">Ok</button></div>
         </div>
       </div>
@@ -672,7 +672,7 @@ class WebsiteEdit extends Component {
           </div>
         </div>
         <Footer className="footer"/>
-        {(this.state.modalVisibility===true) ? this.showModal(): null }
+        {(this.state.modalVisibility) ? this.showModal(this.showModuleProperties()): null }
       </div>
     );
   }
