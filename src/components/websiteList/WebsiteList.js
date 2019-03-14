@@ -67,9 +67,9 @@ class WebsiteList extends Component {
               <div className="col-6 col">Options</div>
             </div>  
             {this.state.websiteList.map((item,i) => {
-              const styleItem = (item.website_id == this.state.websiteIdCreated) ? 'item selected' : 'item';
+              const styleItem = (parseInt(item.website_id) === this.state.websiteIdCreated) ? 'item selected' : 'item';
               return (<div className={styleItem} key={i}>
-                { (item.website_id == this.state.websiteIdCreated) ? <div className="tooltip-wrapper"><div className="tooltip">Successfully created!</div></div> : null }
+                { (parseInt(item.website_id) === this.state.websiteIdCreated) ? <div className="tooltip-wrapper"><div className="tooltip">Successfully created!</div></div> : null }
                 <div className="col-6 col">{item.website_name}</div>
                 <div className="col-3 col">https://modules.weband.tv/pro/{item.website_id}</div>
                 <div className="col-6 col">{commons.dateFormat(item.website_updated)}</div>
