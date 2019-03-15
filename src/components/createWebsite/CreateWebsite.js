@@ -19,18 +19,14 @@ const createWebsiteList = [
     description: 'Use Buy Now to sell products from your advertisers.',
     image: 'url',
     template: 'buy_now',
-    runSrc: {
-      text: 'nothing',
-    }
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
   {
     title: 'Vote',
     description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
     image: 'url',
     template: 'vote',
-    runSrc: {
-      text: 'nothing',
-    }
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
 ]
 
@@ -51,18 +47,38 @@ class CreateWebsite extends Component {
     };
   }
 
+  getTemplateToRunSrc = (template) => {
+    console.log('getTemplateToRunSrc: ',template);
+    return '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}';
+  }
+
+  saveRunSrc = (websiteId, template) => {
+    const userId = sessionStorage.getItem('userId');
+    const userToken = sessionStorage.getItem('userToken');
+    const runSrc = this.getTemplateToRunSrc(template);
+    let postData='data='+runSrc+'&website_id='+websiteId+'&user_id='+userId+'&user_token='+userToken;
+    console.log('Save changes',postData);
+    axios.post(`${API_URL}setRun/`,postData)
+      .then(response => {
+        if(response.data.result==='true') {
+          this.props.loadList({websiteIdCreated: websiteId});
+          this.props.closeModal();
+        }
+      })
+      .catch(error => {});
+  }
+
   handleClickCreateWebsite = (e) => {
     const name = 'Testing 1';
     const template = e.target.value;
     const userId = sessionStorage.getItem('userId');
     const userToken = sessionStorage.getItem('userToken');
-    console.log('createWebsite', e.target.value);
+    console.log('createWebsite', template);
     const paramsData = `user_id=${userId}&user_token=${userToken}&website_name=${name}&website_template=${template}`;
     axios.post(`${API_URL}sw`, paramsData )
       .then(response => {
         if(response.data.result) {
-          this.props.loadList({websiteIdCreated: response.data.website_id});
-          this.props.closeModal();
+          this.saveRunSrc(response.data.website_id, template);
         }
       })
       .catch(error => {});
@@ -71,7 +87,7 @@ class CreateWebsite extends Component {
   render() {
     return (
       <div>
-        <input type="text" className="inp" placeholder="Website Name (eg: Advertise for company)"/>
+        <input type="text" className="inp" placeholder="Website Name (eg: Advertise for company)" />
         <p>
           Choose a theme refered to your target.
         </p>
@@ -79,7 +95,7 @@ class CreateWebsite extends Component {
           {createWebsiteList.map((item, key)=>
             <div key={key}>
               Option {item.title}
-              <button template={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
+              <button value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
             </div>
             )}
         </div>
