@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './CreateWebsite.css';
 import axios from 'axios';
 import { API_URL } from '../../constants';
+import * as commons from '../../commons/Commons';
 
 const createWebsiteList = [
   {
@@ -24,7 +25,10 @@ class CreateWebsite extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
+      message: {
+        text: '',
+        typeMessage: 'alert',
+      },
       name: '',
     };
   }
@@ -75,7 +79,10 @@ class CreateWebsite extends Component {
     }
     else {
       this.setState({
-        message: 'Complete Website Name',
+        message: {
+          text: 'Fill Website Name',
+          typeMessage: 'alert',
+        }
       });
     }
   }
@@ -84,7 +91,7 @@ class CreateWebsite extends Component {
     console.log(this.state);
     return (
       <div>
-        {(this.state.message!==undefined) ? <div>{this.state.message}</div> : null }
+        { commons.Notification(this.state.message.text, this.state.message.typeMessage) }
         <input type="text" name="name" className="inp" placeholder="Website Name (eg: Advertise for company)" onChange={this.handleInputChange}/>
         <p>
           Choose a theme refered to your target.
