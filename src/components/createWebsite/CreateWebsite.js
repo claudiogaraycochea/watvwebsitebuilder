@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import './CreateWebsite.css';
-import { withRouter} from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import { API_URL } from '../../constants';
-/*
-api: /sw
-methos: post
-
-website_name: Testing 1
-website_template: buynow
-user_id: 2
-user_token: c9e8b6c961456291f62c27fbbc1392667196ae97*/
 
 const createWebsiteList = [
   {
@@ -19,14 +9,14 @@ const createWebsiteList = [
     description: 'Use Buy Now to sell products from your advertisers.',
     image: 'url',
     template: 'buy_now',
-    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title0","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
   {
-    title: 'Vote',
+    title: 'Download App',
     description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
     image: 'url',
-    template: 'vote',
-    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+    template: 'download_app',
+    runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
 ]
 
@@ -34,22 +24,22 @@ class CreateWebsite extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      website: {
-        name: '',
-
-      }
+      message: '',
+      name: '',
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return {
-      userFirstname: sessionStorage.getItem('userFirstname'),
-    };
+  handleInputChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const name = e.target.name;
+    this.setState({
+      [name]: value,
+    });
   }
 
   getTemplateToRunSrc = (template) => {
-    console.log('getTemplateToRunSrc: ',template);
-    return '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}';
+    const item = createWebsiteList.filter(item => item.template === template );
+    return item[0].runSrc; 
   }
 
   saveRunSrc = (websiteId, template) => {
@@ -69,25 +59,33 @@ class CreateWebsite extends Component {
   }
 
   handleClickCreateWebsite = (e) => {
-    const name = 'Testing 1';
-    const template = e.target.value;
-    const userId = sessionStorage.getItem('userId');
-    const userToken = sessionStorage.getItem('userToken');
-    console.log('createWebsite', template);
-    const paramsData = `user_id=${userId}&user_token=${userToken}&website_name=${name}&website_template=${template}`;
-    axios.post(`${API_URL}sw`, paramsData )
-      .then(response => {
-        if(response.data.result) {
-          this.saveRunSrc(response.data.website_id, template);
-        }
-      })
-      .catch(error => {});
+    const name = this.state.name;
+    if(name.length>2){
+      const template = e.target.value;
+      const userId = sessionStorage.getItem('userId');
+      const userToken = sessionStorage.getItem('userToken');
+      const paramsData = `user_id=${userId}&user_token=${userToken}&website_name=${name}&website_template=${template}`;
+      axios.post(`${API_URL}sw`, paramsData )
+        .then(response => {
+          if(response.data.result) {
+            this.saveRunSrc(response.data.website_id, template);
+          }
+        })
+        .catch(error => {});
+    }
+    else {
+      this.setState({
+        message: 'Complete Website Name',
+      });
+    }
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
-        <input type="text" className="inp" placeholder="Website Name (eg: Advertise for company)" />
+        {(this.state.message!==undefined) ? <div>{this.state.message}</div> : null }
+        <input type="text" name="name" className="inp" placeholder="Website Name (eg: Advertise for company)" onChange={this.handleInputChange}/>
         <p>
           Choose a theme refered to your target.
         </p>
@@ -104,14 +102,4 @@ class CreateWebsite extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userFirstname: state.userFirstname,
-  };
-}
-
-const mapDispatchToProps = dispatch => {
-  return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateWebsite));
+export default CreateWebsite;
