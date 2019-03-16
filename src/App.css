@@ -63,6 +63,10 @@ a.btn {
   margin-right: 5px;
 }
 
+.btn-transparent {
+  background-color: transparent;
+}
+
 .center-right {
   justify-content: flex-end;
 }
@@ -149,6 +153,7 @@ h1, h2, h3, h4 {
 
 .table-list .item {
   display: flex;
+  min-height: 48px;
 }
 
 .table-list .item.selected {
@@ -361,6 +366,12 @@ h1, h2, h3, h4 {
 
 .icon-create-website {
   background-image: url('./assets/icon-create-website.svg');
+}
+
+.icon-close {
+  background-image: url('./assets/icon-close.svg');
+  width: 24px;
+  height: 24px;
 }
 
 .icon-edit {
