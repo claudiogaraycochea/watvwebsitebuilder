@@ -44,6 +44,7 @@ class CreateWebsite extends Component {
         typeMessage: 'alert',
       },
       name: '',
+      screen: 'insert_name',
     };
   }
 
@@ -76,20 +77,17 @@ class CreateWebsite extends Component {
       .catch(error => {});
   }
 
-  handleClickCreateWebsite = (e) => {
+  handleClickChooseTemplate = () => {
     const name = this.state.name;
+    console.log('click');
     if(name.length>2){
-      const template = e.target.value;
-      const userId = sessionStorage.getItem('userId');
-      const userToken = sessionStorage.getItem('userToken');
-      const paramsData = `user_id=${userId}&user_token=${userToken}&website_name=${name}&website_template=${template}`;
-      axios.post(`${API_URL}sw`, paramsData )
-        .then(response => {
-          if(response.data.result) {
-            this.saveRunSrc(response.data.website_id, template);
-          }
-        })
-        .catch(error => {});
+      this.setState({
+        message: {
+          text: '',
+          typeMessage: 'alert',
+        },
+        screen: 'choose_template'
+      })
     }
     else {
       this.setState({
@@ -101,29 +99,63 @@ class CreateWebsite extends Component {
     }
   }
 
+  handleClickCreateWebsite = (e) => {
+    const name = this.state.name;
+    const template = e.target.value;
+    const userId = sessionStorage.getItem('userId');
+    const userToken = sessionStorage.getItem('userToken');
+    const paramsData = `user_id=${userId}&user_token=${userToken}&website_name=${name}&website_template=${template}`;
+    axios.post(`${API_URL}sw`, paramsData )
+      .then(response => {
+        if(response.data.result) {
+          this.saveRunSrc(response.data.website_id, template);
+        }
+      })
+      .catch(error => {});
+  }
+
+  inputName = () => {
+    return (<div>
+      <div className="row">
+        <input type="text" name="name" className="inp" placeholder="Website Name (eg: Advertise for company)" onChange={this.handleInputChange}/> 
+      </div>
+      <div className="">
+        <button className="btn btn-primary" onClick={() => this.handleClickChooseTemplate()}>Next</button>
+      </div>
+    </div>);
+  }
+
+  chooseTemplate = () => {
+    return (
+      <div>
+        {createWebsiteList.map((item, key)=>
+          <div key={key} className="row">
+            <div className="col-8" >
+              <i className="template-download-app" />
+            </div>
+            <div className="col-4">
+              <div className="row">
+                <div className="title">{item.title}</div>
+              </div>
+              <div className="row">
+                {item.description}
+              </div>
+              <div className="row">
+                <button className="btn btn-primary" value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select and Create</button>
+              </div>
+            </div>
+          </div>
+          )}
+      </div>
+    );
+  }
+
   render() {
     console.log(this.state);
     return (
       <div className="create-website-wrapper">
         { commons.Notification(this.state.message.text, this.state.message.typeMessage) }
-        <input type="text" name="name" className="inp" placeholder="Website Name (eg: Advertise for company)" onChange={this.handleInputChange}/>
-        <p>
-          Choose a theme refered to your target.
-        </p>
-        <div>
-          {createWebsiteList.map((item, key)=>
-            <div key={key} className="row">
-              <div className="col-5" >
-                <i className="template-download-app" />
-              </div>
-              <div className="col">
-                {item.title}
-                {item.description}
-                <button value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
-              </div>
-            </div>
-            )}
-        </div>
+        {(this.state.screen==='insert_name') ? this.inputName() : this.chooseTemplate()}
       </div>
     );
   }
