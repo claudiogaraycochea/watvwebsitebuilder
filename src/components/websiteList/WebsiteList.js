@@ -74,8 +74,8 @@ class WebsiteList extends Component {
                 <div className="col-4 col">https://modules.weband.tv/pro/{item.website_id}</div>
                 <div className="col-2 col">{commons.dateFormat(item.website_updated)}</div>
                 <div className="col-2 col">
-                  <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-secondary btn-circle"><i className="icon-edit"/></Link> 
-                  <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-circle"><i className="icon-trash"/></Link>
+                  <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-transparent"><i className="icon-edit"/></Link> 
+                  <Link to={`/WebsiteDelete/${item.website_id}`} className="btn btn-transparent"><i className="icon-trash"/></Link>
                 </div>
               </div>)
             })}
