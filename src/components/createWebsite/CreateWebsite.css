@@ -2,16 +2,16 @@
   border: 1px solid red;
 }
 
-.create-website-wrapper [class^="image-"],
-.create-website-wrapper [class*="image-"] {
+.create-website-wrapper [class^="template-"],
+.create-website-wrapper [class*="template-"] {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 60px;
+  height: 100px;
 }
-/*
-.image-buy-now {
-  background-image: url('./assets/icon-create-website.svg');
-}*/
+
+.create-website-wrapper .template-download-app {
+  background-image: url('./../../assets/templates/template-download-app.png');
+}
