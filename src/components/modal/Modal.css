@@ -1,5 +1,5 @@
 .modal-wrapper {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.50);
@@ -19,6 +19,7 @@
   height: auto;
   min-width: 500px;
   min-height: 100px;
+  max-width: 80%;
 }
 
 .modal-box .modal-header {
@@ -32,6 +33,9 @@
 
 .modal-box .modal-content {
   padding: 20px;
+  border: 1px solid red;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .modal-box .modal-footer {

@@ -19,6 +19,20 @@ const createWebsiteList = [
     template: 'download_app',
     runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
+  {
+    title: 'Download App',
+    description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
+    image: 'url',
+    template: 'download_app',
+    runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+  },
+  {
+    title: 'Download App',
+    description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
+    image: 'url',
+    template: 'download_app',
+    runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+  },
 ]
 
 class CreateWebsite extends Component {
@@ -90,7 +104,7 @@ class CreateWebsite extends Component {
   render() {
     console.log(this.state);
     return (
-      <div>
+      <div className="create-website-wrapper">
         { commons.Notification(this.state.message.text, this.state.message.typeMessage) }
         <input type="text" name="name" className="inp" placeholder="Website Name (eg: Advertise for company)" onChange={this.handleInputChange}/>
         <p>
@@ -98,9 +112,15 @@ class CreateWebsite extends Component {
         </p>
         <div>
           {createWebsiteList.map((item, key)=>
-            <div key={key}>
-              Option {item.title}
-              <button value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
+            <div key={key} className="row">
+              <div className="col-2" >
+                <i className="template-download-app" />
+              </div>
+              <div className="col-2">
+                {item.title}
+                {item.description}
+                <button value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
+              </div>
             </div>
             )}
         </div>
