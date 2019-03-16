@@ -489,36 +489,36 @@ class WebsiteEdit extends Component {
           <button onClick={() => this.goToTemplates('template_selector')}>Templates</button>
         </div>
         <div className="row">
-          <div className="col-2">Background</div>
-          <div className="col-2">
+          <div className="col-6">Background</div>
+          <div className="col-6">
             <input type="color" name="background.backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
           </div>
         </div>
         <div className="row">
-          <div className="col-2">Font size global</div>
-          <div className="col-2">
+          <div className="col-6">Font size global</div>
+          <div className="col-6">
             <select className="inp" name="background.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>
         <div className="row">
-          <div className="col-2">Font size title</div>
-          <div className="col-2">
+          <div className="col-6">Font size title</div>
+          <div className="col-6">
             <select className="inp" name="title.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>
         <div className="row">
-          <div className="col-2">Button Color</div>
-          <div className="col-2">
+          <div className="col-6">Button Color</div>
+          <div className="col-6">
             <input type="color" name="button.backgroundColor" defaultValue={styles.button.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
           </div>
         </div>
         <div className="row">
-          <div className="col-2">Font Size Button</div>
-          <div className="col-2">
+          <div className="col-6">Font Size Button</div>
+          <div className="col-6">
             <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
@@ -588,10 +588,10 @@ class WebsiteEdit extends Component {
       <div className="tertiary-style">
         <div className="container padding-lr">
           <div className="container-header">
-            <div className="col-2">
+            <div className="col-6">
               <h2>Website Editor</h2>
             </div>
-            <div className="col-2 inline">
+            <div className="col-6 inline">
               <div className="website-url-wrapper">
                 { this.state.runSrcSaved ? <div className="tooltip-wrapper"><div className="tooltip">Successfully saved!</div></div> : null }
                 <input type="text" className="website-url inp" defaultValue={`https://modules.weband.tv/pro/${this.state.websiteId}`} /> 
@@ -601,7 +601,7 @@ class WebsiteEdit extends Component {
           </div>
           <div>
             <div className="editor-wrapper">
-              <div className="col-4">
+              <div className="col-3">
                 <div className="box-wrapper">
                   <div className="box-header">Modules</div>
                   <div className="box-container">
@@ -624,7 +624,7 @@ class WebsiteEdit extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-3">
                 <div className="box-wrapper">
                   <div className="box-header">Editor</div>
                   <div className="box-container">
@@ -632,7 +632,7 @@ class WebsiteEdit extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-3">
                 <div className="box-wrapper">
                   <div className="box-header">Templates</div>
                   <div className="box-container">
@@ -640,7 +640,7 @@ class WebsiteEdit extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-3">
                 <div className="box-wrapper">
                   <div className="box-header">Preview</div>
                   <div className="box-container">
