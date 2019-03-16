@@ -152,8 +152,7 @@ h1, h2, h3, h4 {
 }
 
 .table-list .item.selected {
-  border-bottom: 1px solid #4e4e6f;
-  background-color: #35404e;
+  background-color: #466082 !important;
   display: flex;
 }
 /*
