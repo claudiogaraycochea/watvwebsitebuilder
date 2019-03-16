@@ -113,10 +113,10 @@ class CreateWebsite extends Component {
         <div>
           {createWebsiteList.map((item, key)=>
             <div key={key} className="row">
-              <div className="col-2" >
+              <div className="col-5" >
                 <i className="template-download-app" />
               </div>
-              <div className="col-2">
+              <div className="col">
                 {item.title}
                 {item.description}
                 <button value={item.template} onClick={(e) => this.handleClickCreateWebsite(e)}>Select</button>
