@@ -1,5 +1,4 @@
 .create-website-wrapper {
-  border: 1px solid red;
 }
 
 .create-website-wrapper [class^="template-"],
@@ -9,9 +8,14 @@
   background-repeat: no-repeat;
   display: inline-block;
   width: -webkit-fill-available;
-  height: 200px;
+  height: 300px;
 }
 
 .create-website-wrapper .template-download-app {
   background-image: url('./../../assets/templates/template-download-app.png');
+}
+
+.create-website-wrapper .title {
+  margin-top: 10px;
+  font-size: 30px;
 }
