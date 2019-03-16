@@ -8,8 +8,8 @@
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
-  width: 60px;
-  height: 100px;
+  width: -webkit-fill-available;
+  height: 200px;
 }
 
 .create-website-wrapper .template-download-app {
