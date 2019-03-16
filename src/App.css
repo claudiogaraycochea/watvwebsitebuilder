@@ -155,18 +155,6 @@ h1, h2, h3, h4 {
   background-color: #466082 !important;
   display: flex;
 }
-/*
-.table-list .item.selected::before {
-  content: 'Website created successfully!!!';
-  background-color: #3dc581;
-  border-radius: 10px;
-  display: -webkit-flex;
-  padding: 5px 10px;
-  font-size: 10px;
-  display: flex;
-  position: absolute;
-  margin-top: -10px;
-}*/
 
 .table-list .col {
   padding: 5px 20px;
