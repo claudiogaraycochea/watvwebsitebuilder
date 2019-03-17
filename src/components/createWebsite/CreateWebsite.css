@@ -15,6 +15,22 @@
   background-image: url('./../../assets/templates/template-download-app.png');
 }
 
+.create-website-wrapper .template-buy-now {
+  background-image: url('./../../assets/templates/template-buy-now.png');
+}
+
+.create-website-wrapper .template-message {
+  background-image: url('./../../assets/templates/template-message.png');
+}
+
+.create-website-wrapper .template-vote {
+  background-image: url('./../../assets/templates/template-vote.png');
+}
+
+.create-website-wrapper .template-link {
+  background-image: url('./../../assets/templates/template-link.png');
+}
+
 .create-website-wrapper .title {
   margin-top: 10px;
   font-size: 30px;
