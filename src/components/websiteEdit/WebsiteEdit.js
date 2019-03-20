@@ -57,6 +57,7 @@ class WebsiteEdit extends Component {
       websiteTemplates: [
         {
           title: 'MyTemplate 1',
+          preview: 'image url1',
           styles: {
             background: {
               backgroundColor: '#ff0000',
@@ -77,6 +78,7 @@ class WebsiteEdit extends Component {
         },
         {
           title: 'MyTemplate 2',
+          preview: 'imageurl2',
           styles: {
             background: {
               backgroundColor: '#3392FF',
@@ -98,6 +100,7 @@ class WebsiteEdit extends Component {
         },
         {
           title: 'MyTemplate 3',
+          preview: 'imageurl3',
           styles: {
             background: {
               backgroundColor: '#FF9300',
