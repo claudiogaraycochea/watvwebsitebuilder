@@ -501,21 +501,27 @@ class WebsiteEdit extends Component {
           <button onClick={() => this.goToTemplates('template_selector')}>Templates</button>
         </div>
         <div className="row">
-          <div className="col-6">Background</div>
+          <div className="col-6 col-center">Background</div>
           <div className="col-6">
             <input type="color" name="background.backgroundColor" defaultValue={styles.background.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
           </div>
         </div>
         <div className="row">
-          <div className="col-6">Font size global</div>
+          <div className="col-6 col-center">Font Family</div>
           <div className="col-6">
-            <select className="inp" name="background.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+            <select className="inp" name="background.fontFamily" defaultValue={styles.background.fontFamily} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontFamilyValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>
         <div className="row">
-          <div className="col-6">Font size title</div>
+          <div className="col-6 col-center">Font Color</div>
+          <div className="col-6">
+            <input type="color" name="background.color" defaultValue={styles.background.color} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6 col-center">Size title</div>
           <div className="col-6">
             <select className="inp" name="title.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
@@ -523,24 +529,24 @@ class WebsiteEdit extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-6">Button Color</div>
+          <div className="col-6 col-center">Size text</div>
           <div className="col-6">
-            <input type="color" name="button.backgroundColor" defaultValue={styles.button.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">Font Size Button</div>
-          <div className="col-6">
-            <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
+            <select className="inp" name="background.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>
         <div className="row">
-          <div className="col-6">Font Family</div>
+          <div className="col-6 col-center">Button color</div>
           <div className="col-6">
-            <select className="inp" name="background.fontFamily" defaultValue={styles.background.fontFamily} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontFamilyValue.map((item)=><option value={item}>{item}</option>) }
+            <input type="color" name="button.backgroundColor" defaultValue={styles.button.backgroundColor} onChange={(e)=>{this.handleTemplateChange(e)}} /> 
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6 col-center">Button text</div>
+          <div className="col-6">
+            <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>

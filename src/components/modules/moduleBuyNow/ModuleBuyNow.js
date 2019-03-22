@@ -41,26 +41,15 @@ class ModuleBuyNow extends Component {
     }
     else {
       let styles = {};
-      styles = {
-        button: {
-          fontSize: 30,
-          backgroundColor: 'red',
-          color: 'black',
-        }
-      }
       if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
         styles = {
           button: {
-            fontSize: 30,
-            backgroundColor: 'red',
-            color: 'black',
           }
         }
       }
       else {
         styles = this.props.runSrc.template.styles;
       }
-
       return (
         <div className="mod-link mod-row">
           <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space" style={styles.button}>

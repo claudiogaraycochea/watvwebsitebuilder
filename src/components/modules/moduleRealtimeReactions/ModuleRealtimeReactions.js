@@ -46,23 +46,22 @@ class ModuleRealtimeReactions extends Component {
       )
     }
     else {
-      /*let styles = {};
+      let styles = {};
       if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
         styles = {
-          title: {
-            fontSize: 30,
+          button: {
           }
         }
       }
       else {
         styles = this.props.runSrc.template.styles;
-      }*/
+      }
       return (
         <div className="mod-realtime-reactions mod-row">
           <div className="mod-buttons-wrapper">
-            {(this.props.moduleSrc.urlFacebook!=='') ? <a href={this.props.moduleSrc.urlFacebook} className="mod-btn mod-btn-circle" ><i className="mod-icon-happy"></i></a> : null }
-            {(this.props.moduleSrc.urlInstagram!=='') ? <a href={this.props.moduleSrc.urlInstagram} className="mod-btn mod-btn-circle" ><i className="mod-icon-sad"></i></a> : null }
-            {(this.props.moduleSrc.urlTwitter!=='') ? <a href={this.props.moduleSrc.urlTwitter} className="mod-btn mod-btn-circle" ><i className="mod-icon-heart"></i></a> : null }
+            {(this.props.moduleSrc.urlFacebook!=='') ? <a href={this.props.moduleSrc.urlFacebook} className="mod-btn mod-btn-circle" style={styles.button}><i className="mod-icon-happy"></i></a> : null }
+            {(this.props.moduleSrc.urlInstagram!=='') ? <a href={this.props.moduleSrc.urlInstagram} className="mod-btn mod-btn-circle" style={styles.button}><i className="mod-icon-sad"></i></a> : null }
+            {(this.props.moduleSrc.urlTwitter!=='') ? <a href={this.props.moduleSrc.urlTwitter} className="mod-btn mod-btn-circle" style={styles.button}><i className="mod-icon-heart"></i></a> : null }
           </div>
         </div>
       );
