@@ -8,30 +8,37 @@ const createWebsiteList = [
   {
     title: 'Buy Now',
     description: 'Use Buy Now to sell products from your advertisers.',
-    image: 'url',
+    image: 'template-buy-now',
     template: 'buy_now',
     runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title0","description":"Description"}},{"moduleKey":"ModuleBuyNow","moduleTitle":"Buy Now","moduleSrc":{"title":"Testing","buttonLink":"http://","buttonTitle":"Buy Now"}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#0099cc","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
   {
     title: 'Download App',
     description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
-    image: 'url',
+    image: 'template-download-app',
     template: 'download_app',
     runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
   {
-    title: 'Download App',
-    description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
-    image: 'url',
-    template: 'download_app',
-    runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+    title: 'Default',
+    description: 'Include an instant hashtag message and viewers real-time reactions.',
+    image: 'template-message',
+    template: 'message',
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleFacebookSendMessage","moduleTitle":"Facebook Send Message","moduleSrc":{"buttonTitle":"Send","text":"#hashtag "}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#294279","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
   {
-    title: 'Download App',
+    title: 'Vote',
     description: 'Use Vote for your viewers to vote for a movie, get a general opinion or vote for the best player.',
-    image: 'url',
-    template: 'download_app',
-    runSrc: '{"components":[{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Download APP","description":"Description"}},{"moduleKey":"ModuleDownloadApp","moduleTitle":"Download App","moduleSrc":{"buttonLink":"http://","buttonTitle":"Google Play"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+    image: 'template-vote',
+    template: 'vote',
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleFacebookSendMessage","moduleTitle":"Facebook Send Message","moduleSrc":{"buttonTitle":"Send","text":"#hashtag "}},{"moduleKey":"ModuleRealtimeReactions","moduleTitle":"Realtime Reactions","moduleSrc":{"title":"Realtime Reactions","reactions":"happy, sad, like, love"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#ff0000","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
+  },
+  {
+    title: 'Link',
+    description: 'Include links for getting more info about a product, website, contact page, other.',
+    image: 'template-link',
+    template: 'link',
+    runSrc: '{"components":[{"moduleKey":"ModuleImage","moduleTitle":"Image","moduleSrc":{"imageURL":"","imageSize":"small"}},{"moduleKey":"ModuleTitleDescription","moduleTitle":"Title Description","moduleSrc":{"title":"Title","description":"Description"}},{"moduleKey":"ModuleLink","moduleTitle":"Simple Link","moduleSrc":{"buttonLink":"http://","buttonTitle":"More info"}},{"moduleKey":"ModuleLink","moduleTitle":"Simple Link","moduleSrc":{"buttonLink":"tel:303030303030","buttonTitle":"Call Us"}},{"moduleKey":"ModuleSocialNetwork","moduleTitle":"Social Network","moduleSrc":{"urlFacebook":"https://facebook.com/","urlInstagram":"https://instagram.com/","urlTwitter":"https://twitter.com/"}}],"template":{"title":"MyTemplate 1","styles":{"background":{"backgroundColor":"#1a2852","fontSize":20,"fontFamily":"Bitter"},"title":{"fontSize":50},"subtitle":{"fontSize":20},"button":{"backgroundColor":"#ff0022","fontColor":"#ffffff"}}}}',
   },
 ]
 
@@ -45,6 +52,7 @@ class CreateWebsite extends Component {
       },
       name: '',
       screen: 'insert_name',
+      //screen: 'choose_template',
     };
   }
 
@@ -131,7 +139,7 @@ class CreateWebsite extends Component {
         {createWebsiteList.map((item, key)=>
           <div key={key} className="row">
             <div className="col-8" >
-              <i className="template-download-app" />
+              <i className={item.image} />
             </div>
             <div className="col-4">
               <div className="row">
