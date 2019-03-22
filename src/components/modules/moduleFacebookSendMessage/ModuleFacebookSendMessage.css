@@ -1,8 +1,8 @@
-.mod-realtime-reactions {
+.mod-facebook-send-message {
   color: #ffffff;
   font-size: 11px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 }

@@ -40,10 +40,19 @@ class ModuleLink extends Component {
       )
     }
     else {
-      //console.log('ModuleLink',this.props.moduleSrc);
+      let styles = {};
+      if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
+        styles = {
+          button: {
+          }
+        }
+      }
+      else {
+        styles = this.props.runSrc.template.styles;
+      }
       return (
         <div className="mod-link mod-row">
-          <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space">
+          <a href={this.props.moduleSrc.buttonLink} className="mod-btn mod-large-full mod-btn-no-space" style={styles.button}>
             {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Visit Link' }
           </a>
         </div>
