@@ -72,7 +72,7 @@ class WebsiteEdit extends Component {
             },
             button: {
               backgroundColor: '#ff0022',
-              fontColor: '#ffffff',
+              fontColor: '#000000',
             }
           },
         },
@@ -94,7 +94,7 @@ class WebsiteEdit extends Component {
             },
             button: {
               backgroundColor: '#339222',
-              fontColor: '#ffffff',
+              fontColor: '#000000',
             }
           },
         },
@@ -116,7 +116,7 @@ class WebsiteEdit extends Component {
             },
             button: {
               backgroundColor: '#FF9300',
-              fontColor: '#fff333',
+              fontColor: '#000000',
             }
           },
         },
@@ -125,10 +125,9 @@ class WebsiteEdit extends Component {
       templateChange: 'template_selector',
       runSrc: {},
       fontSizeValue: ['10','15','20','25','30','40'],
-      fontFamilyValue: ['Ubuntu','Bitter'],
+      fontFamilyValue: ['Ubuntu','Bitter','Roboto'],
       runSrcSaved: false,
     };
-    //this.handleCloseModuleProperties = this.handleCloseModuleProperties.bind(this);
   }
 
   componentWillMount() {
@@ -269,54 +268,62 @@ class WebsiteEdit extends Component {
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleImage': 
         return <ModuleImage 
           {...this.props} 
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleSocialNetwork': 
         return <ModuleSocialNetwork 
-          moduleSrc={moduleSrc} 
+          moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleFacebookSendMessage':
         return <ModuleFacebookSendMessage 
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleBuyNow': 
         return <ModuleBuyNow 
           {...this.props}
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleDownloadApp': 
         return <ModuleDownloadApp 
           {...this.props}
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleVote': 
         return <ModuleVote 
           {...this.props}
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       case 'ModuleRealtimeReactions': 
         return <ModuleRealtimeReactions 
           {...this.props}
           moduleSrc={moduleSrc}
           properties={properties}
           setModuleProperties={this.setModuleProperties}
-          runSrc={this.runSrc}/>
+          runSrc={this.state.runSrc}
+          showStyle={showStyle}/>
       default:
         return null;
     }
@@ -448,6 +455,7 @@ class WebsiteEdit extends Component {
   handleTemplateChange = (e) => {
     let toModify = e.target.name.split('.');
     const styles = commons.copyObj(this.state.runSrc.template.styles); 
+    console.log('handleTemplateChange: styles: ',styles);
     let background = styles.background;
     if(toModify[0]==='background') {
       background[toModify[1]] = this.converterValue(toModify[1],e.target.value);
