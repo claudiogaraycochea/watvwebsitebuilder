@@ -40,13 +40,23 @@ class ModuleFacebookSendMessage extends Component {
       )
     }
     else {
+      let styles = {};
+      if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
+        styles = {
+          button: {
+          }
+        }
+      }
+      else {
+        styles = this.props.runSrc.template.styles;
+      }
       return (
-        <div className="mod- mod-row">
+        <div className="mod-facebook-send-message mod-row">
           <div className="mod-row-small">
             <textarea className="mod-inp" readOnly value={this.props.moduleSrc.text}/>
           </div>
           <div className="mod-row-small">
-            <a href={this.props.moduleSrc.text} className="mod-btn mod-large-full mod-btn-no-space">
+            <a href={this.props.moduleSrc.text} className="mod-btn mod-large-full mod-btn-no-space" style={styles.button}>
               {(this.props.moduleSrc.buttonTitle!=='') ? this.props.moduleSrc.buttonTitle : 'Send' }
             </a>
           </div>
