@@ -125,6 +125,7 @@ class WebsiteEdit extends Component {
       templateChange: 'template_selector',
       runSrc: {},
       fontSizeValue: ['10','15','20','25','30','40'],
+      fontFamilyValue: ['Ubuntu','Bitter'],
       runSrcSaved: false,
     };
     //this.handleCloseModuleProperties = this.handleCloseModuleProperties.bind(this);
@@ -524,6 +525,14 @@ class WebsiteEdit extends Component {
           <div className="col-6">
             <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
               { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+            </select>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6">Font Family</div>
+          <div className="col-6">
+            <select className="inp" name="background.fontFamily" defaultValue={styles.background.fontFamily} onChange={(e)=>{this.handleTemplateChange(e)}}>
+              { this.state.fontFamilyValue.map((item)=><option value={item}>{item}</option>) }
             </select>
           </div>
         </div>
