@@ -60,7 +60,7 @@ class WebsiteList extends Component {
             </div>
           </div>
           <div className="table-list">
-            <div className="item table-header">
+            <div className="table-header">
               <div className="col-4 col">Name</div>
               <div className="col-4 col">URL</div>
               <div className="col-2 col">Updated</div>
