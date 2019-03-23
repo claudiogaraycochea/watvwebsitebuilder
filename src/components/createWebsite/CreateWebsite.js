@@ -74,7 +74,6 @@ class CreateWebsite extends Component {
     const userToken = sessionStorage.getItem('userToken');
     const runSrc = this.getTemplateToRunSrc(template);
     let postData='data='+runSrc+'&website_id='+websiteId+'&user_id='+userId+'&user_token='+userToken;
-    console.log('Save changes',postData);
     axios.post(`${API_URL}setRun/`,postData)
       .then(response => {
         if(response.data.result==='true') {
@@ -87,7 +86,6 @@ class CreateWebsite extends Component {
 
   handleClickChooseTemplate = () => {
     const name = this.state.name;
-    console.log('click');
     if(name.length>2){
       this.setState({
         message: {
@@ -159,7 +157,6 @@ class CreateWebsite extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="create-website-wrapper">
         { commons.Notification(this.state.message.text, this.state.message.typeMessage) }

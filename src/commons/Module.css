@@ -1,7 +1,6 @@
 
 .mod-run {
   min-height: 100%;
-  padding: 20px;
 }
 
 .mod-run .mod-box {
@@ -11,6 +10,8 @@
 }
 
 .mod-run .mod-row {
+  padding-left: 20px;
+  padding-right: 20px;
   margin-bottom: 20px;
 }
 

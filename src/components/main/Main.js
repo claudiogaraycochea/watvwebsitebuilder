@@ -26,7 +26,6 @@ class Main extends Component {
   }
 
   updateHeader = () => {
-    console.log('Main: updateHeader');
     return 'updateheader true';
   }
 

@@ -29,11 +29,9 @@ class WebsiteRun extends Component {
         //this.props.history.push("/WebsiteList");
       })
       .catch(error => {});
-    console.log('websiteId:',this.props.match.params.websiteId);
   }
   
   render() {
-    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20">

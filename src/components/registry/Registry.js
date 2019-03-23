@@ -48,10 +48,8 @@ class Welcome extends Component {
   }
 
   handleSubmit = () => {
-    console.log('handleSubmit');
     if(this.state.email) {
       this.setState({ loading: true, message: '' }, () => {
-        console.log('login');
         this.login();
       });      
     }
@@ -63,7 +61,6 @@ class Welcome extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-20 center">

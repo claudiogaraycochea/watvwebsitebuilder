@@ -168,7 +168,6 @@ class WebsiteEdit extends Component {
     const websiteId = this.state.websiteId;
     const runSrc = JSON.stringify(this.state.runSrc);
     let postData='data='+runSrc+'&website_id='+websiteId+'&user_id='+userId+'&user_token='+userToken;
-    console.log('Save changes',postData);
     axios.post(`${API_URL}setRun/`,postData)
       .then(response => {
         if(response.data.result==='true') {
@@ -388,8 +387,7 @@ class WebsiteEdit extends Component {
 
   handleTemplateChange = (e) => {
     let toModify = e.target.name.split('.');
-    const styles = commons.copyObj(this.state.runSrc.template.styles); 
-    console.log('handleTemplateChange: styles: ',styles);
+    const styles = commons.copyObj(this.state.runSrc.template.styles);
     let background = styles.background;
     if(toModify[0]==='background') {
       background[toModify[1]] = this.converterValue(toModify[1],e.target.value);
@@ -427,8 +425,7 @@ class WebsiteEdit extends Component {
   }
 
   getTemplateProperties(){
-    const styles = this.state.runSrc.template.styles;//commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].styles);
-    console.log('templateProperties: templateSrc.styles: ', styles.background.backgroundColor);
+    const styles = this.state.runSrc.template.styles;
     return (
       <div className="container-content">
         <div className="row">
@@ -548,7 +545,6 @@ class WebsiteEdit extends Component {
 //
 
   render() {
-    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">
