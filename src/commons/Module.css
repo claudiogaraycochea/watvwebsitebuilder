@@ -1,7 +1,6 @@
 
 .mod-run {
   min-height: 100%;
-  padding: 20px;
 }
 
 .mod-run .mod-box {
@@ -11,6 +10,8 @@
 }
 
 .mod-run .mod-row {
+  padding-left: 20px;
+  padding-right: 20px;
   margin-bottom: 20px;
 }
 
@@ -86,4 +87,8 @@ textarea.mod-inp {
 
 .mod-icon-space {
   margin-right: 10px;
+}
+
+.mod-run .mod-image {
+  margin-bottom: 20px;
 }

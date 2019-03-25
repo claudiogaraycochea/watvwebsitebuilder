@@ -11,12 +11,12 @@ class ModuleTitleDescription extends Component {
   
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
   createModuleSrc(props, e, moduleSrcInput){
-    // set values;
     let moduleSrc = {
       title: props.moduleSrc.title,
       description: props.moduleSrc.description,
@@ -24,6 +24,9 @@ class ModuleTitleDescription extends Component {
     if(moduleSrcInput==='title') moduleSrc.title = e.target.value;
     if(moduleSrcInput==='description') moduleSrc.description = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    })
   }
 
   render() {
@@ -31,10 +34,10 @@ class ModuleTitleDescription extends Component {
       return (
         <div>
           <div className="row">
-            <input type="text" className="inp" placeholder="Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'title')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.title} className="inp" placeholder="Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'title')}} />
           </div>
-          <div className="row">
-            <input type="text" className="inp" placeholder="Description" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'description')}} />
+          <div>
+            <input type="text" defaultValue={this.state.moduleSrc.description} className="inp" placeholder="Description" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'description')}} />
           </div>
         </div>
       )

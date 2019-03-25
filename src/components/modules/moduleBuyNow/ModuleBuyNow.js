@@ -11,7 +11,8 @@ class ModuleBuyNow extends Component {
   
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
@@ -24,6 +25,9 @@ class ModuleBuyNow extends Component {
     if(moduleSrcInput==='buttonTitle') moduleSrc.buttonTitle = e.target.value;
     if(moduleSrcInput==='buttonLink') moduleSrc.buttonLink = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    })
   }
 
   render() {
@@ -31,10 +35,10 @@ class ModuleBuyNow extends Component {
       return (
         <div>
           <div className="row">
-            <input type="text" className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.buttonTitle} className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
           </div>
           <div className="">
-            <input type="text" className="inp" placeholder="https://example.com" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLink')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.buttonLink} className="inp" placeholder="https://example.com" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLink')}} />
           </div>
         </div>
       )

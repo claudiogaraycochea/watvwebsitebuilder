@@ -11,12 +11,12 @@ class ModuleSocialNetwork extends Component {
 
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
   createModuleSrc(props, e, moduleSrcInput){
-    // set values;
     let moduleSrc = {
       urlFacebook: props.moduleSrc.urlFacebook,
       urlInstagram: props.moduleSrc.urlInstagram,
@@ -26,21 +26,23 @@ class ModuleSocialNetwork extends Component {
     if(moduleSrcInput==='urlInstagram') moduleSrc.urlInstagram = e.target.value;
     if(moduleSrcInput==='urlTwitter') moduleSrc.urlTwitter = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    })
   }
 
   render() {
     if(this.state.properties===true) {
       return (
         <div>
-          <h2>Social Network</h2>
           <div className="row">
-            <input type="text" className="inp" placeholder="URL Facebook" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlFacebook')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.urlFacebook} className="inp" placeholder="URL Facebook" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlFacebook')}} />
           </div>
           <div className="row">
-            <input type="text" className="inp" placeholder="URL Instagram" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlInstagram')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.urlInstagram} className="inp" placeholder="URL Instagram" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlInstagram')}} />
           </div>
-          <div className="row">
-            <input type="text" className="inp" placeholder="URL Twitter" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlTwitter')}} />
+          <div>
+            <input type="text" defaultValue={this.state.moduleSrc.urlTwitter} className="inp" placeholder="URL Twitter" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'urlTwitter')}} />
           </div>
         </div>
       )
