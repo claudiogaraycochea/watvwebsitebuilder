@@ -429,7 +429,7 @@ class WebsiteEdit extends Component {
     return (
       <div className="container-content">
         <div className="row">
-          <a onClick={(e) => this.goToTemplates(e,'template_selector')}>Choose Templates</a>
+          <a href="#default" onClick={(e) => this.goToTemplates(e,'template_selector')}>Choose Templates</a>
         </div>
         <div className="row">
           <div className="col-6 col-center">Background</div>
