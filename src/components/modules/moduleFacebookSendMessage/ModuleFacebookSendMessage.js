@@ -11,12 +11,12 @@ class ModuleFacebookSendMessage extends Component {
   
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
   createModuleSrc(props, e, moduleSrcInput){
-    // set values;
     let moduleSrc = {
       text: props.moduleSrc.text,
       buttonTitle: props.moduleSrc.buttonTitle
@@ -24,6 +24,9 @@ class ModuleFacebookSendMessage extends Component {
     if(moduleSrcInput==='buttonTitle') moduleSrc.buttonTitle = e.target.value;
     if(moduleSrcInput==='text') moduleSrc.text = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    })
   }
 
   render() {
@@ -31,10 +34,10 @@ class ModuleFacebookSendMessage extends Component {
       return (
         <div>          
           <div className="row">
-            <textarea className="inp" placeholder="Text" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'text')}} />
+            <textarea defaultValue={this.state.moduleSrc.text} className="inp" placeholder="Text" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'text')}} />
           </div>
           <div>
-            <input type="text" className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.buttonTitle} className="inp" placeholder="Button Title" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonTitle')}} />
           </div>
         </div>
       )

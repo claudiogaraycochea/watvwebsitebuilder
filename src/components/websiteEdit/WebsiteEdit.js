@@ -7,7 +7,7 @@ import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
 import '../../commons/Fonts.css';
 import '../../commons/Module.css';
-import { modulesList } from './ModuleList';
+import { modulesList, websiteTemplates } from './ModuleList';
 import Modal from '../modal/Modal';
 
 import ModuleLink from '../modules/moduleLink/ModuleLink';
@@ -54,73 +54,7 @@ class WebsiteEdit extends Component {
       },
       modulesList: modulesList,
       modalVisibility: false,
-      websiteTemplates: [
-        {
-          title: 'MyTemplate 1',
-          preview: 'image url1',
-          styles: {
-            background: {
-              backgroundColor: '#ff0000',
-              fontSize: 20,
-              fontFamily: 'Bitter',
-            },
-            title: {
-              fontSize: 50,
-            },
-            subtitle: {
-              fontSize: 20,
-            },
-            button: {
-              backgroundColor: '#ff0022',
-              fontColor: '#000000',
-            }
-          },
-        },
-        {
-          title: 'MyTemplate 2',
-          preview: 'imageurl2',
-          styles: {
-            background: {
-              backgroundColor: '#3392FF',
-              fontSize: 10,
-              fontFamily: 'Ubuntu',
-              color: 'violet',
-            },
-            title: {
-              fontSize: 50,
-            },
-            subtitle: {
-              fontSize: 20,
-            },
-            button: {
-              backgroundColor: '#339222',
-              fontColor: '#000000',
-            }
-          },
-        },
-        {
-          title: 'MyTemplate 3',
-          preview: 'imageurl3',
-          styles: {
-            background: {
-              backgroundColor: '#FF9300',
-              fontSize: 10,
-              fontFamily: 'Open Sans',
-              color: 'blue',
-            },
-            title: {
-              fontSize: 50,
-            },
-            subtitle: {
-              fontSize: 20,
-            },
-            button: {
-              backgroundColor: '#FF9300',
-              fontColor: '#000000',
-            }
-          },
-        },
-      ],
+      websiteTemplates: websiteTemplates,
       templateSelected: 0,
       templateChange: 'template_selector',
       runSrc: {},
@@ -234,7 +168,6 @@ class WebsiteEdit extends Component {
     const websiteId = this.state.websiteId;
     const runSrc = JSON.stringify(this.state.runSrc);
     let postData='data='+runSrc+'&website_id='+websiteId+'&user_id='+userId+'&user_token='+userToken;
-    console.log('Save changes',postData);
     axios.post(`${API_URL}setRun/`,postData)
       .then(response => {
         if(response.data.result==='true') {
@@ -454,8 +387,7 @@ class WebsiteEdit extends Component {
 
   handleTemplateChange = (e) => {
     let toModify = e.target.name.split('.');
-    const styles = commons.copyObj(this.state.runSrc.template.styles); 
-    console.log('handleTemplateChange: styles: ',styles);
+    const styles = commons.copyObj(this.state.runSrc.template.styles);
     let background = styles.background;
     if(toModify[0]==='background') {
       background[toModify[1]] = this.converterValue(toModify[1],e.target.value);
@@ -493,12 +425,11 @@ class WebsiteEdit extends Component {
   }
 
   getTemplateProperties(){
-    const styles = this.state.runSrc.template.styles;//commons.copyObj(this.state.websiteTemplates[this.state.templateSelected].styles);
-    console.log('templateProperties: templateSrc.styles: ', styles.background.backgroundColor);
+    const styles = this.state.runSrc.template.styles;
     return (
       <div className="container-content">
         <div className="row">
-          <button onClick={() => this.goToTemplates('template_selector')}>Templates</button>
+          <a href="#default" onClick={(e) => this.goToTemplates(e,'template_selector')}>Choose Templates</a>
         </div>
         <div className="row">
           <div className="col-6 col-center">Background</div>
@@ -510,7 +441,7 @@ class WebsiteEdit extends Component {
           <div className="col-6 col-center">Font Family</div>
           <div className="col-6">
             <select className="inp" name="background.fontFamily" defaultValue={styles.background.fontFamily} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontFamilyValue.map((item)=><option value={item}>{item}</option>) }
+              { this.state.fontFamilyValue.map((item, key)=><option key={key} value={item}>{item}</option>) }
             </select>
           </div>
         </div>
@@ -524,7 +455,7 @@ class WebsiteEdit extends Component {
           <div className="col-6 col-center">Size title</div>
           <div className="col-6">
             <select className="inp" name="title.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+              { this.state.fontSizeValue.map((item, key)=><option key={key} value={item}>{item}</option>) }
             </select>
           </div>
         </div>
@@ -532,7 +463,7 @@ class WebsiteEdit extends Component {
           <div className="col-6 col-center">Size text</div>
           <div className="col-6">
             <select className="inp" name="background.fontSize" defaultValue={styles.background.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+              { this.state.fontSizeValue.map((item, key)=><option key={key} value={item}>{item}</option>) }
             </select>
           </div>
         </div>
@@ -546,7 +477,7 @@ class WebsiteEdit extends Component {
           <div className="col-6 col-center">Button text</div>
           <div className="col-6">
             <select className="inp" name="button.fontSize" defaultValue={styles.button.fontSize} onChange={(e)=>{this.handleTemplateChange(e)}}>
-              { this.state.fontSizeValue.map((item)=><option value={item}>{item}</option>) }
+              { this.state.fontSizeValue.map((item, key)=><option key={key}  value={item}>{item}</option>) }
             </select>
           </div>
         </div>
@@ -556,10 +487,14 @@ class WebsiteEdit extends Component {
 
   getTemplateSelector = () => {
     return (
-      <div className="template-wrapper">
-        {this.state.websiteTemplates.map((item,key) => 
-          <div className="item" key={key} onClick={(e) => this.handleSelectTemplate(e,key)}>{item.title}</div>
-        )}
+      <div className="container-content">
+        <div className="template-wrapper">
+          {this.state.websiteTemplates.map((item,key) => 
+            <div className="item" key={key} onClick={(e) => this.handleSelectTemplate(e,key)}>
+              <div className={item.preview}></div>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
@@ -573,7 +508,8 @@ class WebsiteEdit extends Component {
     }
   }
 
-  goToTemplates = (templateChange) => {
+  goToTemplates = (event,templateChange) => {
+    event.preventDefault();
     this.setState({templateChange});
   }
 
@@ -609,7 +545,6 @@ class WebsiteEdit extends Component {
 //
 
   render() {
-    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">

@@ -11,12 +11,12 @@ class ModuleDownloadApp extends Component {
   
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
   createModuleSrc(props, e, moduleSrcInput){
-    // set values;
     let moduleSrc = {
       buttonLinkGooglePlay: props.moduleSrc.buttonLinkGooglePlay,
       buttonLinkAppStore: props.moduleSrc.buttonLinkAppStore
@@ -24,6 +24,9 @@ class ModuleDownloadApp extends Component {
     if(moduleSrcInput==='buttonLinkGooglePlay') moduleSrc.buttonLinkGooglePlay = e.target.value;
     if(moduleSrcInput==='buttonLinkAppStore') moduleSrc.buttonLinkAppStore = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    })
   }
 
   render() {
@@ -31,16 +34,15 @@ class ModuleDownloadApp extends Component {
       return (
         <div>
           <div className="row">
-            <input type="text" className="inp" placeholder="URL Google Play" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLinkGooglePlay')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.buttonLinkGooglePlay} className="inp" placeholder="URL Google Play" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLinkGooglePlay')}} />
           </div>
           <div className="">
-            <input type="text" className="inp" placeholder="URL App Store" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLinkAppStore')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.buttonLinkAppStore} className="inp" placeholder="URL App Store" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'buttonLinkAppStore')}} />
           </div>
         </div>
       )
     }
     else {
-      //console.log('ModuleLink',this.props.moduleSrc);
       return (
         <div className="mod-download-app mod-row">
           <div className="mod-row-small">

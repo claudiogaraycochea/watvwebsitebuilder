@@ -23,6 +23,14 @@
   width: 100%;
   padding: 10px;
   position: relative;
+  transition: transform .2s;
+}
+
+.module-box:hover{
+  transform: scale(1.05);
+  background:rgba(255, 255, 255, 0.16);
+  z-index: 1000;
+  cursor: pointer;
 }
 
 .module-box .message {
@@ -32,15 +40,17 @@
 .module-box .btn-delete {
   border: 0;
   border-radius: 50%;
-  background: #3f5a79;
+  background: #2222229e;
   position: absolute;
-  top: 2px;
-  right: 2px;
-  color: #ffffff;
+  top: 5px;
+  right: 5px;
   height: 24px;
   width: 24px;
+  display: -webkit-flex;
   display: flex;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
   z-index: 1000;
 }
@@ -48,11 +58,15 @@
 .template-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .template-wrapper .item {
-  width: 100%;
-  padding: 20px;
+  width: 50%;
+  min-width: 100px;
+  height: 230px;
+  margin-bottom: 40px;
 }
 
 .website-url {
@@ -74,4 +88,62 @@
   position: relative;
   width: 100%;
   margin-right: 20px;
+}
+
+[class^="image-template"],
+[class*="image-template"] {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform .2s;
+}
+
+[class^="image-template"]:hover,
+[class*="image-template"]:hover {
+  transform: scale(1.05);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.image-template-1 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-2 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-3 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-4 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-5 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-6 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-7 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-8 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-9 {
+  background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.image-template-10 {
+  background-image: url('../../assets/preview/image-template-1.png');
 }

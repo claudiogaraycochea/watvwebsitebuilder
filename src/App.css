@@ -19,6 +19,7 @@ body, html {
 a {
   text-decoration: none;
   color: #03A9F4;
+  cursor: pointer;
 }
 
 .row {
@@ -148,12 +149,20 @@ h1, h2, h3, h4 {
 }
 
 .table-list .table-header {
+  display: flex;
   color: #69809a;
 }
 
 .table-list .item {
   display: flex;
   min-height: 48px;
+  transition: transform .2s;
+}
+
+.table-list .item:hover{
+  transform: scale(1.01);
+  background:rgba(255, 255, 255, 0.16) !important;
+  z-index: 1000;
 }
 
 .table-list .item.selected {
@@ -183,7 +192,6 @@ h1, h2, h3, h4 {
   width: 100%;
   min-height: 1px;
   padding-right: 10px;
-  padding-left: 10px;
 }
 
 .col {
@@ -304,6 +312,7 @@ h1, h2, h3, h4 {
 
 .box-container {
   overflow: auto;
+  overflow-x: hidden;
   flex: 1 1 auto;
 }
 

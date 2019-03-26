@@ -12,7 +12,8 @@ class ModuleImage extends Component {
   
   componentDidMount() {
     this.setState({
-      properties: this.props.properties
+      properties: this.props.properties,
+      moduleSrc: this.props.moduleSrc,
     })
   }
 
@@ -22,11 +23,12 @@ class ModuleImage extends Component {
       imageURL: props.moduleSrc.imageURL,
       imageSize: props.moduleSrc.imageSize,
     };
-
-    console.log('*******',moduleSrc);
     if(moduleSrcInput==='imageURL') moduleSrc.imageURL = e.target.value;
     if(moduleSrcInput==='imageSize') moduleSrc.imageSize = e.target.value;
     props.setModuleProperties(moduleSrc);
+    this.setState({
+      moduleSrc,
+    });
   }
 
   render() {
@@ -34,24 +36,24 @@ class ModuleImage extends Component {
       return (
         <div>
           <div className="row">
-            <input type="text" className="inp" placeholder="imageURL" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'imageURL')}} />
+            <input type="text" defaultValue={this.state.moduleSrc.imageURL} className="inp" placeholder="imageURL" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'imageURL')}} />
           </div>
           <div className="row">
             <select className="inp" onChange={(e)=>{this.createModuleSrc(this.props,e,'imageSize')}} > 
-              <option value="ultra-small">Ultra Small</option>
-              <option value="small" selected>Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
+              <option value="size-20">20</option>
+              <option value="size-40" selected>40</option>
+              <option value="size-60">60</option>
+              <option value="size-80">80</option>
+              <option value="size-100">100</option>
             </select>
-            {/*<input type="text" className="inp" placeholder="imageSize" onKeyUp={(e)=>{this.createModuleSrc(this.props,e,'imageSize')}} />*/}
           </div>
         </div>
       )
     }
     else {
       return (
-        <div className="mod-image mod-row">
-          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className={this.props.moduleSrc.imageSize} alt=""/> : <i className="no-image"></i> }
+        <div className="mod-image">
+          {(this.props.moduleSrc.imageURL!=='') ? <img src={this.props.moduleSrc.imageURL} className={this.props.moduleSrc.imageSize} alt=""/> : <i className={`no-image ${this.props.moduleSrc.imageSize}`}></i> }
         </div>
       );
     }

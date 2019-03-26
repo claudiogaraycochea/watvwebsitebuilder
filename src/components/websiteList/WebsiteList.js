@@ -15,7 +15,6 @@ class WebsiteList extends Component {
       websiteList: [],
       modalVisibility: false,
     };
-    //this.clickHistory = this.clickHistory.bind(this);
   }
 
   componentWillMount() {
@@ -24,7 +23,6 @@ class WebsiteList extends Component {
 
   loadList = (data) => {
     const websiteIdCreated = (data!==undefined) ? data.websiteIdCreated : null;
-    console.log('loadList: websiteIdCreated: ',websiteIdCreated);
     const userId = sessionStorage.getItem('userId');
     const userToken = sessionStorage.getItem('userToken');
     axios.get(`${API_URL}gwl/?user_id=${userId}&user_token=${userToken}`)
@@ -42,12 +40,10 @@ class WebsiteList extends Component {
   }
 
   handleClickEdit = () => {
-    console.log('clickEdit')
     this.setState({modalVisibility: true});
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">
@@ -60,7 +56,7 @@ class WebsiteList extends Component {
             </div>
           </div>
           <div className="table-list">
-            <div className="item table-header">
+            <div className="table-header">
               <div className="col-4 col">Name</div>
               <div className="col-4 col">URL</div>
               <div className="col-2 col">Updated</div>

@@ -74,3 +74,159 @@ export const modulesList = [
     }
   },
 ];
+
+export const websiteTemplates = [
+  {
+    title: 'MyTemplate 1',
+    preview: 'image-template-1',
+    styles: {
+      background: {
+        backgroundColor: '#ff0000',
+        fontSize: 20,
+        fontFamily: 'Bitter',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#ff0022',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 2',
+    preview: 'image-template-2',
+    styles: {
+      background: {
+        backgroundColor: '#3392FF',
+        fontSize: 10,
+        fontFamily: 'Ubuntu',
+        color: 'violet',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#339222',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 3',
+    preview: 'image-template-3',
+    styles: {
+      background: {
+        backgroundColor: '#FF9300',
+        fontSize: 10,
+        fontFamily: 'Open Sans',
+        color: 'blue',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#FF9300',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 3',
+    preview: 'image-template-3',
+    styles: {
+      background: {
+        backgroundColor: '#FF9300',
+        fontSize: 10,
+        fontFamily: 'Open Sans',
+        color: 'blue',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#FF9300',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 3',
+    preview: 'image-template-3',
+    styles: {
+      background: {
+        backgroundColor: '#FF9300',
+        fontSize: 10,
+        fontFamily: 'Open Sans',
+        color: 'blue',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#FF9300',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 3',
+    preview: 'image-template-3',
+    styles: {
+      background: {
+        backgroundColor: '#FF9300',
+        fontSize: 10,
+        fontFamily: 'Open Sans',
+        color: 'blue',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#FF9300',
+        fontColor: '#000000',
+      }
+    },
+  },
+  {
+    title: 'MyTemplate 3',
+    preview: 'image-template-3',
+    styles: {
+      background: {
+        backgroundColor: '#FF9300',
+        fontSize: 10,
+        fontFamily: 'Open Sans',
+        color: 'blue',
+      },
+      title: {
+        fontSize: 50,
+      },
+      subtitle: {
+        fontSize: 20,
+      },
+      button: {
+        backgroundColor: '#FF9300',
+        fontColor: '#000000',
+      }
+    },
+  },
+];
