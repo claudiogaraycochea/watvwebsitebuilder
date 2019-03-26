@@ -21,9 +21,13 @@ class Test extends Component {
     const fd = new FormData();
     fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
     console.log('******************** >>>>>>>>>>>> ',fd);
-    axios.post('https://modules.weband.tv/upload/upload_file.php', fd).then(res=>{
+    /*axios.post('https://modules.weband.tv/upload/upload_file.php', fd).then(res=>{
       console.log(res);
-    });
+    });*/
+    axios.post('https://modules.weband.tv/upload/upload_file.php', fd).then(res => {
+      console.log(res);
+    })
+    .catch(error => {});
   }
 
   render() {
