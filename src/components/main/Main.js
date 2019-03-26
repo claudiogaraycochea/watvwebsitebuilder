@@ -4,6 +4,7 @@ import './Main.css';
 import Header from '../header/Header';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+import Test from '../test/Test';
 import Login from '../login/Login';
 import WebsiteList from '../websiteList/WebsiteList';
 import WebsiteEdit from '../websiteEdit/WebsiteEdit';
@@ -36,6 +37,7 @@ class Main extends Component {
         <div className="content">
           <BrowserRouter>
             <Switch>
+              <Route path="/test" component={Test} />
               <Route exact path="/login" component={Login} />
               <Route path="/registry" component={Registry} />
               <Route path="/pro/:websiteId" component={WebsiteRun} />
