@@ -26,7 +26,9 @@ class Test extends Component {
         const fd = new FormData();
         
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        const paramsData = fd+'&userId='+userId;
+        fd.append('user', userId);
+        const paramsData = fd;
+       
         axios.post('https://modules.weband.tv/upload/upload.php', paramsData).then(res => {
           console.log(res);
         })
