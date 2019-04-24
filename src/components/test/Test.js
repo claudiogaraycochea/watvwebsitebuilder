@@ -18,13 +18,30 @@ class Test extends Component {
   }
 
   fileUpload = () => {
-    const fd = new FormData();
-    fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-    console.log('******************** >>>>>>>>>>>> ',fd);
-    axios.post('https://modules.weband.tv/upload/upload.php', fd).then(res => {
-      console.log(res);
-    })
-    .catch(error => {});
+    const userId = sessionStorage.getItem('userId');
+    console.log('fileUpload: selectedFile',this.state.selectedFile);
+    if(this.state.selectedFile!==null) {
+      console.log('fileUpload: userId: ', userId);
+      if(userId!==null) {
+        const fd = new FormData();
+        
+        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+        fd.append('user', userId);
+        const paramsData = fd;
+       
+        axios.post('https://modules.weband.tv/upload/upload.php', paramsData).then(res => {
+          console.log(res);
+        })
+        .catch(error => {});
+      }
+      else {
+        console.log('Please login session');
+      }
+    }
+    else {
+      console.log('have not image');
+    }
+
   }
 
   render() {
