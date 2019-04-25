@@ -61,7 +61,8 @@ class WebsiteEdit extends Component {
       fontSizeValue: ["10", "15", "20", "25", "30", "40"],
       fontFamilyValue: ["Ubuntu", "Bitter", "Roboto"],
       runSrcSaved: false,
-      selectedFile: null
+      selectedFile: null,
+      backgroundImage: null
     };
   }
 
@@ -475,6 +476,7 @@ class WebsiteEdit extends Component {
 
   getTemplateProperties() {
     const styles = this.state.runSrc.template.styles;
+
     return (
       <div className="container-content">
         <div className="row">
@@ -502,10 +504,10 @@ class WebsiteEdit extends Component {
           <div className="col-6 col-center">Background Image</div>
           <div className="col-6">
             <div>
-              <input type="file" onChange={this.fileSelect} />
-              <button onClick={e => this.fileUpload("setBackgroundImage")}>
-                Upload
-              </button>
+              <input
+                type="file"
+                onChange={e => this.fileUpload("setBackgroundImage", e)}
+              />
             </div>
           </div>
         </div>
@@ -656,6 +658,7 @@ class WebsiteEdit extends Component {
     else {
       const styles = this.state.runSrc.template.styles;
       const showStyle = true;
+      console.log("getPreview: styles: ", styles);
       return (
         <div className="mod-run" style={styles.background}>
           {this.state.runSrc.components.map((item, key) => (
@@ -671,22 +674,15 @@ class WebsiteEdit extends Component {
   //
   // File upload
   //
-  fileSelect = event => {
-    this.setState({ selectedFile: event.target.files[0] });
-    console.log(event.target.files[0]);
-  };
 
-  fileUpload = functionCallBack => {
+  fileUpload = (functionCallBack, event) => {
+    const selectedFile = event.target.files[0];
     const userId = sessionStorage.getItem("userId");
-    if (this.state.selectedFile !== null) {
+    if (selectedFile !== null) {
       if (userId !== null) {
         const fd = new FormData();
 
-        fd.append(
-          "image",
-          this.state.selectedFile,
-          this.state.selectedFile.name
-        );
+        fd.append("image", selectedFile, selectedFile.name);
         fd.append("user", userId);
         const paramsData = fd;
 
@@ -705,9 +701,6 @@ class WebsiteEdit extends Component {
                 case "setBackgroundImage":
                   this.setBackgroundImage(res.data.filename_server);
                   break;
-                case "setModuleImage":
-                  this.setModuleImage(res.data.filename_server);
-                  break;
                 default:
                   return null;
               }
@@ -723,7 +716,31 @@ class WebsiteEdit extends Component {
   };
 
   setBackgroundImage(filename_server) {
-    console.log("____________ setBackgroundImage", filename_server);
+    let toModify = ["background", "backgroundImage"];
+    const styles = commons.copyObj(this.state.runSrc.template.styles);
+    let background = styles.background;
+    if (toModify[0] === "background") {
+      background[toModify[1]] = this.converterValue(
+        toModify[1],
+        `url(${filename_server})`
+      );
+    }
+    const runSrc = {
+      components: this.state.runSrc.components,
+      template: {
+        title: this.state.runSrc.template.title,
+        styles: {
+          background: background,
+          title: styles.title,
+          subtitle: styles.subtitle,
+          button: styles.button
+        }
+      }
+    };
+    this.setState({
+      ...this.state,
+      runSrc
+    });
   }
 
   setModuleImage(filename_server) {
@@ -735,6 +752,7 @@ class WebsiteEdit extends Component {
   //
 
   render() {
+    console.log("RunSrc: ", this.state.runSrc);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">
