@@ -438,7 +438,6 @@ class WebsiteEdit extends Component {
     const styles = commons.copyObj(this.state.runSrc.template.styles);
     let background = styles.background;
     if (toModify[0] === "background") {
-      console.log("handleTemplateChange: background: ", background);
       background[toModify[1]] = this.converterValue(
         toModify[1],
         e.target.value
@@ -469,7 +468,6 @@ class WebsiteEdit extends Component {
         }
       }
     };
-    console.log("********* runSrc: ", runSrc);
     this.setState({
       ...this.state,
       runSrc
@@ -676,58 +674,10 @@ class WebsiteEdit extends Component {
   //
   // File upload
   //
-  fileSelect = event => {
-    /*const selectedFile = event.target.files[0];
-    this.fileUpload("setBackgroundImage", selectedFile);*/
-  };
 
   fileUpload = (functionCallBack, event) => {
     const selectedFile = event.target.files[0];
     const userId = sessionStorage.getItem("userId");
-    /*
-    if (this.state.selectedFile !== null) {
-      if (userId !== null) {
-        const fd = new FormData();
-
-        fd.append(
-          "image",
-          this.state.selectedFile,
-          this.state.selectedFile.name
-        );
-        fd.append("user", userId);
-        const paramsData = fd;
-
-        axios
-          .post("https://modules.weband.tv/upload/upload.php", paramsData)
-          .then(res => {
-            console.log("fileUpload: res: ", res);
-            if (res.data.filename_server) {
-              console.log(
-                "functionCallBack",
-                functionCallBack,
-                "url",
-                res.data.filename_server
-              );
-              switch (functionCallBack) {
-                case "setBackgroundImage":
-                  this.setBackgroundImage(res.data.filename_server);
-                  break;
-                case "setModuleImage":
-                  this.setModuleImage(res.data.filename_server);
-                  break;
-                default:
-                  return null;
-              }
-            }
-          })
-          .catch(error => {});
-      } else {
-        console.log("Please login session");
-      }
-    } else {
-      console.log("have not image");
-    }*/
-
     if (selectedFile !== null) {
       if (userId !== null) {
         const fd = new FormData();
@@ -750,9 +700,6 @@ class WebsiteEdit extends Component {
               switch (functionCallBack) {
                 case "setBackgroundImage":
                   this.setBackgroundImage(res.data.filename_server);
-                  break;
-                case "setModuleImage":
-                  this.setModuleImage(res.data.filename_server);
                   break;
                 default:
                   return null;
