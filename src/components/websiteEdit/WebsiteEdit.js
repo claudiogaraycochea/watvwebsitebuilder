@@ -628,6 +628,7 @@ class WebsiteEdit extends Component {
               onClick={e => this.handleSelectTemplate(e, key)}
             >
               <div className={item.preview} />
+              <div>{item.title}</div>
             </div>
           ))}
         </div>
