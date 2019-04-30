@@ -67,6 +67,9 @@
   min-width: 100px;
   height: 230px;
   margin-bottom: 40px;
+  padding-right: 20px;
+  border: 1px solid red;
+  overflow: hidden;
 }
 
 .website-url {
@@ -146,4 +149,13 @@
 
 .image-template-10 {
   background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.preview-template {
+  /*transform: scale(.5);*/
+}
+
+.preview-template-title {
+  font-size: 12px;
+  margin-bottom: 5px;
 }

@@ -618,6 +618,15 @@ class WebsiteEdit extends Component {
   }
 
   getTemplateSelector = () => {
+    //const scale = 0.45;//Math.min(160/280);
+    const scale = Math.min(120/240);
+    const stylePreview = {
+      transform: `scale(${scale})`,
+      transformOrigin: `top left`,
+      width: `fit-content`,
+      height: `fit-content`,
+      overflow: "hidden"
+    };
     return (
       <div className="container-content">
         <div className="template-wrapper">
@@ -627,14 +636,35 @@ class WebsiteEdit extends Component {
               key={key}
               onClick={e => this.handleSelectTemplate(e, key)}
             >
-              <div className={item.preview} />
-              <div>{item.title}</div>
+              <div className="preview-template-title">{item.title}</div>
+              <div className="preview-template" style={stylePreview}>
+                {this.getPreviewTemplate(key)}
+              </div>
             </div>
           ))}
         </div>
       </div>
     );
   };
+
+  getPreviewTemplate(row) {
+    if (Object.keys(this.state.runSrc).length === 0) return <div>Empty</div>;
+    else {
+      const styles = this.state.websiteTemplates[row].styles;
+      //const styles = this.state.runSrc.template.styles;
+      const showStyle = true;
+      console.log("getPreview: styles: ", styles);
+      return (
+        <div className="mod-run" style={styles.background}>
+          {this.state.runSrc.components.map((item, key) => (
+            <div key={key} className="mod-box">
+              {this.getModuleComponent(item, false, showStyle)}
+            </div>
+          ))}
+        </div>
+      );
+    }
+  }
 
   getTemplates() {
     if (this.state.templateChange === "template_properties") {
