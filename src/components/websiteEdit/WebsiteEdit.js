@@ -619,13 +619,11 @@ class WebsiteEdit extends Component {
 
   getTemplateSelector = () => {
     //const scale = 0.45;//Math.min(160/280);
-    const scale = Math.min(120/240);
+    const scale = 0.5;
     const stylePreview = {
       transform: `scale(${scale})`,
       transformOrigin: `top left`,
-      width: `fit-content`,
-      height: `fit-content`,
-      overflow: "hidden"
+      overflow: `hidden`
     };
     return (
       <div className="container-content">
@@ -637,8 +635,10 @@ class WebsiteEdit extends Component {
               onClick={e => this.handleSelectTemplate(e, key)}
             >
               <div className="preview-template-title">{item.title}</div>
-              <div className="preview-template" style={stylePreview}>
-                {this.getPreviewTemplate(key)}
+              <div className="box">
+                <div className="preview-template" style={stylePreview}>
+                  {this.getPreviewTemplate(key)}
+                </div>
               </div>
             </div>
           ))}

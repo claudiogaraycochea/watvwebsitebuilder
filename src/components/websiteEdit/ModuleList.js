@@ -82,18 +82,18 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#1abc9c",
-        fontSize: 10,
+        fontSize: 14,
         fontFamily: "Ubuntu",
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
       },
       button: {
-        backgroundColor: "#2b4d53",
+        backgroundColor: "#009193",
         fontColor: "#ffffff"
       }
     }
@@ -104,12 +104,12 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#2ecc71",
-        fontSize: 10,
+        fontSize: 14,
         fontFamily: "Open Sans",
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -126,12 +126,12 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#3498db",
-        fontSize: 10,
+        fontSize: 14,
         fontFamily: "Open Sans",
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -283,7 +283,7 @@ export const websiteTemplates = [
         backgroundImage: `url('http://modules.weband.tv/upload/default/wood-white.jpg')`,
         fontSize: 10,
         fontFamily: "Open Sans",
-        color: "#ffffff"
+        color: "#222222"
       },
       title: {
         fontSize: 50
