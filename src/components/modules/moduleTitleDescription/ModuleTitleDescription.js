@@ -47,7 +47,7 @@ class ModuleTitleDescription extends Component {
       if((Object.keys(this.props.runSrc).length === 0)||(this.props.showStyle===false)) {
         styles = {
           title: {
-            fontSize: 30,
+            fontSize: 26,
           }
         }
       }

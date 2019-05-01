@@ -66,7 +66,15 @@
   width: 50%;
   min-width: 100px;
   height: 230px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.template-wrapper .item .box {
+  width: 100px;
+  height: 200px;
+  overflow: hidden;
 }
 
 .website-url {
@@ -146,4 +154,14 @@
 
 .image-template-10 {
   background-image: url('../../assets/preview/image-template-1.png');
+}
+
+.preview-template {
+  width: 200px;
+  height: 400px;
+}
+
+.preview-template-title {
+  font-size: 12px;
+  margin-bottom: 5px;
 }
