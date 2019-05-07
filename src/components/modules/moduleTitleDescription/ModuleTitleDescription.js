@@ -54,6 +54,9 @@ class ModuleTitleDescription extends Component {
       else {
         styles = this.props.runSrc.template.styles;
       }
+      if(this.props.styles) {
+        styles = this.props.styles;
+      }
       return (
         <div className="mod-title-description mod-row">
           {(this.props.moduleSrc.title!=='') ? <div className="mod-title" style={styles.title}>{this.props.moduleSrc.title}</div> : <div className="mod-title">Write a title</div> }
