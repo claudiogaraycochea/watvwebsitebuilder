@@ -83,7 +83,7 @@ export const websiteTemplates = [
       background: {
         backgroundColor: "#1abc9c",
         fontSize: 14,
-        fontFamily: "Ubuntu",
+        fontFamily: "Bitter",
         color: "#ffffff"
       },
       title: {
@@ -94,7 +94,8 @@ export const websiteTemplates = [
       },
       button: {
         backgroundColor: "#009193",
-        fontColor: "#ffffff"
+        fontColor: "#ffffff",
+        fontSize: 28
       }
     }
   },
@@ -104,8 +105,8 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#2ecc71",
-        fontSize: 14,
-        fontFamily: "Open Sans",
+        fontSize: 16,
+        fontFamily: "Roboto",
         color: "#ffffff"
       },
       title: {
@@ -115,8 +116,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#2c383f",
+        fontColor: "#ffffff",
+        fontSize: 24
       }
     }
   },
@@ -137,8 +139,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#00be90",
+        fontColor: "#ffffff",
+        fontSize: 24
       }
     }
   },
@@ -159,8 +162,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#ffffff",
+        fontColor: "#000000",
+        fontSize: 20
       }
     }
   },
@@ -181,8 +185,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#34495e",
+        fontColor: "#ffffff",
+        fontSize: 30
       }
     }
   },
@@ -236,7 +241,7 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#e74c3c",
-        fontSize: 10,
+        fontSize: 16,
         fontFamily: "Open Sans",
         color: "#ffffff"
       },
@@ -247,8 +252,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#FF6666",
+        fontColor: "#000000",
+        fontSize: 26
       }
     }
   },
@@ -258,7 +264,7 @@ export const websiteTemplates = [
     styles: {
       background: {
         backgroundColor: "#ecf0f1",
-        fontSize: 10,
+        fontSize: 16,
         fontFamily: "Open Sans",
         color: "#222222"
       },
@@ -269,8 +275,9 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
-        fontColor: "#000000"
+        backgroundColor: "#3399FF",
+        fontColor: "#000000",
+        fontSize: 24
       }
     }
   },
@@ -292,7 +299,7 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
+        backgroundColor: "#333333",
         fontColor: "#000000"
       }
     }
@@ -315,7 +322,7 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
+        backgroundColor: "#00FF99",
         fontColor: "#000000"
       }
     }

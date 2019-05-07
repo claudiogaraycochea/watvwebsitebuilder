@@ -50,6 +50,9 @@ class ModuleVote extends Component {
       else {
         styles = this.props.runSrc.template.styles;
       }
+      if(this.props.styles) {
+        styles = this.props.styles;
+      }
       return (
         <div className="mod-vote mod-row">
           <div className="mod-row-small">

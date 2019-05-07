@@ -160,7 +160,7 @@ h1, h2, h3, h4 {
 }
 
 .table-list .item:hover{
-  transform: scale(1.01);
+  /*transform: scale(1.01);*/
   background:rgba(255, 255, 255, 0.16) !important;
   z-index: 1000;
 }
