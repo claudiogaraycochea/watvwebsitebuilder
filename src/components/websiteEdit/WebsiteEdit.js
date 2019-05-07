@@ -194,19 +194,20 @@ class WebsiteEdit extends Component {
   // GET MODULE
   //
 
-  getModuleComponent(moduleItem, properties, showStyle) {
-    const moduleKey = moduleItem.moduleKey;
-    const moduleSrc = moduleItem.moduleSrc;
+  getModuleComponent(data) {
+    const moduleKey = data.moduleItem.moduleKey;
+    const moduleSrc = data.moduleItem.moduleSrc;
     switch (moduleKey) {
       case "ModuleTitleDescription":
         return (
           <ModuleTitleDescription
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleLink":
@@ -214,10 +215,11 @@ class WebsiteEdit extends Component {
           <ModuleLink
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleImage":
@@ -225,30 +227,33 @@ class WebsiteEdit extends Component {
           <ModuleImage
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleSocialNetwork":
         return (
           <ModuleSocialNetwork
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleFacebookSendMessage":
         return (
           <ModuleFacebookSendMessage
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleBuyNow":
@@ -256,10 +261,11 @@ class WebsiteEdit extends Component {
           <ModuleBuyNow
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleDownloadApp":
@@ -267,10 +273,11 @@ class WebsiteEdit extends Component {
           <ModuleDownloadApp
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleVote":
@@ -278,10 +285,11 @@ class WebsiteEdit extends Component {
           <ModuleVote
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       case "ModuleRealtimeReactions":
@@ -289,10 +297,11 @@ class WebsiteEdit extends Component {
           <ModuleRealtimeReactions
             {...this.props}
             moduleSrc={moduleSrc}
-            properties={properties}
+            properties={data.properties}
             setModuleProperties={this.setModuleProperties}
             runSrc={this.state.runSrc}
-            showStyle={showStyle}
+            styles={data.styles}
+            showStyle={data.showStyle}
           />
         );
       default:
@@ -383,7 +392,10 @@ class WebsiteEdit extends Component {
               onClick={e => this.handleModuleProperties(e, key)}
               className="no-click-event"
             />
-            <div>{this.getModuleComponent(item, false, false)}</div>
+            <div>{this.getModuleComponent({
+              moduleItem: item, 
+              properties: false,
+              showStyle: false})}</div>
           </div>
         ))}
         <div
@@ -408,7 +420,11 @@ class WebsiteEdit extends Component {
   showModuleProperties() {
     const itemSelected = this.state.websiteDraggableConfig.itemSelected;
     const moduleItem = this.state.websiteDraggable[itemSelected];
-    return this.getModuleComponent(moduleItem, true, false);
+    const data = {
+      moduleItem: moduleItem, 
+      properties: true,
+      showStyle: false}
+    return this.getModuleComponent(data);
   }
 
   setModuleProperties = moduleSrc => {
@@ -653,12 +669,15 @@ class WebsiteEdit extends Component {
       const styles = this.state.websiteTemplates[row].styles;
       //const styles = this.state.runSrc.template.styles;
       const showStyle = true;
-      console.log("getPreview: styles: ", styles);
       return (
         <div className="mod-run" style={styles.background}>
           {this.state.runSrc.components.map((item, key) => (
             <div key={key} className="mod-box">
-              {this.getModuleComponent(item, false, showStyle)}
+              {this.getModuleComponent({
+                moduleItem: item, 
+                properties: false,
+                showStyle: showStyle,
+                styles: styles})}
             </div>
           ))}
         </div>
@@ -689,12 +708,14 @@ class WebsiteEdit extends Component {
     else {
       const styles = this.state.runSrc.template.styles;
       const showStyle = true;
-      console.log("getPreview: styles: ", styles);
       return (
         <div className="mod-run" style={styles.background}>
           {this.state.runSrc.components.map((item, key) => (
             <div key={key} className="mod-box">
-              {this.getModuleComponent(item, false, showStyle)}
+              {this.getModuleComponent({
+                moduleItem: item, 
+                properties: false,
+                showStyle: showStyle})}
             </div>
           ))}
         </div>
@@ -720,14 +741,7 @@ class WebsiteEdit extends Component {
         axios
           .post("https://modules.weband.tv/upload/upload.php", paramsData)
           .then(res => {
-            console.log("fileUpload: res: ", res);
             if (res.data.filename_server) {
-              console.log(
-                "functionCallBack",
-                functionCallBack,
-                "url",
-                res.data.filename_server
-              );
               switch (functionCallBack) {
                 case "setBackgroundImage":
                   this.setBackgroundImage(res.data.filename_server);
@@ -783,7 +797,7 @@ class WebsiteEdit extends Component {
   //
 
   render() {
-    console.log("RunSrc: ", this.state.runSrc);
+    //console.log("RunSrc: ", this.state.runSrc);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">
@@ -835,11 +849,10 @@ class WebsiteEdit extends Component {
                           >
                             <div className="no-click-event" />
                             <div>
-                              {this.getModuleComponent(
-                                moduleItem,
-                                false,
-                                false
-                              )}
+                              {this.getModuleComponent({
+                                moduleItem: moduleItem, 
+                                properties: false,
+                                showStyle: false})}
                             </div>
                           </div>
                         </div>

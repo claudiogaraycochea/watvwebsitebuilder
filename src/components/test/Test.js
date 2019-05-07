@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../constants';
+// import { API_URL } from '../../constants';
 import { connect } from 'react-redux';
 
 class Test extends Component {

@@ -93,7 +93,7 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#009193",
+        backgroundColor: "red",
         fontColor: "#ffffff"
       }
     }
@@ -115,7 +115,7 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
+        backgroundColor: "violet",
         fontColor: "#000000"
       }
     }
@@ -137,7 +137,7 @@ export const websiteTemplates = [
         fontSize: 20
       },
       button: {
-        backgroundColor: "#FF9300",
+        backgroundColor: "green",
         fontColor: "#000000"
       }
     }
