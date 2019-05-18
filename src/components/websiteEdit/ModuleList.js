@@ -156,7 +156,7 @@ export const websiteTemplates = [
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -179,7 +179,7 @@ export const websiteTemplates = [
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -202,7 +202,7 @@ export const websiteTemplates = [
         color: "#222222"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -224,7 +224,7 @@ export const websiteTemplates = [
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -246,7 +246,7 @@ export const websiteTemplates = [
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -269,7 +269,7 @@ export const websiteTemplates = [
         color: "#222222"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -293,7 +293,7 @@ export const websiteTemplates = [
         color: "#222222"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
@@ -316,7 +316,7 @@ export const websiteTemplates = [
         color: "#ffffff"
       },
       title: {
-        fontSize: 50
+        fontSize: 30
       },
       subtitle: {
         fontSize: 20
