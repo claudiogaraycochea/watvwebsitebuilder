@@ -11,6 +11,7 @@ import WebsiteList from '../websiteList/WebsiteList';
 import WebsiteEdit from '../websiteEdit/WebsiteEdit';
 import WebsiteRun from '../pro/WebsiteRun';
 import Registry from '../registry/Registry';
+import Terms from '../terms/Terms';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -35,12 +36,12 @@ class Main extends Component {
     console.log(this.props);
     return (
       <div className="main">
-        {/* !=='/' ? <Header {...this.props} updateHeader={()=>this.updateHeader}/>:''*/}
         <Header {...this.props} updateHeader={()=>this.updateHeader}/>
         <div className="content">
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/terms" component={Terms} />
               <Route path="/test" component={Test} />
               <Route exact path="/login" component={Login} />
               <Route path="/registry" component={Registry} />

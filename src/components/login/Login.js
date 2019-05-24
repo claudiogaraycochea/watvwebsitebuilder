@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Login.css';
 import Footer from '../footer/Footer';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import * as commons from '../../commons/Commons';
