@@ -2,3 +2,16 @@
     border: 1px solid red;
     flex: 1 1 auto;
 }
+
+.logo.logo-large {
+    width: 40%;
+}
+
+.slogan {
+    text-align: center;
+}
+
+.home .logo-wrapper {
+    margin-bottom: 40px;
+    justify-content: center;
+}
