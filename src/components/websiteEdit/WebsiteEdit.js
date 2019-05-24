@@ -815,7 +815,7 @@ class WebsiteEdit extends Component {
                 <input
                   type="text"
                   className="website-url inp"
-                  defaultValue={`https://modules.weband.tv/pro/${
+                  defaultValue={`https://modules.weband.tv/page/${
                     this.state.websiteId
                   }`}
                 />

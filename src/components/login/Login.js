@@ -98,9 +98,6 @@ class Login extends Component {
             <div className="row">
               <button className="btn btn-primary" onClick={this.handleSubmit}><i className="icon-key space"/>Login</button>
             </div>
-            <div className="row">
-              <Link to="/WebsiteList">Forgot Password</Link>
-            </div>
           </div>
         </div>
         { commons.LoadingSpinner(this.state.loading) }
