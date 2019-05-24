@@ -130,8 +130,7 @@ h1, h2, h3, h4 {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
-  border-bottom: 1px solid #4e4e6f;
+  height: 80px;
   margin-bottom: 20px;
 }
 
@@ -294,7 +293,7 @@ h1, h2, h3, h4 {
 }
 
 .box-wrapper {
-  border: 1px solid rgba(244, 244, 244, 0.25);
+  border: 1px solid #171727;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -308,7 +307,7 @@ h1, h2, h3, h4 {
   font-size: 12px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(244, 244, 244, 0.25);
+  border-bottom: 1px solid #171727;
 }
 
 .box-container {

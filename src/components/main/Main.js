@@ -5,6 +5,7 @@ import Header from '../header/Header';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Test from '../test/Test';
+import Home from '../home/Home';
 import Login from '../login/Login';
 import WebsiteList from '../websiteList/WebsiteList';
 import WebsiteEdit from '../websiteEdit/WebsiteEdit';
@@ -31,12 +32,15 @@ class Main extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="main">
+        {/* !=='/' ? <Header {...this.props} updateHeader={()=>this.updateHeader}/>:''*/}
         <Header {...this.props} updateHeader={()=>this.updateHeader}/>
         <div className="content">
           <BrowserRouter>
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route exact path="/login" component={Login} />
               <Route path="/registry" component={Registry} />
