@@ -12,7 +12,7 @@ class Home extends Component {
   }
 
   render() {
-    return <div className="tertiary-style">
+    return <div className="home tertiary-style">
 				<div className="container padding-20 center">
           <div className="center-wrapper">
             <div className="logo-wrapper"><img src={logo} className="logo logo-large" alt="" /></div>

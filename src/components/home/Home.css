@@ -1,10 +1,9 @@
 .home {
-    border: 1px solid red;
     flex: 1 1 auto;
 }
 
 .logo.logo-large {
-    width: 40%;
+    width: 50%;
 }
 
 .slogan {
@@ -13,5 +12,6 @@
 
 .home .logo-wrapper {
     margin-bottom: 40px;
+    align-items: center;
     justify-content: center;
 }
