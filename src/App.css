@@ -73,7 +73,7 @@ a.btn {
 }
 
 .btn.small {
-  padding: 5px 10px;
+  height: 24px;
   font-size: 12px;
 }
 

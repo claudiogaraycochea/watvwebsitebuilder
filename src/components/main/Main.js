@@ -12,6 +12,7 @@ import WebsiteEdit from '../websiteEdit/WebsiteEdit';
 import WebsiteRun from '../pro/WebsiteRun';
 import Registry from '../registry/Registry';
 import Terms from '../terms/Terms';
+import Privacy from '../privacy/Privacy';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -42,6 +43,7 @@ class Main extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/terms" component={Terms} />
+              <Route path="/privacy" component={Privacy} />
               <Route path="/test" component={Test} />
               <Route exact path="/login" component={Login} />
               <Route path="/registry" component={Registry} />

@@ -28,7 +28,7 @@ class Header extends Component {
   }
 
   render() {
-    const buttonSession = (this.state.userFirstname!==null) ? <div className="menu-top-wrapper"><div className="item">Hi {this.state.userFirstname}!</div> <button className="btn small" onClick={()=>this.handleCloseSession()}><i className="icon-logout space" />Log Out</button></div> : null;
+    const buttonSession = (this.state.userFirstname!==null) ? <div className="menu-top-wrapper"><div className="item">Hi {this.state.userFirstname}!</div> <button className="btn small" onClick={()=>this.handleCloseSession()}>Log Out</button></div> : null;
     return (
       <div className="header">
         <div className="logo-wrapper">
