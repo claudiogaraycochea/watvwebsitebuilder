@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './ModuleFacebookSendMessage.css';
+import './ModuleTwitterSendMessage.css';
 
-class ModuleFacebookSendMessage extends Component {
+class ModuleTwitterSendMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,4 +72,4 @@ class ModuleFacebookSendMessage extends Component {
   }
 }
 
-export default ModuleFacebookSendMessage;
+export default ModuleTwitterSendMessage;

@@ -13,6 +13,7 @@ import Modal from "../modal/Modal";
 import ModuleLink from "../modules/moduleLink/ModuleLink";
 import ModuleSocialNetwork from "../modules/moduleSocialNetwork/ModuleSocialNetwork";
 import ModuleFacebookSendMessage from "../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage";
+import ModuleTwitterSendMessage from "../modules/moduleTwitterSendMessage/ModuleTwitterSendMessage";
 import ModuleTitleDescription from "../modules/moduleTitleDescription/ModuleTitleDescription";
 import ModuleImage from "../modules/moduleImage/ModuleImage";
 import ModuleBuyNow from "../modules/moduleBuyNow/ModuleBuyNow";
@@ -248,6 +249,17 @@ class WebsiteEdit extends Component {
       case "ModuleFacebookSendMessage":
         return (
           <ModuleFacebookSendMessage
+            moduleSrc={moduleSrc}
+            properties={data.properties}
+            setModuleProperties={this.setModuleProperties}
+            runSrc={this.state.runSrc}
+            styles={data.styles}
+            showStyle={data.showStyle}
+          />
+        );
+      case "ModuleTwitterSendMessage":
+        return (
+          <ModuleTwitterSendMessage
             moduleSrc={moduleSrc}
             properties={data.properties}
             setModuleProperties={this.setModuleProperties}
