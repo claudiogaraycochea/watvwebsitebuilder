@@ -42,6 +42,14 @@ export const modulesList = [
     }
   },
   {
+    moduleKey: "ModuleTwitterSendMessage",
+    moduleTitle: "Twitter Send Message",
+    moduleSrc: {
+      buttonTitle: "Send",
+      text: "#hashtag "
+    }
+  },
+  {
     moduleKey: "ModuleBuyNow",
     moduleTitle: "Buy Now",
     moduleSrc: {
