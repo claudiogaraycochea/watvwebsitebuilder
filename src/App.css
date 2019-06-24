@@ -156,6 +156,7 @@ h1, h2, h3, h4 {
   display: flex;
   min-height: 48px;
   transition: transform .2s;
+  border-bottom: 1px solid #455060;
 }
 
 .table-list .item:hover{
@@ -175,10 +176,6 @@ h1, h2, h3, h4 {
   word-break: break-all;
   display: flex;
   align-items: center;
-}
-
-.table-list .item:nth-child(2n) {
-  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .table-list .col:last-child {
