@@ -59,6 +59,7 @@ class ModuleTwitterSendMessage extends Component {
       return (
         <div className="mod-facebook-send-message mod-row">
           <div className="mod-row-small">
+            Twitter
             <textarea className="mod-inp" value={this.props.moduleSrc.text}/>
           </div>
           <div className="mod-row-small">
