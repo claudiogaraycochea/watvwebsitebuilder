@@ -80,7 +80,7 @@ class WebsiteEdit extends Component {
       .get(`${API_URL}getRun/?website_id=${websiteId}`)
       .then(response => {
         const data = commons.copyObj(response.data);
-        const runSrc = JSON.parse(data.run_src);
+        const runSrc = JSON.parse(atob(data.run_src));
         const components = runSrc.components;
         const template = runSrc.template;
 
@@ -169,7 +169,8 @@ class WebsiteEdit extends Component {
     const userId = sessionStorage.getItem("userId");
     const userToken = sessionStorage.getItem("userToken");
     const websiteId = this.state.websiteId;
-    const runSrc = JSON.stringify(this.state.runSrc);
+    const runSrc = btoa(JSON.stringify(this.state.runSrc));
+    console.log('handleSaveChanges: ', runSrc);
     let postData =
       "data=" +
       runSrc +
@@ -809,7 +810,7 @@ class WebsiteEdit extends Component {
   //
 
   render() {
-    //console.log("RunSrc: ", this.state.runSrc);
+    console.log("RunSrc: ", this.state.runSrc);
     return (
       <div className="tertiary-style">
         <div className="container padding-lr">
