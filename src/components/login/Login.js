@@ -73,9 +73,7 @@ class Login extends Component {
       <div className="tertiary-style">
         <div className="container padding-20 center">
           <div className="center-wrapper">
-            <div className="row">
-              <h2>Login</h2>
-            </div>
+            <div><h2>Login</h2></div>
             <div className="row">
               <input
                 name="email"

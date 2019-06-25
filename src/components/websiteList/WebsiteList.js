@@ -67,7 +67,7 @@ class WebsiteList extends Component {
               return (<div className={styleItem} key={i}>
                 { (parseInt(item.website_id) === this.state.websiteIdCreated) ? <div className="tooltip-wrapper"><div className="tooltip">Successfully created!</div></div> : null }
                 <div className="col-4 col">{item.website_name}</div>
-                <div className="col-4 col">https://modules.weband.tv/pro/{item.website_id}</div>
+                <div className="col-4 col">https://modules.weband.tv/page/{item.website_id}</div>
                 <div className="col-2 col">{commons.dateFormat(item.website_updated)}</div>
                 <div className="col-2 col">
                   <Link to={`/websiteEdit/${item.website_id}`} className="btn btn-transparent"><i className="icon-edit"/></Link> 
