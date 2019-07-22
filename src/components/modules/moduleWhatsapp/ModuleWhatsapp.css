@@ -1,0 +1,11 @@
+.mod-buy-now {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.mod-icon-whatsapp {
+  background-image: url('../../../assets/icon-whatsapp.svg');
+}

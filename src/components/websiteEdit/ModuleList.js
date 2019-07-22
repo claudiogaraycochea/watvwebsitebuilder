@@ -33,6 +33,7 @@ export const modulesList = [
       urlTwitter: "https://twitter.com/"
     }
   },
+/*
   {
     moduleKey: "ModuleFacebookSendMessage",
     moduleTitle: "Facebook Send Message",
@@ -41,6 +42,7 @@ export const modulesList = [
       text: "#hashtag "
     }
   },
+*/
   {
     moduleKey: "ModuleTwitterSendMessage",
     moduleTitle: "Twitter Send Message",
@@ -50,10 +52,28 @@ export const modulesList = [
     }
   },
   {
+    moduleKey: "ModuleFacebookComment",
+    moduleTitle: "Facebook Comment",
+    moduleSrc: {
+      title: "Text",
+      buttonLink: "http://facebook.com/",
+      buttonTitle: "Send Us Your Comment"
+    }
+  },
+  {
+    moduleKey: "ModuleWhatsapp",
+    moduleTitle: "Whatsapp",
+    moduleSrc: {
+      title: "Text",
+      buttonLink: "",
+      buttonTitle: "Whatsapp"
+    }
+  },
+  {
     moduleKey: "ModuleBuyNow",
     moduleTitle: "Buy Now",
     moduleSrc: {
-      title: "Testing",
+      title: "Text",
       buttonLink: "http://",
       buttonTitle: "Buy Now"
     }
@@ -66,6 +86,7 @@ export const modulesList = [
       buttonTitle: "Google Play"
     }
   },
+/*  
   {
     moduleKey: "ModuleVote",
     moduleTitle: "Vote",
@@ -81,6 +102,7 @@ export const modulesList = [
       reactions: "happy, sad, like, love"
     }
   }
+*/
 ];
 
 export const websiteTemplates = [
@@ -103,7 +125,7 @@ export const websiteTemplates = [
       button: {
         backgroundColor: "#009193",
         fontColor: "#ffffff",
-        fontSize: 28
+        fontSize: 16
       }
     }
   },

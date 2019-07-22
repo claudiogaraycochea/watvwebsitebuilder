@@ -12,8 +12,10 @@ import Modal from "../modal/Modal";
 
 import ModuleLink from "../modules/moduleLink/ModuleLink";
 import ModuleSocialNetwork from "../modules/moduleSocialNetwork/ModuleSocialNetwork";
-import ModuleFacebookSendMessage from "../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage";
+// import ModuleFacebookSendMessage from "../modules/moduleFacebookSendMessage/ModuleFacebookSendMessage";
 import ModuleTwitterSendMessage from "../modules/moduleTwitterSendMessage/ModuleTwitterSendMessage";
+import ModuleFacebookComment from "../modules/moduleFacebookComment/ModuleFacebookComment";
+import ModuleWhatsapp from "../modules/moduleWhatsapp/ModuleWhatsapp";
 import ModuleTitleDescription from "../modules/moduleTitleDescription/ModuleTitleDescription";
 import ModuleImage from "../modules/moduleImage/ModuleImage";
 import ModuleBuyNow from "../modules/moduleBuyNow/ModuleBuyNow";
@@ -247,7 +249,7 @@ class WebsiteEdit extends Component {
             showStyle={data.showStyle}
           />
         );
-      case "ModuleFacebookSendMessage":
+        /* case "ModuleFacebookSendMessage":
         return (
           <ModuleFacebookSendMessage
             moduleSrc={moduleSrc}
@@ -257,10 +259,34 @@ class WebsiteEdit extends Component {
             styles={data.styles}
             showStyle={data.showStyle}
           />
-        );
+        ); */
       case "ModuleTwitterSendMessage":
         return (
           <ModuleTwitterSendMessage
+            moduleSrc={moduleSrc}
+            properties={data.properties}
+            setModuleProperties={this.setModuleProperties}
+            runSrc={this.state.runSrc}
+            styles={data.styles}
+            showStyle={data.showStyle}
+          />
+        );
+      case "ModuleFacebookComment":
+        return (
+          <ModuleFacebookComment
+            {...this.props}
+            moduleSrc={moduleSrc}
+            properties={data.properties}
+            setModuleProperties={this.setModuleProperties}
+            runSrc={this.state.runSrc}
+            styles={data.styles}
+            showStyle={data.showStyle}
+          />
+        );
+      case "ModuleWhatsapp":
+        return (
+          <ModuleWhatsapp
+            {...this.props}
             moduleSrc={moduleSrc}
             properties={data.properties}
             setModuleProperties={this.setModuleProperties}
