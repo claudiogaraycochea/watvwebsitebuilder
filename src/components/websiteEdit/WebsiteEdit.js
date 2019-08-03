@@ -396,7 +396,7 @@ class WebsiteEdit extends Component {
     let item = this.getItemSelectedModulesList(blockId);
     let newWebsiteDraggable = commons.copyObj(this.state.websiteDraggable);
     newWebsiteDraggable.splice(row, 0, item);
-
+    console.log('insertModuleToWebsiteDraggable: ', this.state);
     this.setState({
       websiteDraggable: newWebsiteDraggable,
       runSrc: {

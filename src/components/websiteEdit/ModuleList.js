@@ -107,6 +107,29 @@ export const modulesList = [
 
 export const websiteTemplates = [
   {
+    title: "White",
+    preview: "image-template-2",
+    styles: {
+      background: {
+        backgroundColor: "#ffffff",
+        fontSize: 14,
+        fontFamily: "Bitter",
+        color: "#222222"
+      },
+      title: {
+        fontSize: 30
+      },
+      subtitle: {
+        fontSize: 20
+      },
+      button: {
+        backgroundColor: "#1d88ff",
+        fontColor: "#ffffff",
+        fontSize: 16
+      }
+    }
+  },
+  {
     title: "Turquoise",
     preview: "image-template-2",
     styles: {
